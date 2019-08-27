@@ -22,7 +22,7 @@ import Dashboard from "@material-ui/icons/People"
 import Schedule from "@material-ui/icons/Business"
 import List from "@material-ui/icons/List"
 import Description from "@material-ui/icons/Description"
-import { AvatarCard } from "../components/custom-cards"
+import { AvatarCard, CompanyCard } from "../components/custom-cards"
 
 const useStyles = makeStyles({
   avatar: {
@@ -138,6 +138,8 @@ function AboutPage({ data }) {
                             img={person.avatarUrl}
                             name={`${person.firstname} ${person.lastname}`}
                             role={person.kabisrole}
+                            logo={person.company.logoUrl}
+                            orgRole={person.orgrole}
                           />
                         </Grid>
                       ))}
@@ -157,13 +159,14 @@ function AboutPage({ data }) {
                       </Title>
                     </Box>
                   </Container>
-                  <Grid container>
+                  <Grid container spacing={2}>
                     {data.partners &&
                       data.partners.nodes.map(company => (
                         <Grid item xs={6} md={4}>
-                          <AvatarCard
-                            img={company.logoUrl}
+                          <CompanyCard
+                            logo={company.logoUrl}
                             name={`${company.name}`}
+                            website={company.website}
                           />
                         </Grid>
                       ))}
@@ -183,13 +186,14 @@ function AboutPage({ data }) {
                       </Title>
                     </Box>
                   </Container>
-                  <Grid container>
+                  <Grid container spacing={2}>
                     {data.industry &&
                       data.industry.nodes.map(company => (
                         <Grid item xs={6} md={4}>
-                          <AvatarCard
-                            img={company.logoUrl}
+                          <CompanyCard
+                            logo={company.logoUrl}
                             name={`${company.name}`}
+                            website={company.website}
                           />
                         </Grid>
                       ))}
@@ -211,6 +215,11 @@ export const ItemPageQuery = graphql`
         lastname
         kabisrole
         avatarUrl
+        orgrole
+        company {
+          logoUrl
+          name
+        }
       }
     }
     partners: allGoogleSheetCompaniesRow(

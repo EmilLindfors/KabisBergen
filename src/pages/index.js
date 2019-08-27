@@ -12,6 +12,7 @@ import { Grid, Container, Divider, Box } from "@material-ui/core"
 import Layout from "../components/layout"
 import Image from "../components/image"
 import SEO from "../components/seo"
+import { AvatarCard } from "../components/custom-cards"
 
 function IndexPage(props) {
   const img = props.data.cover.childImageSharp.fixed.src
@@ -90,6 +91,24 @@ function IndexPage(props) {
           </Text>
         </Box>
       </DividedSection>
+      <Container maxWidth="md">
+        <Box pt={8}>
+          <Text align="center" variant="h4">
+            "Kabis is a good project that will benefit the region, we do a lot
+            of important stuff."
+          </Text>
+        </Box>
+        <Box justifyContent="flex-end" mr={8}>
+          <AvatarCard
+            horizontal
+            img={props.data.quote.avatarUrl}
+            name={`${props.data.quote.firstname} ${props.data.quote.lastname}`}
+            role={props.data.quote.kabisrole}
+            logo={props.data.quote.company.logoUrl}
+            orgRole={props.data.quote.orgrole}
+          />
+        </Box>
+      </Container>
     </Layout>
   )
 }
@@ -123,6 +142,17 @@ export const pageQuery = graphql`
         name
         website
         logoUrl
+      }
+    }
+    quote: googleSheetPeopleRow(lastname: { eq: "Handeland" }) {
+      firstname
+      lastname
+      kabisrole
+      avatarUrl
+      orgrole
+      company {
+        logoUrl
+        name
       }
     }
   }

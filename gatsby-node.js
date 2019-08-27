@@ -94,9 +94,11 @@ exports.createSchemaCustomization = ({ actions }) => {
   const typeDefs = `
     type googleSheetPeopleRow implements Node {
       avatarUrl: String
+      company: googleSheetCompaniesRow @link(by: "name", from: "organization") # foreign-key relation by custom field
     }
     type googleSheetCompaniesRow implements Node {
       logoUrl: String
+
     }
   
   `
