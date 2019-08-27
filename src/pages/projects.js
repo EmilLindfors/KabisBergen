@@ -45,7 +45,7 @@ function EventsPage(props) {
                   <div>
                     <Title
                       component={Link}
-                      to={`/events/${slugify(e.projecttitle)}`}
+                      to={`/project/${slugify(e.projecttitle)}`}
                       variant="h4"
                       color="inherit"
                     >

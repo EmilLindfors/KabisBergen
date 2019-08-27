@@ -82,28 +82,9 @@ const TemplateWrapper = ({ children }) => {
         rightLinks={
           <HeaderLinks
             links={[
-              { link: "/", text: "Hjem" },
+              { link: "/", text: "Home" },
               { link: "/projects", text: "Projects" },
-              { link: "https://hvlinnowiki.now.sh", text: "innowiki" },
-              {
-                dropdown: {
-                  title: "Om oss",
-                  icon: DashIcon,
-                  links: [
-                    { link: "/about", text: "Kontakt oss" },
-                    { link: "https://hvlinnowiki.now.sh", text: "innowiki" },
-                  ],
-                },
-              },
-              {
-                dropdown: {
-                  icon: UserIcon,
-                  links: [
-                    { link: "/login", text: "login" },
-                    { link: "/profile", text: "profile" },
-                  ],
-                },
-              },
+              { link: "/about", text: "ABout" },
             ]}
           />
         }

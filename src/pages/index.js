@@ -40,6 +40,12 @@ function IndexPage(props) {
           </Box>
         </Container>
       </DividedSection>
+      <DividedSection>
+        {props.data.partners &&
+          props.data.partners.nodes.map(company => (
+            <img src={company.logoUrl} width="100px" />
+          ))}
+      </DividedSection>
       <DividedSection height="80vh">
         <Img fluid={props.data.kickoff.childImageSharp.fluid} />
         <Container>
@@ -108,6 +114,15 @@ export const pageQuery = graphql`
         fluid(maxWidth: 1000) {
           ...GatsbyImageSharpFluid
         }
+      }
+    }
+    partners: allGoogleSheetCompaniesRow(
+      filter: { partnertype: { eq: "Partner" } }
+    ) {
+      nodes {
+        name
+        website
+        logoUrl
       }
     }
   }

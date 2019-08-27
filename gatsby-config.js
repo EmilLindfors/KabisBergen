@@ -25,6 +25,22 @@ module.exports = {
       },
     },
     {
+      resolve: "gatsby-source-google-sheets",
+      options: {
+        spreadsheetId: "1PKxuE9HGlnWXZfEsnL-DUdfUpmhHSn9u2XV1lhlDn3E",
+        worksheetTitle: "people",
+        credentials: require("./key.json"),
+      },
+    },
+    {
+      resolve: "gatsby-source-google-sheets",
+      options: {
+        spreadsheetId: "1ALmxQIDDC8GKxkx0sIuoGCkI_N0xHgJ8GkCYMOGfhrY",
+        worksheetTitle: "companies",
+        credentials: require("./key.json"),
+      },
+    },
+    {
       resolve: `gatsby-plugin-manifest`,
       options: {
         name: `gatsby-starter-default`,
