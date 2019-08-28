@@ -1,5 +1,5 @@
 import React from "react"
-import { Button, Badge } from "gatsby-theme-material-foundry"
+import { Button, Badge, Title } from "gatsby-theme-material-foundry"
 import {
   ListItem,
   List,
@@ -7,6 +7,8 @@ import {
   ListItemText,
   Box,
   Grid,
+  Avatar,
+  makeStyles,
 } from "@material-ui/core"
 import LocationIcon from "@material-ui/icons/LocationOn"
 import CalendarIcon from "@material-ui/icons/CalendarToday"
@@ -14,14 +16,29 @@ import TimeIcon from "@material-ui/icons/Label"
 import FoodIcon from "@material-ui/icons/Business"
 import GroupIcon from "@material-ui/icons/Person"
 
+const useStyles = makeStyles({
+  avatar: {
+    width: 100,
+    height: 100,
+    zIndex: -1,
+    marginRight: "24px",
+  },
+  bigAvatar: {
+    width: 150,
+    height: 150,
+  },
+})
+
 function GenerateList({
   horizontal,
   date,
   category,
   location,
   organization,
+  projectPerson,
   person,
 }) {
+  const classes = useStyles()
   if (horizontal) {
     return (
       <Grid container flexDirection="row">
@@ -91,6 +108,17 @@ function GenerateList({
   } else {
     return (
       <List>
+        {projectPerson && (
+          <Box align="center">
+            <Avatar
+              src={projectPerson.avatarUrl}
+              className={classes.bigAvatar}
+            />
+            <Title variant="h5" align="center" className={classes.title}>
+              {projectPerson.fullname}
+            </Title>
+          </Box>
+        )}
         {date && (
           <ListItem>
             <ListItemIcon>
@@ -124,7 +152,7 @@ function GenerateList({
             <ListItemText primary={organization} />
           </ListItem>
         )}
-        {person && (
+        {person && !projectPerson && (
           <ListItem>
             <ListItemIcon>
               <GroupIcon />

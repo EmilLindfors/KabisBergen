@@ -5,7 +5,9 @@
  */
 
 // You can delete this file if you're not using it
+const { createRemoteFileNode } = require("gatsby-source-filesystem")
 const path = require(`path`)
+
 const slugify = str => {
   const slug = str
     .toLowerCase()
@@ -60,6 +62,30 @@ exports.createPages = ({ actions, graphql }) => {
 }
 
 //transforms and optimizes images uploaded though forms into sheet
+/*  imageFile: {
+        type: `File`,
+        async resolve(source, args, context, info) {
+          const result = await fetch(
+            `https://drive.google.com/uc?export=view&${
+              source.avatar.split("?")[1]
+            }`
+          ).then(function(response) {
+            reporter.info("Headers: ", response.headers)
+            return response.headers
+          })
+          reporter.info("Response: ", result)
+
+          return createRemoteFileNode({
+            url: result,
+            store,
+            cache,
+            createNode,
+            createNodeId,
+            reporter,
+          })
+        },
+      },*/
+
 exports.createResolvers = ({
   actions,
   cache,
@@ -69,6 +95,7 @@ exports.createResolvers = ({
   reporter,
 }) => {
   const { createNode } = actions
+
   createResolvers({
     googleSheetPeopleRow: {
       avatarUrl: {
@@ -86,6 +113,14 @@ exports.createResolvers = ({
           }`,
       },
     },
+    googleSheetProjectsRow: {
+      coverUrl: {
+        resolve: source =>
+          `https://drive.google.com/uc?export=view&${
+            source.cover.split("?")[1]
+          }`,
+      },
+    },
   })
 }
 
@@ -98,7 +133,10 @@ exports.createSchemaCustomization = ({ actions }) => {
     }
     type googleSheetCompaniesRow implements Node {
       logoUrl: String
-
+    }
+    type googleSheetProjectsRow implements Node {
+      coverUrl: String
+      projectPerson: googleSheetPeopleRow @link(by: "fullname", from: "nameofprojectlead")
     }
   
   `

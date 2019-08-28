@@ -8,7 +8,7 @@ import {
   Text,
 } from "gatsby-theme-material-foundry"
 import EventList from "../components/event-list"
-import { Container, Card, Grid, Box } from "@material-ui/core"
+import { Container, Card, Grid, Box, Hidden } from "@material-ui/core"
 import Divider from "@material-ui/core/Divider"
 
 function GenerateTags({ tags }) {
@@ -23,7 +23,9 @@ function EventTemplate(props) {
     projecttitle,
     nameofprojectlead,
     involvedorganizations,
+    projectPerson,
     tags,
+    coverUrl,
     startdate,
     enddate,
   } = props.data.googleSheetProjectsRow
@@ -45,6 +47,17 @@ function EventTemplate(props) {
       </DividedSection>
       <Container maxWidth="md">
         <Box pt={4}>
+          {coverUrl && (
+            <img
+              src={coverUrl}
+              style={{
+                width: "100%",
+                maxHeight: "400px",
+                objectFit: "cover",
+                objectPosition: "100% 0",
+              }}
+            />
+          )}
           <Grid container>
             <Grid item md={8}>
               <Box pr={4}>
@@ -56,19 +69,36 @@ function EventTemplate(props) {
                 </Box>
               </Box>
             </Grid>
-            <Grid item md={4}>
-              <Card align="center">
-                <Box p={2}>
+            <Grid item xs={12} md={4}>
+              <Hidden mdDown>
+                <Card align="center">
+                  <Box p={2}>
+                    <Title align="center">Project Info</Title>
+
+                    <EventList
+                      category={category}
+                      date={startdate}
+                      person={nameofprojectlead}
+                      organization={involvedorganizations}
+                      projectPerson={projectPerson}
+                    />
+                  </Box>
+                </Card>
+              </Hidden>
+              <Hidden mdUp>
+                <Box p={2} align="center">
                   <Title align="center">Project Info</Title>
 
                   <EventList
+                    horizontal
                     category={category}
                     date={startdate}
                     person={nameofprojectlead}
                     organization={involvedorganizations}
+                    projectPerson={projectPerson}
                   />
                 </Box>
-              </Card>
+              </Hidden>
             </Grid>
           </Grid>
         </Box>
@@ -85,6 +115,11 @@ export const ItemPageQuery = graphql`
       description
       category
       projecttitle
+      coverUrl
+      projectPerson {
+        avatarUrl
+        fullname
+      }
       nameofprojectlead
       involvedorganizations
       tags

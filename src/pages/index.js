@@ -102,7 +102,7 @@ function IndexPage(props) {
           <AvatarCard
             horizontal
             img={props.data.quote.avatarUrl}
-            name={`${props.data.quote.firstname} ${props.data.quote.lastname}`}
+            name={props.data.quote.fullname}
             role={props.data.quote.kabisrole}
             logo={props.data.quote.company.logoUrl}
             orgRole={props.data.quote.orgrole}
@@ -144,9 +144,8 @@ export const pageQuery = graphql`
         logoUrl
       }
     }
-    quote: googleSheetPeopleRow(lastname: { eq: "Handeland" }) {
-      firstname
-      lastname
+    quote: googleSheetPeopleRow(fullname: { eq: "Sigurd Handeland" }) {
+      fullname
       kabisrole
       avatarUrl
       orgrole

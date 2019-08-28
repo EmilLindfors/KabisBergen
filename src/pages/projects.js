@@ -36,7 +36,19 @@ function EventsPage(props) {
             <Box mb={4} mt={4}>
               <Grid container key={e.id} spacing={3}>
                 <Grid item xs="4">
-                  <Img fluid={props.data.project.childImageSharp.fluid} />
+                  {e.coverUrl ? (
+                    <img
+                      src={e.coverUrl}
+                      style={{
+                        width: "100%",
+                        maxHeight: "130px",
+                        objectFit: "cover",
+                        objectPosition: "100% 0",
+                      }}
+                    />
+                  ) : (
+                    <Img fluid={props.data.project.childImageSharp.fluid} />
+                  )}
                 </Grid>
                 <Grid item xs="8">
                   <Text variant="subheader">
@@ -75,6 +87,7 @@ export const ItemPageQuery = graphql`
     allGoogleSheetProjectsRow {
       nodes {
         id
+        coverUrl
         description
         category
         projecttitle

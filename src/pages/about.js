@@ -136,7 +136,7 @@ function AboutPage({ data }) {
                         <Grid item xs={6} md={4}>
                           <AvatarCard
                             img={person.avatarUrl}
-                            name={`${person.firstname} ${person.lastname}`}
+                            name={person.fullname}
                             role={person.kabisrole}
                             logo={person.company.logoUrl}
                             orgRole={person.orgrole}
@@ -209,10 +209,9 @@ function AboutPage({ data }) {
 }
 export const ItemPageQuery = graphql`
   query People {
-    people: allGoogleSheetPeopleRow(sort: { fields: lastname, order: ASC }) {
+    people: allGoogleSheetPeopleRow(sort: { fields: fullname, order: ASC }) {
       nodes {
-        firstname
-        lastname
+        fullname
         kabisrole
         avatarUrl
         orgrole
