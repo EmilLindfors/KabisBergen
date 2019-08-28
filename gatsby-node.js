@@ -61,31 +61,6 @@ exports.createPages = ({ actions, graphql }) => {
   })
 }
 
-//transforms and optimizes images uploaded though forms into sheet
-/*  imageFile: {
-        type: `File`,
-        async resolve(source, args, context, info) {
-          const result = await fetch(
-            `https://drive.google.com/uc?export=view&${
-              source.avatar.split("?")[1]
-            }`
-          ).then(function(response) {
-            reporter.info("Headers: ", response.headers)
-            return response.headers
-          })
-          reporter.info("Response: ", result)
-
-          return createRemoteFileNode({
-            url: result,
-            store,
-            cache,
-            createNode,
-            createNodeId,
-            reporter,
-          })
-        },
-      },*/
-
 exports.createResolvers = ({
   actions,
   cache,
@@ -116,9 +91,11 @@ exports.createResolvers = ({
     googleSheetProjectsRow: {
       coverUrl: {
         resolve: source =>
-          `https://drive.google.com/uc?export=view&${
-            source.cover.split("?")[1]
-          }`,
+          source.cover
+            ? `https://drive.google.com/uc?export=view&${
+                source.cover.split("?")[1]
+              }`
+            : "",
       },
     },
   })

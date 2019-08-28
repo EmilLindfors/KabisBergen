@@ -91,7 +91,7 @@ const TemplateWrapper = ({ children }) => {
       />
       <div style={{ minHeight: "100%" }}>{children}</div>
       <DividedSection black height="10vh" justifySelf="flex-end">
-        <Title align="right">Hvl Skape 2019</Title>
+        <Title align="right">KABIS 2019</Title>
       </DividedSection>
     </div>
   )
