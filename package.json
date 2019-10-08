@@ -1,9 +1,9 @@
 {
   "name": "kabis",
   "private": true,
-  "description": "A simple starter to get up and developing quickly with Gatsby",
-  "version": "0.1.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "description": "Kabis project website built with gatsby",
+  "version": "0.5.5",
+  "author": "Emil Lindfors <emil@lindforsfoundry.com>",
   "dependencies": {
     "@material-ui/core": "4.3.1",
     "@material-ui/icons": "4.2.1",
@@ -18,10 +18,10 @@
     "gatsby-plugin-sharp": "^2.2.18",
     "gatsby-source-drive": "0.0.2",
     "gatsby-source-filesystem": "^2.1.8",
-    "gatsby-source-google-sheets": "1.1.1",
-    "gatsby-source-ical": "1.1.0",
     "gatsby-theme-material-foundry": "0.0.48",
     "gatsby-transformer-sharp": "^2.2.5",
+    "google-spreadsheet": "^2.0.8",
+    "lodash": "^4.17.15",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
@@ -43,9 +43,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/gatsbyjs/gatsby-starter-default"
+    "url": "https://github.com/EmilLindfors/KabisBergen"
   },
   "bugs": {
-    "url": "https://github.com/gatsbyjs/gatsby/issues"
+    "url": "https://github.com/EmilLindfors/KabisBergen/issues"
   }
 }

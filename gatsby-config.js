@@ -17,30 +17,6 @@ module.exports = {
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {
-      resolve: "gatsby-source-google-sheets",
-      options: {
-        spreadsheetId: "1ZM4fzS5ggnv7eed21i40mDkOD-dwOPCDO6FfZY9JEn8",
-        worksheetTitle: "projects",
-        credentials: require("./key.json"),
-      },
-    },
-    {
-      resolve: "gatsby-source-google-sheets",
-      options: {
-        spreadsheetId: "1PKxuE9HGlnWXZfEsnL-DUdfUpmhHSn9u2XV1lhlDn3E",
-        worksheetTitle: "people",
-        credentials: require("./key.json"),
-      },
-    },
-    {
-      resolve: "gatsby-source-google-sheets",
-      options: {
-        spreadsheetId: "1ALmxQIDDC8GKxkx0sIuoGCkI_N0xHgJ8GkCYMOGfhrY",
-        worksheetTitle: "companies",
-        credentials: require("./key.json"),
-      },
-    },
-    {
       resolve: `gatsby-plugin-manifest`,
       options: {
         name: `gatsby-starter-default`,

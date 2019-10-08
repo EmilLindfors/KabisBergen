@@ -1,7 +1,6 @@
 import React from "react"
 import { graphql, Link } from "gatsby"
 import Layout from "../components/layout"
-import Image from "../components/image"
 import Img from "gatsby-image"
 import SEO from "../components/seo"
 import {
@@ -10,12 +9,11 @@ import {
   Title,
   Text,
 } from "gatsby-theme-material-foundry"
-import { slugify } from "../utils"
 import { Grid, Divider, Container, Box } from "@material-ui/core"
 import EventList, { GenerateTags } from "../components/event-list"
 
 function EventsPage(props) {
-  const projects = props.data.allGoogleSheetProjectsRow.nodes
+  const projects = props.data.allProjects.nodes
   const img = props.data.cover.childImageSharp.fixed.src
   return (
     <Layout>
@@ -57,19 +55,19 @@ function EventsPage(props) {
                   <div>
                     <Title
                       component={Link}
-                      to={`/project/${slugify(e.projecttitle)}`}
+                      to={`/projects/${e.slug}`}
                       variant="h4"
                       color="inherit"
                     >
-                      {e.projecttitle}
+                      {e.title}
                     </Title>
                   </div>
                   <EventList
                     horizontal
                     category={e.category}
-                    date={e.startdate}
-                    person={e.nameofprojectlead}
-                    organization={e.involvedorganizations}
+                    date={e.start}
+                    person={e.author}
+                    organization={e.organizations}
                   />
                 </Grid>
               </Grid>
@@ -84,18 +82,19 @@ function EventsPage(props) {
 
 export const ItemPageQuery = graphql`
   query Projects {
-    allGoogleSheetProjectsRow {
+    allProjects {
       nodes {
         id
         coverUrl
         description
         category
-        projecttitle
-        nameofprojectlead
-        involvedorganizations
+        title
+        author
+        slug
+        organizations
         tags
-        startdate
-        enddate
+        start
+        end
       }
     }
     cover: file(relativePath: { eq: "cover.jpg" }) {

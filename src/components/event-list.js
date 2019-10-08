@@ -166,8 +166,7 @@ function GenerateList({
 }
 
 export function GenerateTags({ tags, color }) {
-  const tagArray = tags.split(",")
-  return tagArray.map(tag => (
+  return tags.map(tag => (
     <Badge color={color} key={tag}>
       {tag}
     </Badge>

@@ -12,23 +12,22 @@ import { Container, Card, Grid, Box, Hidden } from "@material-ui/core"
 import Divider from "@material-ui/core/Divider"
 
 function GenerateTags({ tags }) {
-  const tagArray = tags.split(",")
-  return tagArray.map(tag => <Badge key={tag}>{tag}</Badge>)
+  return tags.map(tag => <Badge key={tag}>{tag}</Badge>)
 }
 
 function EventTemplate(props) {
   const {
     description,
     category,
-    projecttitle,
-    nameofprojectlead,
-    involvedorganizations,
+    title,
+    author,
+    organizations,
     projectPerson,
     tags,
     coverUrl,
-    startdate,
-    enddate,
-  } = props.data.googleSheetProjectsRow
+    start,
+    end,
+  } = props.data.projects
   return (
     <Layout>
       <DividedSection black height="70vh">
@@ -38,10 +37,10 @@ function EventTemplate(props) {
             {tags && <GenerateTags tags={tags} />}
           </Text>
           <Title variant="h2" gutterBottom>
-            {projecttitle}
+            {title}
           </Title>
           <Text variant="h5">
-            {startdate} - {enddate}
+            {start} - {end}
           </Text>
         </Container>
       </DividedSection>
@@ -49,7 +48,7 @@ function EventTemplate(props) {
         <Box pt={4}>
           {coverUrl && (
             <img
-              src={coverUrl}
+              src={`${coverUrl}&sz=w800`}
               style={{
                 width: "100%",
                 maxHeight: "400px",
@@ -77,9 +76,9 @@ function EventTemplate(props) {
 
                     <EventList
                       category={category}
-                      date={startdate}
-                      person={nameofprojectlead}
-                      organization={involvedorganizations}
+                      date={start}
+                      person={author}
+                      organization={organizations}
                       projectPerson={projectPerson}
                     />
                   </Box>
@@ -92,9 +91,9 @@ function EventTemplate(props) {
                   <EventList
                     horizontal
                     category={category}
-                    date={startdate}
-                    person={nameofprojectlead}
-                    organization={involvedorganizations}
+                    date={start}
+                    person={author}
+                    organization={organizations}
                     projectPerson={projectPerson}
                   />
                 </Box>
@@ -111,20 +110,20 @@ export default EventTemplate
 
 export const ItemPageQuery = graphql`
   query ItemDetails($itemId: String!) {
-    googleSheetProjectsRow(id: { eq: $itemId }) {
+    projects(id: { eq: $itemId }) {
       description
       category
-      projecttitle
+      title
       coverUrl
       projectPerson {
         avatarUrl
         fullname
       }
-      nameofprojectlead
-      involvedorganizations
+      author
+      organizations
       tags
-      startdate
-      enddate
+      start
+      end
     }
   }
 `

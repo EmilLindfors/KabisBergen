@@ -84,7 +84,8 @@ const TemplateWrapper = ({ children }) => {
             links={[
               { link: "/", text: "Home" },
               { link: "/projects", text: "Projects" },
-              { link: "/about", text: "ABout" },
+              { link: "/annual-report", text: "Annual Report" },
+              { link: "/about", text: "About" },
             ]}
           />
         }

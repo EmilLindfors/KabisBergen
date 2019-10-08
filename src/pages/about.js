@@ -209,7 +209,7 @@ function AboutPage({ data }) {
 }
 export const ItemPageQuery = graphql`
   query People {
-    people: allGoogleSheetPeopleRow(sort: { fields: fullname, order: ASC }) {
+    people: allPeople(sort: { fields: fullname, order: ASC }) {
       nodes {
         fullname
         kabisrole
@@ -221,18 +221,14 @@ export const ItemPageQuery = graphql`
         }
       }
     }
-    partners: allGoogleSheetCompaniesRow(
-      filter: { partnertype: { eq: "Partner" } }
-    ) {
+    partners: allCompanies(filter: { type: { eq: "Partner" } }) {
       nodes {
         name
         website
         logoUrl
       }
     }
-    industry: allGoogleSheetCompaniesRow(
-      filter: { partnertype: { eq: "Industry Member" } }
-    ) {
+    industry: allCompanies(filter: { type: { eq: "Industry Member" } }) {
       nodes {
         name
         website
