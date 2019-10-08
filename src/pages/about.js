@@ -69,7 +69,7 @@ function AboutPage({ data }) {
                     <Text variant="body1" gutterBottom>
                       The aim of the KABIS project's current period has been to
                       focus and strengthen the aquaculture-oriented research and
-                      higher education in Western Norway so that it builds on
+                      higher education in western Norway so that it builds on
                       the innovation and restructuring work that is underway to
                       develop environmentally friendly fish farming systems.
                       This applies to land-based recycling facilities (RAS) and
