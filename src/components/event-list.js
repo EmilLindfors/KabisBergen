@@ -1,5 +1,5 @@
 import React from "react"
-import { Button, Badge, Title } from "gatsby-theme-material-foundry"
+import { Badge, Title } from "gatsby-theme-material-foundry"
 import {
   ListItem,
   List,

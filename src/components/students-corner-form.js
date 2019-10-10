@@ -1,7 +1,6 @@
 import React from "react"
 import {
   Divider,
-  Button,
   TextField,
   Box,
   MenuItem,
@@ -10,36 +9,23 @@ import {
   FormLabel,
   Radio,
   RadioGroup,
-  Grid
+  Grid,
 } from "@material-ui/core"
-import {
-  Title,
-  Button as FoundryButton,
-} from "gatsby-theme-material-foundry"
+import { Button as FoundryButton } from "gatsby-theme-material-foundry"
 import { makeStyles } from "@material-ui/core/styles"
-import Icon from "@material-ui/icons/Cancel"
-import { FieldArray, Form, Formik, getIn } from "formik"
+import { Form, Formik } from "formik"
 import * as Yup from "yup"
 
-
 const validationSchema = Yup.object().shape({
-  mittFakultet: Yup.string().required("Du må velge et fakultet"),
-  mittNavn: Yup.string().required("Du må skrive et navn"),
-  minEmail: Yup.string()
-    .required("Du må skrive en epost")
-    .email("må være en epost"),
-  people: Yup.array().of(
-    Yup.object().shape({
-      navn: Yup.string().required("Du må skrive et navn"),
-      email: Yup.string()
-        .required("Du må skrive en epost")
-        .email("må være en epost"),
-    })
-  ),
-  ideTittel: Yup.string().required("Hva er tittelen på ideen?"),
-  beskrivelse: Yup.string()
-    .min(50, "Oppsummeringen må være minimum 50 bokstaver")
-    .required("Oppsummeringen må være minimum 50 bokstaver"),
+  mySchool: Yup.string().required("You have to choose a school"),
+  myName: Yup.string().required("You have to write a name"),
+  myEmail: Yup.string()
+    .required("You have to write an email")
+    .email("need to be an email"),
+  fieldOfStudy: Yup.string().required("Please supply your field of study"),
+  description: Yup.string()
+    .min(100, "The summary has to be at minumum 100 words")
+    .required("The summary has to be at minumum 100 words"),
 })
 
 const useStyles = makeStyles(theme => ({
@@ -60,8 +46,8 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     flexWrap: "wrap",
   },
-  textField:{
-width: "100%",
+  textField: {
+    width: "100%",
   },
   button: {
     margin: theme.spacing(1),
@@ -71,45 +57,42 @@ width: "100%",
   },
 }))
 
-const fakultet = [
+const school = [
   {
-    value: "FIN",
-    label: "FIN - Fakultet for ingeniør- og naturvitskap",
+    value: "NHH",
+    label: "NHH - Norwegian School of Economics",
   },
   {
-    value: "FHS",
-    label: "FHS - Fakultet for helse- og sosialvitskap",
+    value: "HVL",
+    label: "HVL - Western Norway university of Applied Sciences",
   },
   {
-    value: "FLKI",
-    label: "FLKI - Fakultet for lærarutdanning, kultur og idrett",
+    value: "UiB",
+    label: "UiB - University in Bergen",
   },
   {
-    value: "FØS",
-    label: "FØS - Fakultet for økonomi og samfunnsvitskap",
-  },
-]
-
-const campus = [
-  {
-    value: "Bergen",
-    label: "Bergen",
+    value: "BI",
+    label: "BI - Norwegian Business School",
   },
   {
-    value: "Sogndal",
-    label: "Sogndal",
+    value: "UiO",
+    label: "UiO - University in Oslo",
   },
   {
-    value: "Stord",
-    label: "Stord",
+    value: "UiS",
+    label: "UiS - University in Stavanger",
   },
   {
-    value: "Haugesund",
-    label: "Haugesund",
+    value: "NTNU",
+    label: "NTNU - Norwegian University of Science and Technology",
   },
   {
-    value: "Førde",
-    label: "Førde",
+    value: "Other Domestic",
+    label: "Other Domestic - Other Norwegian University ",
+  },
+  {
+    value: "Other International",
+    label: "Other International - Other International University ",
   },
 ]
 
@@ -117,239 +100,188 @@ const MyForm = ({ handleClose }) => {
   const classes = useStyles()
 
   return (
+    <Formik
+      initialValues={{
+        myName: "",
+        mySchool: "",
+        fieldOfStudy: "",
+        myEmail: "",
+        typeOfApplication: "",
+        description: "",
+        attendDinner: "",
+        allergies: "",
+        subscribe: false,
+      }}
+   
+      validationSchema={validationSchema}
+      onSubmit={async (values, { resetForm }) => {
+        
+        const msg = {
+          to: "info@kabis.no",
+          from: values.myEmail,
+          subject: `New Students Corner Application from ${values.myName}`,
+          text:
+            `name: ${values.myName}, ` +
+            `Email: ${values.myEmail}, ` +
+            `School and field of study: ${values.fieldOfStudy} at ${values.mySchool}, ` +
+            `Type of application: ${values.typeOfApplication},` +
+            `description: ${values.description}, ` +
+            `Attending dinner: ${values.attendDinner}, ` +
+            `Allergies: ${values.allergies ? values.allergies : "none"},`,
 
-      <Formik
-        initialValues={{
-          mittNavn: "",
-          mittFakultet: "",
-          mittCampus: "",
-          minEmail: "",
-          ideTittel: "",
-          beskrivelse: "",
-          people: [],
-        }}
-        validationSchema={validationSchema}
-        onSubmit={(values, { resetForm }) => {
-          console.log("onSubmit", JSON.stringify(values, null, 2))
-          var emailBody = ""
-          if (values.people.length > 0) {
-            emailBody =
-              `Navn: ${values.mittNavn}, ` +
-              `Email: ${values.minEmail}, ` +
-               `Campus og fakutet: ${values.mittFakultet} ved ${values.mittCampus}, ` +
-              `Andre i teamet: ${values.people.map(
-                person => `navn: ${person.navn} email: ${person.email}, `
-              )},` +
-              `Ide Tittel: ${values.ideTittel},` +
-              `Beskrivelse: ${values.beskrivelse}`
-          } else {
-            emailBody =
-              `Navn: ${values.mittNavn}, ` +
-              `Email: ${values.minEmail}, ` +
-              `Campus og fakutet: ${values.mittFakultet} ved ${values.mittCampus}, ` +
-              `Ide Tittel: ${values.ideTittel}, ` +
-              `Beskrivelse: ${values.beskrivelse}`
-          }
-          window.location.href = `mailto:studentinnovasjon@hvl.no?subject=Ny ide fra ${values.mittNavn} &body=${emailBody}`
+          html:
+            `name: ${values.myName}, ` +
+            `Email: ${values.myEmail}, ` +
+            `School and field of study: ${values.fieldOfStudy} at ${values.mySchool}, ` +
+            `Type of application: ${values.typeOfApplication},` +
+            `description: ${values.description}, ` +
+            `Attending dinner: ${values.attendDinner}, ` +
+            `Allergies: ${values.allergies ? values.allergies : "none"},`,
+        }
 
-          resetForm()
-        }}
-      >
-        {({ values, touched, errors, handleChange, handleBlur, isValid }) => (
-          <Form noValidate autoComplete="off" className={classes.root}>
+    
+/*
+
+        if(values.subscribe){
+         
+        }
+   
+
+        const emailBody =
+          `name: ${values.myName}, ` +
+          `Email: ${values.myEmail}, ` +
+          `School and field of study: ${values.fieldOfStudy} at ${values.mySchool}, ` +
+          `Type of application: ${values.typeOfApplication},` +
+          `description: ${values.description}, ` +
+          `Attending dinner: ${values.attendDinner}, ` +
+          `Allergies: ${values.allergies ? values.allergies : "none"},`;
+
+
+        window.location.href = `mailto:info@kabis.no?subject=New Application from ${values.myName} &body=${emailBody}`*/
+
+        resetForm()
+      }}
+    >
+      {({ values, touched, errors, handleChange, handleBlur, isValid }) => (
+        <Form noValidate autoComplete="off" className={classes.root}>
+          <Box mx={1}>
             <Divider style={{ marginBottom: 20 }} />
-  
+            {console.log(sendgrid)}
             <TextField
-              name="mittNavn"
-              helperText={touched.mittNavn ? errors.mittNavn : ""}
-              error={Boolean(errors.mittNavn)}
-              label="Mitt Navn"
+              name="myName"
+              helperText={touched.myName ? errors.myName : ""}
+              error={Boolean(errors.myName)}
+              label="My Name"
               margin="dense"
               required
               variant="outlined"
-              value={values.mittNavn}
+              value={values.myName}
               onBlur={handleBlur}
               onChange={handleChange}
               fullWidth
             />
+            {console.log(errors)}
             <TextField
-              name="minEmail"
+              name="myEmail"
               type="email"
               margin="dense"
               required
-              helperText={touched.minEmail ? errors.minEmail : ""}
-              error={Boolean(errors.minEmail)}
-              label="Min Email"
+              helperText={touched.myEmail ? errors.myEmail : ""}
+              error={Boolean(errors.myEmail)}
+              label="My Email"
               variant="outlined"
-              value={values.minEmail}
+              value={values.myEmail}
               onBlur={handleBlur}
               onChange={handleChange}
               fullWidth
             />
-<Grid container>
-  <Grid item xs={12} sm={8}>
-            <TextField
-              id="standard-select-campus"
-              select
-              required
-              margin="dense"
-              label="Mitt HVL Fakultet"
-              className={classes.textField}
-              value={values.mittFakultet}
-              name="mittFakultet"
-              variant="outlined"
-              onBlur={handleBlur}
-              fullwidth
-              onChange={handleChange}
-              SelectProps={{
-                MenuProps: {
-                  className: classes.menu,
-                },
-              }}
-              error={Boolean(errors.mittFakultet)}
-              helperText={touched.mittFakultet ? errors.mittFakultet : ""}
-            >
-              {fakultet.map(option => (
-                <MenuItem key={option.value} value={option.value}>
-                  {option.label}
-                </MenuItem>
-              ))}
-            </TextField>
-            </Grid>
-            <Grid item xs={12} sm={4}>
-              <Box ml={1}>
-            <TextField
-              id="standard-select-faculty"
-              select
-              fullwidth
-              required
-              margin="dense"
-              label="Mitt Campus"
-              className={classes.textField}
-              value={values.mittCampus}
-              name="mittCampus"
-              variant="outlined"
-              onBlur={handleBlur}
-              onChange={handleChange}
-              SelectProps={{
-                MenuProps: {
-                  className: classes.menu,
-                },
-              }}
-              error={Boolean(errors.mittCampus)}
-              helperText={touched.mittCampus ? errors.mittCampus : ""}
-            >
-              {campus.map(option => (
-                <MenuItem key={option.value} value={option.value}>
-                  {option.label}
-                </MenuItem>
-              ))}
-            </TextField>
-            </Box>
-            </Grid>
-            </Grid>
-            <FieldArray name="people">
-              {({ push, remove }) => (
-                <div>
-                  <Title black variant="h6">
-                    Andre i teamet
-                  </Title>
-                  {values.people.map((p, index) => {
-                    const navn = `people[${index}].navn`
-                    const touchedNavn = getIn(touched, navn)
-                    const errorNavn = getIn(errors, navn)
-
-                    const email = `people[${index}].email`
-                    const touchedEmail = getIn(touched, email)
-                    const errorEmail = getIn(errors, email)
-
-                    return (
-                      <div key={p.id}>
-                        <TextField
-                          className={classes.field}
-                          variant="outlined"
-                          label="Navn"
-                          margin="dense"
-                          name={navn}
-                     
-                          value={p.navn}
-                          required
-                          helperText={touchedNavn && errorNavn ? errorNavn : ""}
-                          error={Boolean(touchedNavn && errorNavn)}
-                          onChange={handleChange}
-                          onBlur={handleBlur}
-                        />
-                        <TextField
-                          className={classes.field}
-                          variant="outlined"
-                          label="Email"
-                          margin="dense"
-                          type="email"
-                          name={email}
-                          value={p.email}
-                          required
-                          helperText={
-                            touchedEmail && errorEmail ? errorEmail : ""
-                          }
-                          error={Boolean(touchedEmail && errorEmail)}
-                          onChange={handleChange}
-                          onBlur={handleBlur}
-                        />
-                        <FoundryButton
-                          className={classes.button}
-                          margin="normal"
-                          type="button"
-                          variant="outlined"
-                          color="error"
-                          simple
-                          justIcon
-                          onClick={() => remove(index)}
-                        >
-                          <Icon />
-                        </FoundryButton>
-                      </div>
-                    )
-                  })}
-                  <Button
-                    className={classes.button}
-                    type="button"
+            <Grid container>
+              <Grid item xs={12} sm={8}>
+                <TextField
+                  name="fieldOfStudy"
+                  helperText={touched.fieldOfStudy ? errors.fieldOfStudy : ""}
+                  error={Boolean(errors.fieldOfStudy)}
+                  label="Field of Study"
+                  margin="dense"
+                  required
+                  variant="outlined"
+                  value={values.fieldOfStudy}
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  fullWidth
+                />
+              </Grid>
+              <Grid item xs={12} sm={4}>
+                <Box ml={1}>
+                  <TextField
+                    id="select-school"
+                    select
+                    fullwidth
+                    required
+                    margin="dense"
+                    label="My school"
+                    className={classes.textField}
+                    value={values.mySchool}
+                    name="mySchool"
                     variant="outlined"
-                    onClick={() =>
-                      push({ id: Math.random(), navn: "", email: "" })
-                    }
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    SelectProps={{
+                      MenuProps: {
+                        className: classes.menu,
+                      },
+                    }}
+                    error={Boolean(errors.mySchool)}
+                    helperText={touched.mySchool ? errors.mySchool : ""}
                   >
-                    Ny Person
-                  </Button>
-                </div>
-              )}
-            </FieldArray>
+                    {school.map(option => (
+                      <MenuItem key={option.value} value={option.value}>
+                        {option.label}
+                      </MenuItem>
+                    ))}
+                  </TextField>
+                </Box>
+              </Grid>
+            </Grid>
+
             <Divider style={{ marginTop: 20, marginBottom: 20 }} />
-            <Title black variant="h5">
-              Ide
-            </Title>
+            <FormControl component="fieldset" className={classes.formControl}>
+              <FormLabel component="legend">Type of application</FormLabel>
+              <RadioGroup
+                row
+                aria-label="type-of-application"
+                name="typeOfApplication"
+                value={values.typeOfApplication}
+                onChange={handleChange}
+              >
+                <FormControlLabel
+                  value="Bachelor-/master- or project assignment"
+                  control={<Radio color="primary" />}
+                  label="Bachelor-/master- or project assignment"
+                  labelPlacement="start"
+                />
+                <FormControlLabel
+                  value="Business Idea"
+                  control={<Radio color="primary" />}
+                  label="Business Idea"
+                  labelPlacement="start"
+                />
+              </RadioGroup>
+            </FormControl>
             <TextField
-              name="ideTittel"
-              helperText={touched.ideTittel ? errors.ideTittel : ""}
-              error={Boolean(errors.ideTittel)}
-              label="ide-tittel"
-              required
-              variant="outlined"
               margin="dense"
-              value={values.ideTittel}
-              onChange={handleChange}
-              fullWidth
-              onBlur={handleBlur}
-            />
-            <TextField
-              margin="dense"
-              label="Oppsummering"
+              label="Description"
               required
-              name="beskrivelse"
-              helperText={touched.beskrivelse ? errors.beskrivelse : "Skriv en oppsummering av ideèn"}
-              error={Boolean(errors.beskrivelse)}
+              name="description"
+              helperText={
+                touched.description
+                  ? errors.description
+                  : "Give a short summary of the project. include problem statmenet, mehotds and (if applicable) preliminary results. If you are applying with a business idea, please describe the problem, how you will solve it and how far along you are."
+              }
+              error={Boolean(errors.description)}
               type="text"
               onChange={handleChange}
-              value={values.beskrivelse}
+              value={values.description}
               fullWidth
               variant="outlined"
               multiline
@@ -357,23 +289,68 @@ const MyForm = ({ handleClose }) => {
               rows="4"
             />
             <Divider style={{ marginTop: 20, marginBottom: 20 }} />
-            <Box align="right">
-             
-              <FoundryButton
-                className={classes.button}
-                type="submit"
-                disabled={Boolean(!isValid)}
-                color="primary"
-                variant="contained"
-                // disabled={!isValid || values.people.length === 0}
-              >
-                send inn bidrag
-              </FoundryButton>
-            </Box>
-          </Form>
-        )}
-      </Formik>
-
+            <Grid container>
+              <Grid item xs={12} sm={6}>
+                <FormControl
+                  component="fieldset"
+                  className={classes.formControl}
+                >
+                  <FormLabel component="legend">
+                    I would like to attend the free dinner
+                  </FormLabel>
+                  <RadioGroup
+                    row
+                    aria-label="attend-dinner"
+                    name="attendDinner"
+                    value={values.attendDinner}
+                    onChange={handleChange}
+                  >
+                    <FormControlLabel
+                      value="yes"
+                      control={<Radio color="primary" />}
+                      label="Yes"
+                      labelPlacement="start"
+                    />
+                    <FormControlLabel
+                      value="no"
+                      control={<Radio color="primary" />}
+                      label="No"
+                      labelPlacement="start"
+                    />
+                  </RadioGroup>
+                </FormControl>
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  name="allergies"
+                  helperText={touched.allergies ? errors.allergies : ""}
+                  error={Boolean(errors.allergies)}
+                  label="Food allergies"
+                  margin="dense"
+                  variant="outlined"
+                  value={values.allergies}
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  fullWidth
+                />
+              </Grid>
+            </Grid>
+          </Box>
+          <Box align="right" mt={4} mb={12}>
+            <FoundryButton
+              className={classes.button}
+              type="submit"
+              disabled={Boolean(!isValid)}
+              color="primary"
+              variant="contained"
+              size="lg"
+            >
+              Apply now
+            </FoundryButton>
+          </Box>
+        </Form>
+      )}
+    </Formik>
   )
 }
 

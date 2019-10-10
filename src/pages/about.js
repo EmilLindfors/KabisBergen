@@ -2,11 +2,7 @@ import React from "react"
 import { graphql } from "gatsby"
 import {
   Box,
-  Icon,
   Grid,
-  Avatar,
-  makeStyles,
-  Divider,
   Container,
 } from "@material-ui/core"
 import {
@@ -15,7 +11,6 @@ import {
   DividedSection,
   TabPill,
 } from "gatsby-theme-material-foundry"
-import Img from "gatsby-image"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import Dashboard from "@material-ui/icons/People"
@@ -24,23 +19,11 @@ import List from "@material-ui/icons/List"
 import Description from "@material-ui/icons/Description"
 import { AvatarCard, CompanyCard } from "../components/custom-cards"
 
-const useStyles = makeStyles({
-  avatar: {
-    margin: 10,
-  },
-  bigAvatar: {
-    width: 100,
-    height: 100,
-    marginRight: "24px",
-  },
-})
-
 function AboutPage({ data }) {
-  const classes = useStyles()
 
   return (
     <Layout>
-      <SEO title="About HVL Skape" />
+      <SEO title="About KABIS" slug="about"/>
       <DividedSection
         black
         height="50vh"

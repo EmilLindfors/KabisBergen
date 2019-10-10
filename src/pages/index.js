@@ -1,16 +1,14 @@
 import React from "react"
-import { Link, graphql } from "gatsby"
+import {  graphql } from "gatsby"
 import Img from "gatsby-image"
 import {
   DividedSection,
   Title,
   Text,
-  Section,
   Button,
 } from "gatsby-theme-material-foundry"
-import { Grid, Container, Divider, Box } from "@material-ui/core"
+import {  Container, Box } from "@material-ui/core"
 import Layout from "../components/layout"
-import Image from "../components/image"
 import SEO from "../components/seo"
 import { AvatarCard } from "../components/custom-cards"
 
@@ -44,7 +42,7 @@ function IndexPage(props) {
       <DividedSection>
         {props.data.partners &&
           props.data.partners.nodes.map(company => (
-            <img src={company.logoUrl} width="100px" />
+            <img src={company.logoUrl} width="100px" alt={company.name} />
           ))}
       </DividedSection>
       <DividedSection height="80vh">

@@ -1,18 +1,15 @@
 import React from "react"
 import {
   Box,
-  Grid,
   Icon,
   Divider,
   makeStyles,
   Avatar,
   Card,
-  CardMedia,
   CardContent,
 } from "@material-ui/core"
 import { Button, Title, Text } from "gatsby-theme-material-foundry"
 import NextIcon from "@material-ui/icons/NavigateNextOutlined"
-import Img from "gatsby-image"
 
 const useStyles = makeStyles({
   avatar: {
@@ -80,7 +77,7 @@ export function AvatarCard({
           className={horizontal ? classes.avatar : classes.bigAvatar}
         />
 
-        {!horizontal && <img src={logo} className={classes.logo} />}
+        {!horizontal && <img src={logo} className={classes.logo} alt={name}/>}
       </Box>
       <Box>
         <Title variant="h5" align="center" className={classes.title}>

@@ -6,8 +6,6 @@ import {
   DividedSection,
   Title,
 } from "gatsby-theme-material-foundry"
-import DashIcon from "@material-ui/icons/Dashboard"
-import UserIcon from "@material-ui/icons/AccountCircle"
 import { graphql, useStaticQuery } from "gatsby"
 
 const useSiteMetadata = () => {
@@ -77,13 +75,26 @@ const TemplateWrapper = ({ children }) => {
       <Header
         absolute
         color="transparent"
-        brand={site.siteMetadata.title}
-        logo={file.childImageSharp.fixed.src}
+        brand={
+          <div
+            style={{ display: "flex", alignItems: "center", width: "300px" }}
+            ariaLabel="home button"
+            role="button"
+          >
+            <img
+              src={file.childImageSharp.fixed.src}
+              alt={site.siteMetadata.title}
+            />
+            <span style={{ visibility: "hidden" }}>
+              {site.siteMetadata.title}
+            </span>
+          </div>
+        }
         rightLinks={
           <HeaderLinks
             links={[
-              { link: "/", text: "Home" },
               { link: "/projects", text: "Projects" },
+              { link: "/students-corner", text: "Students Corner" },
               { link: "/annual-report", text: "Annual Report" },
               { link: "/about", text: "About" },
             ]}

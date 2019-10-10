@@ -4,7 +4,6 @@ import Layout from "../components/layout"
 import Img from "gatsby-image"
 import SEO from "../components/seo"
 import {
-  Button,
   DividedSection,
   Title,
   Text,
@@ -17,6 +16,7 @@ function EventsPage(props) {
   const img = props.data.cover.childImageSharp.fixed.src
   return (
     <Layout>
+       <SEO title="Projects" slug="projects"/>
       <DividedSection
         black
         image={img}
@@ -37,6 +37,7 @@ function EventsPage(props) {
                   {e.coverUrl ? (
                     <img
                       src={e.coverUrl}
+                      alt="cover"
                       style={{
                         width: "100%",
                         maxHeight: "130px",

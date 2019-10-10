@@ -1,18 +1,14 @@
 import React from "react"
 import { graphql } from "gatsby"
-import Img from "gatsby-image"
 import {
   DividedSection,
   Title,
   Text,
   Section,
-  Button,
 } from "gatsby-theme-material-foundry"
-import { Grid, Container, Divider, Box } from "@material-ui/core"
+import { Container, Box } from "@material-ui/core"
 import Layout from "../components/layout"
-import Image from "../components/image"
 import SEO from "../components/seo"
-import { AvatarCard } from "../components/custom-cards"
 
 const Table = ({ headers, data }) => {
   return (
@@ -35,16 +31,17 @@ const Table = ({ headers, data }) => {
 }
 
 function IndexPage(props) {
-  const img = props.data.cover.childImageSharp.fixed.src
 
   return (
     <Layout>
-      <SEO title="Home" />
-      <DividedSection black height="50vh" image="https://source.unsplash.com/Q5QspluNZmM/2000x1000">
+      <SEO title="Annual Report" slug="annual-report" />
+      <DividedSection
+        black
+        height="50vh"
+        image="https://source.unsplash.com/Q5QspluNZmM/2000x1000"
+      >
         <Box align="center">
-          <Title variant="h1">
-            Annual Report 2018
-          </Title>
+          <Title variant="h1">Annual Report 2018</Title>
           <Title variant="subtitle">
             280782 - KAPASITETSLØFT FOR BÆREKRAFTIG OG INNOVATIV
             SJØMATPRODUKSJON (KABIS)
@@ -53,7 +50,6 @@ function IndexPage(props) {
       </DividedSection>
       <Container maxWidth="md">
         <Box my={12}>
-         
           <Section id="rapport-2018-innledning">
             <Title variant="h2" black>
               Innledning

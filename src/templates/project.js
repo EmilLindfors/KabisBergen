@@ -7,6 +7,7 @@ import {
   Title,
   Text,
 } from "gatsby-theme-material-foundry"
+import SEO from "../components/seo"
 import EventList from "../components/event-list"
 import { Container, Card, Grid, Box, Hidden } from "@material-ui/core"
 import Divider from "@material-ui/core/Divider"
@@ -26,10 +27,12 @@ function EventTemplate(props) {
     tags,
     coverUrl,
     start,
+    slug,
     end,
   } = props.data.projects
   return (
     <Layout>
+       <SEO title={title} slug={slug} article/>
       <DividedSection black height="70vh">
         <Container maxWidth="md">
           <Text variant="subheader">
@@ -49,6 +52,7 @@ function EventTemplate(props) {
           {coverUrl && (
             <img
               src={`${coverUrl}&sz=w800`}
+              alt="cover"
               style={{
                 width: "100%",
                 maxHeight: "400px",
@@ -115,6 +119,7 @@ export const ItemPageQuery = graphql`
       category
       title
       coverUrl
+      slug
       projectPerson {
         avatarUrl
         fullname

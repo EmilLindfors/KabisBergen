@@ -19,14 +19,15 @@
     "gatsby-plugin-sharp": "^2.2.18",
     "gatsby-source-drive": "0.0.2",
     "gatsby-source-filesystem": "^2.1.8",
-    "gatsby-theme-material-foundry": "0.0.48",
+    "gatsby-theme-material-foundry": "0.0.53",
     "gatsby-transformer-sharp": "^2.2.5",
     "google-spreadsheet": "^2.0.8",
     "lodash": "^4.17.15",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-helmet": "^5.2.1"
+    "react-helmet": "^5.2.1",
+    "yup": "^0.27.0"
   },
   "devDependencies": {
     "prettier": "^1.18.2"
