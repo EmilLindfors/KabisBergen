@@ -24,7 +24,7 @@ const validationSchema = Yup.object().shape({
     .email("need to be an email"),
   fieldOfStudy: Yup.string().required("Please supply your field of study"),
   description: Yup.string()
-    .min(100, "The summary has to be at minumum 100 words")
+    .min(1, "The summary has to be at minumum 100 words")
     .required("The summary has to be at minumum 100 words"),
 })
 
@@ -112,35 +112,37 @@ const MyForm = ({ handleClose }) => {
         allergies: "",
         subscribe: false,
       }}
-   
       validationSchema={validationSchema}
       onSubmit={async (values, { resetForm }) => {
-        
-        const msg = {
-          to: "info@kabis.no",
-          from: values.myEmail,
-          subject: `New Students Corner Application from ${values.myName}`,
-          text:
-            `name: ${values.myName}, ` +
-            `Email: ${values.myEmail}, ` +
-            `School and field of study: ${values.fieldOfStudy} at ${values.mySchool}, ` +
-            `Type of application: ${values.typeOfApplication},` +
-            `description: ${values.description}, ` +
-            `Attending dinner: ${values.attendDinner}, ` +
-            `Allergies: ${values.allergies ? values.allergies : "none"},`,
+        const msg =
+          `name: ${values.myName}, ` +
+          `Email: ${values.myEmail}, ` +
+          `School and field of study: ${values.fieldOfStudy} at ${values.mySchool}, ` +
+          `Type of application: ${values.typeOfApplication},` +
+          `description: ${values.description}, ` +
+          `Attending dinner: ${values.attendDinner}, ` +
+          `Allergies: ${values.allergies ? values.allergies : "none"},`
+          try {
+        const response  = await fetch(
+          "https://us-central1-kabis-bergen.cloudfunctions.net/sendgridEmail?sg_key=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",
+          {
+            method: "POST",
+            mode: 'no/cors', 
+            body: `{\"to\":\"${values.myEmail}\",\"from\":\"info@kabis.no\",\"subject\":\"New Application from ${values.myName}\",\"body\":\"${msg}\"}`,
+            headers: {
+              "Content-Type": "application/json",
+            },
+         
+          }
+        )
+        const json = await response.json();
+        console.log('Success:', JSON.stringify(json));
 
-          html:
-            `name: ${values.myName}, ` +
-            `Email: ${values.myEmail}, ` +
-            `School and field of study: ${values.fieldOfStudy} at ${values.mySchool}, ` +
-            `Type of application: ${values.typeOfApplication},` +
-            `description: ${values.description}, ` +
-            `Attending dinner: ${values.attendDinner}, ` +
-            `Allergies: ${values.allergies ? values.allergies : "none"},`,
-        }
+          } catch (error) {
+            console.error('Error:', error);
+          }
 
-    
-/*
+        /*
 
         if(values.subscribe){
          
@@ -158,15 +160,14 @@ const MyForm = ({ handleClose }) => {
 
 
         window.location.href = `mailto:info@kabis.no?subject=New Application from ${values.myName} &body=${emailBody}`*/
-
-        resetForm()
+        //resetForm()
+  
       }}
     >
       {({ values, touched, errors, handleChange, handleBlur, isValid }) => (
         <Form noValidate autoComplete="off" className={classes.root}>
           <Box mx={1}>
             <Divider style={{ marginBottom: 20 }} />
-            {console.log(sendgrid)}
             <TextField
               name="myName"
               helperText={touched.myName ? errors.myName : ""}
@@ -180,7 +181,6 @@ const MyForm = ({ handleClose }) => {
               onChange={handleChange}
               fullWidth
             />
-            {console.log(errors)}
             <TextField
               name="myEmail"
               type="email"
