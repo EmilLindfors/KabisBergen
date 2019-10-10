@@ -39,13 +39,18 @@ function IndexPage(props) {
           </Box>
         </Container>
       </DividedSection>
-      <DividedSection>
+ 
+        <Box my={4}>
+        <DividedSection>
         {props.data.partners &&
           props.data.partners.nodes.map(company => (
             <img src={company.logoUrl} width="100px" alt={company.name} />
           ))}
-      </DividedSection>
-      <DividedSection height="80vh">
+          </DividedSection>
+          </Box>
+          <Box my={8}>
+      <DividedSection>
+ 
         <Img fluid={props.data.kickoff.childImageSharp.fluid} />
         <Container>
           <Title variant="h4" align="left">
@@ -58,7 +63,9 @@ function IndexPage(props) {
             systems.
           </Text>
         </Container>
+   
       </DividedSection>
+      </Box>
       <DividedSection height="50vh" info>
         <Box>
           <Title variant="h5" align="center">

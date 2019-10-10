@@ -96,7 +96,7 @@ const school = [
   },
 ]
 
-const MyForm = ({ handleClose }) => {
+const MyForm = () => {
   const classes = useStyles()
 
   return (
