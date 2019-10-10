@@ -2782,6 +2782,11 @@ chroma-js@2.0.4:
   resolved "https://registry.yarnpkg.com/chroma-js/-/chroma-js-2.0.4.tgz#51ada59274856411630d45ea533d717018554cea"
   integrity sha512-gk71qOrSdBTLbsd0DIUO3QjZL8tTvMwpG1EoXYScy7rI4rcO4EyYH6zGuvCgUDumKumqg0pt6Ua+vWnMJsTYhw==
 
+chroma-js@2.0.6:
+  version "2.0.6"
+  resolved "https://registry.yarnpkg.com/chroma-js/-/chroma-js-2.0.6.tgz#2d4b761be09bf142b541f0011f64f213ecf6c8b6"
+  integrity sha512-IiiClbBRkRwuXNl6impq5ssEhUGpmWvc5zzImZbDUWLWcFbj6ZbtsdZEx6sIXMKes7azgYaUpnmsY1T8BL6PqQ==
+
 chrome-trace-event@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/chrome-trace-event/-/chrome-trace-event-1.0.2.tgz#234090ee97c7d4ad1a2c4beae27505deffc608a4"

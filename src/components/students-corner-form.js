@@ -127,7 +127,7 @@ const MyForm = () => {
           "https://us-central1-kabis-bergen.cloudfunctions.net/sendgridEmail?sg_key=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",
           {
             method: "POST",
-            mode: 'no/cors', 
+            mode: 'no-cors', 
             body: `{\"to\":\"${values.myEmail}\",\"from\":\"info@kabis.no\",\"subject\":\"New Application from ${values.myName}\",\"body\":\"${msg}\"}`,
             headers: {
               "Content-Type": "application/json",
