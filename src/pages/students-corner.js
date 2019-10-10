@@ -1,55 +1,30 @@
 import React from "react"
 import { graphql } from "gatsby"
-import Img from "gatsby-image"
 import {
   DividedSection,
   Title,
   Text,
-  Section,
-  Button,
+  Section
 } from "gatsby-theme-material-foundry"
 import {
-  Grid,
   Container,
-  Divider,
   Box,
   List,
   ListItem,
   ListItemIcon,
 } from "@material-ui/core"
 import Layout from "../components/layout"
-import Image from "../components/image"
 import SEO from "../components/seo"
-import { AvatarCard } from "../components/custom-cards"
 import Check from "@material-ui/icons/CheckBox"
 import Star from "@material-ui/icons/Star"
+import Form from "../components/students-corner-form"
 
-const Table = ({ headers, data }) => {
-  return (
-    <table>
-      <tr>
-        {headers.map(header => (
-          <th>{header}</th>
-        ))}
-      </tr>
-
-      {data.map(row => (
-        <tr>
-          {row.map(cell => (
-            <td>{cell}</td>
-          ))}
-        </tr>
-      ))}
-    </table>
-  )
-}
 
 function IndexPage(props) {
-  const img = props.data.cover.childImageSharp.fixed.src
 
   return (
     <Layout>
-      <SEO title="Home" />
+      <SEO title="Students Corner" slug="students-corner"/>
       <DividedSection
         black
         height="50vh"
@@ -140,7 +115,7 @@ function IndexPage(props) {
           </ListItem>
         </List>
         <Title variant="h3" black>
-          How to participate
+          Apply to participate
         </Title>
         <ol>
           <li>
@@ -157,6 +132,11 @@ function IndexPage(props) {
           <li>I løpet av desember vil du få beskjed om du vert valgt ut</li>
         </ol>
       </Container>
+      <Section id="students-corner-form">
+      <Container maxWidth="md">
+      <Form/>
+      </Container>
+      </Section>
     </Layout>
   )
 }
