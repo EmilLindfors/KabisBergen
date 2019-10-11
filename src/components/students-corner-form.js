@@ -128,7 +128,8 @@ const MyForm = () => {
           "https://us-central1-kabis-bergen.cloudfunctions.net/kabisNewsletter",
           {
             method: "POST",
-            body: JSON.stringify({email: values.myEmail, name: values.myName, body: msg}),
+            mode: "no-cors",
+            body: JSON.stringify({email: "test@test.no", name: values.myName, data: `School and field of study: ${values.fieldOfStudy} at ${values.mySchool}`}),
             headers: {
               "Content-Type": "application/json",
             },
