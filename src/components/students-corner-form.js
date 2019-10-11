@@ -153,8 +153,8 @@ const MyForm = () => {
           }
         });
         
-        xhr.open("POST", "https://api.sendgrid.com/v3/mail/send");
-        xhr.setRequestHeader("authorization", "Bearer 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");
+        xhr.open("POST", "https://us-central1-kabis-bergen.cloudfunctions.net/sendgridEmail");
+        xhr.setRequestHeader("authorization", `Bearer ${process.env.sendgrid_api_key}}`);
         xhr.setRequestHeader("content-type", "application/json");
         
         xhr.send(data);
