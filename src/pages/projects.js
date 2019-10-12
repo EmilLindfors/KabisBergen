@@ -55,10 +55,10 @@ function EventsPage(props) {
           <React.Fragment>
             <Box mb={4} mt={4}>
               <Grid container key={e.id} spacing={3}>
-                <Grid item xs="4">
+                <Grid item xs={12} sm={4}>
                   {e.coverUrl ? (
                     <img
-                      src={e.coverUrl}
+                      src={`${e.coverUrl}&sz=w500`}
                       alt="cover"
                       style={{
                         width: "100%",
@@ -71,7 +71,7 @@ function EventsPage(props) {
                     <Img fluid={props.data.project.childImageSharp.fluid} />
                   )}
                 </Grid>
-                <Grid item xs="8">
+                <Grid item xs={12} sm={8}>
                   <Text variant="subheader">
                   <Badge color={statusColor}>{status}</Badge>
                     {e.tags && <GenerateTags tags={e.tags} color="primary" />}

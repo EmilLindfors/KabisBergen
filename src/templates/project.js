@@ -9,7 +9,7 @@ import {
 } from "gatsby-theme-material-foundry"
 import SEO from "../components/seo"
 import EventList from "../components/event-list"
-import { Container, Card, Grid, Box, Hidden } from "@material-ui/core"
+import { Container, Card, Grid, Box, Hidden, makeStyles } from "@material-ui/core"
 import Divider from "@material-ui/core/Divider"
 import moment from "moment"
 import Img from "gatsby-image"
@@ -17,6 +17,20 @@ import Img from "gatsby-image"
 function GenerateTags({ tags }) {
   return tags.map(tag => <Badge key={tag}>{tag}</Badge>)
 }
+
+const useStyles = makeStyles(theme => ({
+  title: {
+    color: "white",
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "1.6em",
+      lineHeight: "1.2"
+    },
+    [theme.breakpoints.up("md")]: {
+      fontSize: "2.4em",
+      lineHeight: "1.2"
+    },
+  }
+}));
 
 function EventTemplate(props) {
   const {
@@ -35,6 +49,7 @@ function EventTemplate(props) {
   } = props.data.projects
   const status = moment(end).isBefore(Date.now()) ? "finished" : moment(start).isAfter(Date.now()) ? "planned" : "in progress"
   const statusColor = status === "finished" ? "success" : status === "in progress" ? "warning" : "error"
+  const classes = useStyles();
   return (
     <Layout>
          <SEO
@@ -44,20 +59,22 @@ function EventTemplate(props) {
         postImage={`${coverUrl}&sz=w1000`}
         article
       />
-      <DividedSection black height="700px">
+      <DividedSection black height="500px">
+        <Box py={12}>
         <Container maxWidth="md">
           <Text variant="subheader">
           <Badge color={statusColor}>{status}</Badge>
             <Badge color="primary">{category}</Badge>
             {tags && <GenerateTags tags={tags} />}
           </Text>
-          <Title variant="h2" gutterBottom>
+          <Title variant="h2" gutterBottom className={classes.title}>
             {title}
           </Title>
           <Text variant="h5">
             {start} - {end}
           </Text>
         </Container>
+        </Box>
       </DividedSection>
       <Container maxWidth="md">
         <Box pt={4} pb={8} style={{marginTop: "-100px"}}>

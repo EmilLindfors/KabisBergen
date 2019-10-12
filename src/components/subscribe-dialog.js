@@ -6,13 +6,26 @@ import {
   DialogTitle,
   useMediaQuery,
   IconButton,
-  Box
+  Box,
+  makeStyles
 } from "@material-ui/core/"
 import { useTheme } from "@material-ui/styles"
 import { Title, Button } from "gatsby-theme-material-foundry"
 import CloseIcon from "@material-ui/icons/Close"
 
+const useStyles = makeStyles(theme => ({
+    dialog: {
+      [theme.breakpoints.down("sm")]: {
+        padding: "0",
+      },
+      [theme.breakpoints.up("md")]: {
+        padding: "12px 24px",
+      },
+    }
+  }));
+
 function SubscribeDialog() {
+    const classes = useStyles()
     const theme = useTheme()
     const fullScreen = useMediaQuery(theme.breakpoints.down("sm"))
 
@@ -38,6 +51,7 @@ function SubscribeDialog() {
         <Dialog
           fullScreen={fullScreen}
           maxWidth="lg"
+        
           open={open}
           onClose={handleClose}
           aria-labelledby="form-dialog-title"
@@ -53,8 +67,8 @@ function SubscribeDialog() {
           </IconButton>
           </Box>
           </DialogTitle>
-          <DialogContent>
-          <iframe width="400px" height="500px" style={{border: "none"}} src="https://cdn.forms-content.sg-form.com/2029b17b-ecb3-11e9-9033-aaa63ca798dc"/>
+          <DialogContent   className={classes.dialog}>
+          <iframe width="400px" height="500px" style={{border: "none", padding: "none"}} src="https://cdn.forms-content.sg-form.com/2029b17b-ecb3-11e9-9033-aaa63ca798dc"/>
        
           </DialogContent>
         </Dialog>
