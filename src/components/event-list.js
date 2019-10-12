@@ -1,5 +1,5 @@
 import React from "react"
-import { Badge, Title } from "gatsby-theme-material-foundry"
+import { Badge, Title, Button } from "gatsby-theme-material-foundry"
 import {
   ListItem,
   List,
@@ -36,6 +36,7 @@ function GenerateList({
   location,
   organization,
   projectPerson,
+  link,
   person,
 }) {
   const classes = useStyles()
@@ -159,6 +160,11 @@ function GenerateList({
             </ListItemIcon>
             <ListItemText primary={person} />
           </ListItem>
+        )}
+            {link && (
+          <Button color="primary" to={link} fullWidth>
+            Download Full Project
+          </Button>
         )}
       </List>
     )

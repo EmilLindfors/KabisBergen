@@ -31,11 +31,11 @@ const createNodesfromSheet = async ({
         slug: slugify(r.projecttitle),
         description: r.description,
         blurb: r.description ? r.description.substr(0, 200) : "",
-        coverUrl: r.cover
-          ? `https://drive.google.com/thumbnail?${r.cover.split("?")[1]}`
+        coverUrl: r.coverimage
+          ? `https://drive.google.com/thumbnail?${r.coverimage.split("?")[1]}`
           : "",
         fileUrl: r.resultsmasterthesisetc
-          ? `https://drive.google.com/thumbnail?${
+          ? `https://drive.google.com/uc?export=download&${
               r.resultsmasterthesisetc.split("?")[1]
             }`
           : "",

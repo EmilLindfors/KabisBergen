@@ -40,7 +40,7 @@ function EventsPage(props) {
                       alt="cover"
                       style={{
                         width: "100%",
-                        maxHeight: "130px",
+                        maxHeight: "170px",
                         objectFit: "cover",
                         objectPosition: "100% 0",
                       }}
@@ -66,7 +66,7 @@ function EventsPage(props) {
                   <EventList
                     horizontal
                     category={e.category}
-                    date={e.start}
+                    date={`${e.start} - ${e.end}`}
                     person={e.author}
                     organization={e.organizations}
                   />
@@ -83,7 +83,7 @@ function EventsPage(props) {
 
 export const ItemPageQuery = graphql`
   query Projects {
-    allProjects {
+    allProjects(sort: {order: ASC, fields: end}) {
       nodes {
         id
         coverUrl
@@ -94,8 +94,8 @@ export const ItemPageQuery = graphql`
         slug
         organizations
         tags
-        start
-        end
+        start(formatString: "MMMM YYYY")
+        end(formatString: "MMMM YYYY")
       }
     }
     cover: file(relativePath: { eq: "cover.jpg" }) {

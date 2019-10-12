@@ -145,11 +145,11 @@ export default IndexPage
 
 export const pageQuery = graphql`
   query StudentsCornerPage {
-    cover: file(relativePath: { eq: "cover.jpg" }) {
+    cover: file(relativePath: { eq: "sc_cover.jpg" }) {
       childImageSharp {
         # Specify the image processing specifications right in the query.
         # Makes it trivial to update as your page's design changes.
-        fixed(width: 1920, height: 1080) {
+        fixed(width: 2000, height: 800) {
           ...GatsbyImageSharpFixed
         }
       }

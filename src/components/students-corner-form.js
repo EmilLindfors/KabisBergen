@@ -115,51 +115,9 @@ const MyForm = () => {
       validationSchema={validationSchema}
       onSubmit={async (values, { resetForm }) => {
 
-        var data = JSON.stringify({
-          "personalizations": [
-            {
-              "to": [
-                {
-                  "email": values.myEmail,
-          "name": values.myName
-                }
-              ],
-              "dynamic_template_data": {
-                "verb": "",
-                "adjective": "",
-                "noun": "",
-                "currentDayofWeek": ""
-              },
-              "subject": "Hello, World!"
-            }
-          ],
-          "from": {
-            "email": "info@kabis.no",
-            "name": "Kabis Styret"
-          },
-          "reply_to": {
-            "email": "info@kabis.no",
-            "name": "Kabis Styret"
-          },
-          "template_id": "d-4482ef8298a3475b8a464757f6deb53d"
-        });
-        
-        var xhr = new XMLHttpRequest();
-        xhr.withCredentials = true;
-        
-        xhr.addEventListener("readystatechange", function () {
-          if (this.readyState === this.DONE) {
-            console.log(this.responseText);
-          }
-        });
-        
-        xhr.open("POST", "https://api.sendgrid.com/v3/mail/send");
-        xhr.setRequestHeader("authorization", "Bearer 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");
-        xhr.setRequestHeader("content-type", "application/json");
-        
-        xhr.send(data);
+     
 
-/*const message = {
+const message = {
   "personalizations": [
     {
       "to": [
