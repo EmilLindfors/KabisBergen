@@ -115,37 +115,6 @@ const MyForm = () => {
       validationSchema={validationSchema}
       onSubmit={async (values, { resetForm }) => {
 
-     
-
-const message = {
-  "personalizations": [
-    {
-      "to": [
-        {
-          "email": values.myEmail,
-          "name": values.myName
-        }
-      ],
-      "dynamic_template_data": {
-        "verb": "",
-        "adjective": "",
-        "noun": "",
-        "currentDayofWeek": ""
-      },
-      "subject": "Hello, World!"
-    }
-  ],
-  "from": {
-    "email": "info@kabis.no",
-    "name": "Kabis Styret"
-  },
-  "reply_to": {
-    "email": "info@kabis.no",
-    "name": "Kabis Styret"
-  },
-  "template_id": "d-4482ef8298a3475b8a464757f6deb53d"
-}
-
         const msg =
           `name: ${values.myName}, ` +
           `Email: ${values.myEmail}, ` +
@@ -156,11 +125,11 @@ const message = {
           `Allergies: ${values.allergies ? values.allergies : "none"},`
           try {
         const response  = await fetch(
-          "https://us-central1-kabis-bergen.cloudfunctions.net/sendgridEmail?sg_key=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",
+          "https://us-central1-kabis-bergen.cloudfunctions.net/kabisNewsletter",
           {
             method: "POST",
-            mode: 'no-cors', 
-            body: `{\"to\":\"${values.myEmail}\",\"from\":\"info@kabis.no\",\"subject\":\"New Application from ${values.myName}\",\"body\":\"${msg}\"}`,
+            mode: "no-cors",
+            body: JSON.stringify({email: "test@test.no", name: values.myName, data: `School and field of study: ${values.fieldOfStudy} at ${values.mySchool}`}),
             headers: {
               "Content-Type": "application/json",
             },
