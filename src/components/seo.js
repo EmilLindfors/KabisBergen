@@ -6,95 +6,81 @@
  */
 
 import React from "react"
-import PropTypes from "prop-types"
 import Helmet from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
 
-function SEO({ description, lang = "en", meta, title, article, slug }) {
+function SEO({
+  postDescription,
+  lang = "en",
+  meta,
+  postTitle,
+  slug,
+  datePublished,
+  isBlogPost,
+  postImage,
+}) {
   const { site } = useStaticQuery(
     graphql`
       query {
         site {
           siteMetadata {
-            defaultTitle: title
+            title
             description
-            author
             siteUrl
             defaultImage
+            author
+            social {
+              twitter
+              fbAppID
+            }
           }
         }
       }
     `
   )
 
-  const metaDescription = description || site.siteMetadata.description
-  const metaTitle = title || site.siteMetadata.defaultTitle
-  const url = site.siteMetadata.siteUrl+ "/" + slug || site.siteMetadata.siteUrl
+  const title = postTitle || site.siteMetadata.title
+  const description = postDescription || site.siteMetadata.description
+  const image = postImage
+    ? postImage
+    : site.siteMetadata.defaultImage
+  const url = slug
+    ? `${site.siteMetadata.siteUrl}/${slug}/`
+    : site.siteMetadata.siteUrl
+
+  const date = datePublished ? datePublished : false
 
   return (
-    <Helmet
-      htmlAttributes={{
-        lang,
-      }}
-      title={metaTitle}
-      titleTemplate={`%s | ${site.siteMetadata.defaultTitle}`}
-      meta={[
-        {
-          name: `description`,
-          content: metaDescription,
-        },
-        {
-          property: `og:title`,
-          content: metaTitle,
-        },
-        {
-          property: `og:description`,
-          content: metaDescription,
-        },
-        {
-          property: `og:type`,
-          content: article ? `article` : `website`,
-        },
-        {
-          property: `og:image`,
-          content: site.siteMetadata.defaultImage,
-        },
-        {
-          property: `og:url`,
-          content: url,
-        },
-        {
-          name: `twitter:card`,
-          content: `summary`,
-        },
-        {
-          name: `twitter:creator`,
-          content: site.siteMetadata.author,
-        },
-        {
-          name: `twitter:title`,
-          content: title,
-        },
-        {
-          name: `twitter:description`,
-          content: metaDescription,
-        },
-      ].concat(meta)}
-    />
+    <React.Fragment>
+      <Helmet>
+        {/* General tags */}
+        <html lang={lang} amp />
+        <title>{title}</title>
+        <meta name="description" content={description} />
+        <meta name="image" content={image} />
+        <link rel="canonical" href={url} />
+
+        {/* OpenGraph tags */}
+        <meta property="og:url" content={url} />
+        {isBlogPost ? <meta property="og:type" content="article" /> : null}
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta property="og:image" content={image} />
+        <meta property="fb:app_id" content={site.siteMetadata.social.fbAppID} />
+
+        {/* Twitter Card tags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+          name="twitter:creator"
+          content={site.siteMetadata.social.twitter}
+        />
+        <meta name="twitter:title" content={title} />
+        <meta name="twitter:description" content={description} />
+        <meta name="twitter:image" content={image} />
+      </Helmet>
+     
+    </React.Fragment>
   )
-}
-
-SEO.defaultProps = {
-  lang: `en`,
-  meta: [],
-  description: ``,
-}
-
-SEO.propTypes = {
-  description: PropTypes.string,
-  lang: PropTypes.string,
-  meta: PropTypes.arrayOf(PropTypes.object),
-  title: PropTypes.string.isRequired,
 }
 
 export default SEO

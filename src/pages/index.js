@@ -1,5 +1,5 @@
 import React from "react"
-import {  graphql } from "gatsby"
+import { graphql } from "gatsby"
 import Img from "gatsby-image"
 import {
   DividedSection,
@@ -7,7 +7,7 @@ import {
   Text,
   Button,
 } from "gatsby-theme-material-foundry"
-import {  Container, Box } from "@material-ui/core"
+import { Container, Box } from "@material-ui/core"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { AvatarCard } from "../components/custom-cards"
@@ -17,7 +17,7 @@ function IndexPage(props) {
 
   return (
     <Layout>
-      <SEO title="Home" />
+      <SEO postImage={img} />
       <DividedSection
         black
         image={img}
@@ -39,32 +39,30 @@ function IndexPage(props) {
           </Box>
         </Container>
       </DividedSection>
- 
-        <Box my={4}>
+
+      <Box my={4}>
         <DividedSection>
-        {props.data.partners &&
-          props.data.partners.nodes.map(company => (
-            <img src={company.logoUrl} width="100px" alt={company.name} />
-          ))}
-          </DividedSection>
-          </Box>
-          <Box my={8}>
-      <DividedSection>
- 
-        <Img fluid={props.data.kickoff.childImageSharp.fluid} />
-        <Container>
-          <Title variant="h4" align="left">
-            What is kabis?
-          </Title>
-          <Text variant="body1" align="left">
-            The KABIS project aim to focus and strengthen aquaculture related
-            reserach and higher education in Western Norway to enhance
-            innovation and transformation toward sustainable aquaculture
-            systems.
-          </Text>
-        </Container>
-   
-      </DividedSection>
+          {props.data.partners &&
+            props.data.partners.nodes.map(company => (
+              <img src={company.logoUrl} width="100px" alt={company.name} />
+            ))}
+        </DividedSection>
+      </Box>
+      <Box my={8}>
+        <DividedSection>
+          <Img fluid={props.data.kickoff.childImageSharp.fluid} />
+          <Container>
+            <Title variant="h4" align="left">
+              What is kabis?
+            </Title>
+            <Text variant="body1" align="left">
+              The KABIS project aim to focus and strengthen aquaculture related
+              reserach and higher education in Western Norway to enhance
+              innovation and transformation toward sustainable aquaculture
+              systems.
+            </Text>
+          </Container>
+        </DividedSection>
       </Box>
       <DividedSection height="50vh" info>
         <Box>

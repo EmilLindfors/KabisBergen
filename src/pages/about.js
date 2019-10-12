@@ -23,7 +23,12 @@ function AboutPage({ data }) {
 
   return (
     <Layout>
-      <SEO title="About KABIS" slug="about"/>
+             <SEO
+        postDescription="About the KABIS Project"
+        postTitle="About Us"
+        slug="about"
+        postImage={data.cover.childImageSharp.fixed.src}
+      />
       <DividedSection
         black
         height="50vh"

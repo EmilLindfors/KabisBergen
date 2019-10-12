@@ -34,7 +34,12 @@ function IndexPage(props) {
 
   return (
     <Layout>
-      <SEO title="Annual Report" slug="annual-report" />
+       <SEO
+        postDescription="Read and download the KABIS annual reports"
+        postTitle="Annual Report"
+        slug="annual-report"
+        postImage="https://source.unsplash.com/Q5QspluNZmM/2000x1000"
+      />
       <DividedSection
         black
         height="50vh"

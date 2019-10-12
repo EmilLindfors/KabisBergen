@@ -1,5 +1,5 @@
 import React from "react"
-import { Badge, Title, Button } from "gatsby-theme-material-foundry"
+import { Badge, Title, Button, Section } from "gatsby-theme-material-foundry"
 import {
   ListItem,
   List,
@@ -38,6 +38,9 @@ function GenerateList({
   projectPerson,
   link,
   person,
+  status,
+  statusColor,
+  noLink
 }) {
   const classes = useStyles()
   if (horizontal) {
@@ -104,6 +107,7 @@ function GenerateList({
             </Grid>
           </>
         )}
+        {!noLink &&<ButtonProgress statusColor={statusColor} status={status} link={link}/>}
       </Grid>
     )
   } else {
@@ -136,7 +140,6 @@ function GenerateList({
             <ListItemText primary={category} />
           </ListItem>
         )}
-
         {location && (
           <ListItem>
             <ListItemIcon>
@@ -161,11 +164,7 @@ function GenerateList({
             <ListItemText primary={person} />
           </ListItem>
         )}
-            {link && (
-          <Button color="primary" to={link} fullWidth>
-            Download Full Project
-          </Button>
-        )}
+            <ButtonProgress statusColor={statusColor} status={status} link={link} />
       </List>
     )
   }
@@ -177,6 +176,24 @@ export function GenerateTags({ tags, color }) {
       {tag}
     </Badge>
   ))
+}
+
+const ButtonProgress = ({ status, statusColor, link }) => {
+  if (status === "finished" && link !== null) {
+    return (
+      <Button color="primary" to={link}>
+        Download Full Project
+      </Button>
+    )
+  } else if (status !== null && link !== null) {
+    return (
+      <Button color={statusColor} disabled>
+        {status}
+      </Button>
+    )
+  } else {
+    return null
+  }
 }
 
 export default GenerateList

@@ -3,20 +3,23 @@ import { graphql, Link } from "gatsby"
 import Layout from "../components/layout"
 import Img from "gatsby-image"
 import SEO from "../components/seo"
-import {
-  DividedSection,
-  Title,
-  Text,
-} from "gatsby-theme-material-foundry"
+import { DividedSection, Title, Text, Badge } from "gatsby-theme-material-foundry"
 import { Grid, Divider, Container, Box } from "@material-ui/core"
 import EventList, { GenerateTags } from "../components/event-list"
+import moment from "moment"
 
 function EventsPage(props) {
   const projects = props.data.allProjects.nodes
   const img = props.data.cover.childImageSharp.fixed.src
+
   return (
     <Layout>
-       <SEO title="Projects" slug="projects"/>
+      <SEO
+        postDescription="Read about the projects that are connected to KABIS"
+        postTitle="Projects"
+        slug="projects"
+        postImage={img}
+      />
       <DividedSection
         black
         image={img}
@@ -29,7 +32,10 @@ function EventsPage(props) {
         </Title>
       </DividedSection>
       <Container maxWidth="md">
-        {projects.map(e => (
+        {projects.map(e => {
+          const status = moment(e.end).isBefore(Date.now()) ? "finished" : moment(e.start).isAfter(Date.now()) ? "planned" : "in progress"
+          const statusColor = status === "finished" ? "success" : status === "in progress" ? "warning" : "error"
+          return(
           <React.Fragment>
             <Box mb={4} mt={4}>
               <Grid container key={e.id} spacing={3}>
@@ -51,6 +57,7 @@ function EventsPage(props) {
                 </Grid>
                 <Grid item xs="8">
                   <Text variant="subheader">
+                  <Badge color={statusColor}>{status}</Badge>
                     {e.tags && <GenerateTags tags={e.tags} color="primary" />}
                   </Text>
                   <div>
@@ -69,13 +76,15 @@ function EventsPage(props) {
                     date={`${e.start} - ${e.end}`}
                     person={e.author}
                     organization={e.organizations}
+                    noLink
+                   
                   />
                 </Grid>
               </Grid>
             </Box>
             <Divider />
           </React.Fragment>
-        ))}
+        )})}
       </Container>
     </Layout>
   )
@@ -83,7 +92,7 @@ function EventsPage(props) {
 
 export const ItemPageQuery = graphql`
   query Projects {
-    allProjects(sort: {order: ASC, fields: end}) {
+    allProjects(sort: { order: ASC, fields: end }) {
       nodes {
         id
         coverUrl

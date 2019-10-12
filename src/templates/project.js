@@ -11,6 +11,8 @@ import SEO from "../components/seo"
 import EventList from "../components/event-list"
 import { Container, Card, Grid, Box, Hidden } from "@material-ui/core"
 import Divider from "@material-ui/core/Divider"
+import moment from "moment"
+import Img from "gatsby-image"
 
 function GenerateTags({ tags }) {
   return tags.map(tag => <Badge key={tag}>{tag}</Badge>)
@@ -31,6 +33,8 @@ function EventTemplate(props) {
     slug,
     end,
   } = props.data.projects
+  const status = moment(end).isBefore(Date.now()) ? "finished" : moment(start).isAfter(Date.now()) ? "planned" : "in progress"
+  const statusColor = status === "finished" ? "success" : status === "in progress" ? "warning" : "error"
   return (
     <Layout>
          <SEO
@@ -43,6 +47,7 @@ function EventTemplate(props) {
       <DividedSection black height="50vh">
         <Container maxWidth="md">
           <Text variant="subheader">
+          <Badge color={statusColor}>{status}</Badge>
             <Badge color="primary">{category}</Badge>
             {tags && <GenerateTags tags={tags} />}
           </Text>
@@ -56,7 +61,7 @@ function EventTemplate(props) {
       </DividedSection>
       <Container maxWidth="md">
         <Box pt={4} pb={8} style={{marginTop: "-100px"}}>
-          {coverUrl && (
+          {coverUrl ? (
             <img
               src={`${coverUrl}&sz=w800`}
               alt="cover"
@@ -69,7 +74,7 @@ function EventTemplate(props) {
                 "0 5px 15px -8px rgba(0, 0, 0, 0.24), 0 8px 10px -5px rgba(0, 0, 0, 0.2)",
               }}
             />
-          )}
+          ): <Img fluid={props.data.projectImage.childImageSharp.fluid} />}
           <Grid container>
             <Grid item md={8}>
               <Box pr={4}>
@@ -101,6 +106,8 @@ function EventTemplate(props) {
                       organization={organizations}
                       projectPerson={projectPerson}
                       link={fileUrl}
+                      status={status}
+                      statusColor={statusColor}
                     />
                   </Box>
                 </Card>
@@ -118,6 +125,8 @@ function EventTemplate(props) {
                     organization={organizations}
                     projectPerson={projectPerson}
                     link={fileUrl}
+                    status={status}
+                    statusColor={statusColor}
                   />
                 </Box>
               </Hidden>
@@ -149,6 +158,15 @@ export const ItemPageQuery = graphql`
       tags
       start(formatString: "MMMM YYYY")
       end(formatString: "MMMM YYYY")
+    }
+    projectImage: file(relativePath: { eq: "project.png" }) {
+      childImageSharp {
+        # Specify the image processing specifications right in the query.
+        # Makes it trivial to update as your page's design changes.
+        fluid {
+          ...GatsbyImageSharpFluid
+        }
+      }
     }
   }
 `

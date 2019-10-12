@@ -2,9 +2,14 @@ module.exports = {
   siteMetadata: {
     title: `KABIS Project`,
     description: `Sustainable and Innovative Aquaculture Production`,
-    author: `Emil Lindfors <emil@lindforsfoundry.com>`,
+    author: `Kabis <info@kabis.no>`,
     siteUrl: "https://kabis.no",
     defaultImage: "/images/cover.jpg",
+    social: {
+      twitter: "@kabisbergen",
+      fbAppID: "@kabisbergen"
+    },
+   
   },
   plugins: [
     `gatsby-theme-material-foundry`,

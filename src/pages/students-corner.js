@@ -4,34 +4,28 @@ import {
   DividedSection,
   Title,
   Text,
-  Section
+  Section,
 } from "gatsby-theme-material-foundry"
-import {
-  Container,
-  Box,
-  List,
-  ListItem,
-  ListItemIcon,
-} from "@material-ui/core"
+import { Container, Box, List, ListItem, ListItemIcon } from "@material-ui/core"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import Check from "@material-ui/icons/CheckBox"
 import Star from "@material-ui/icons/Star"
 import Form from "../components/students-corner-form"
 
-
 function IndexPage(props) {
-
+  const img = props.data.cover.childImageSharp.fixed.src
   return (
     <Layout>
-      <SEO title="Students Corner" slug="students-corner"/>
-      <DividedSection
-        black
-        height="50vh"
-        image="https://source.unsplash.com/Q5QspluNZmM/2000x1000"
-      >
+      <SEO
+        postDescription="Attend the student's corner at the Aqkva conference the 16th of January 2020"
+        postTitle="Student's Corner"
+        slug="students-corner"
+        postImage={img}
+      />
+      <DividedSection black height="50vh" image={img}>
         <Box align="center">
-          <Title variant="h1">Students Corner</Title>
+          <Title variant="h1">Student's Corner</Title>
           <Title variant="subtitle">
             join the students corner during the Aqkva-conference 16th of January
             2020
@@ -133,9 +127,9 @@ function IndexPage(props) {
         </ol>
       </Container>
       <Section id="students-corner-form">
-      <Container maxWidth="md">
-      <Form/>
-      </Container>
+        <Container maxWidth="md">
+          <Form />
+        </Container>
       </Section>
     </Layout>
   )
