@@ -114,7 +114,7 @@ const MyForm = () => {
       }}
       validationSchema={validationSchema}
       onSubmit={async (values, { resetForm }) => {
-
+ /*
         const msg =
           `name: ${values.myName}, ` +
           `Email: ${values.myEmail}, ` +
@@ -342,7 +342,7 @@ const MyForm = () => {
               className={classes.button}
               type="submit"
               disabled={Boolean(!isValid)}
-              color="primary"
+              color="secondary"
               variant="contained"
               size="lg"
             >

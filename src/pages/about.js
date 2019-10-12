@@ -4,11 +4,11 @@ import {
   Box,
   Grid,
   Container,
+  makeStyles
 } from "@material-ui/core"
 import {
   Title,
   Text,
-  DividedSection,
   TabPill,
 } from "gatsby-theme-material-foundry"
 import Layout from "../components/layout"
@@ -18,28 +18,44 @@ import Schedule from "@material-ui/icons/Business"
 import List from "@material-ui/icons/List"
 import Description from "@material-ui/icons/Description"
 import { AvatarCard, CompanyCard } from "../components/custom-cards"
+import Subscribe from "../components/subscribe-dialog"
+import BackgroundImage from "gatsby-background-image"
+
+const useStyles = makeStyles(theme => ({
+  hero: {
+    color: "white",
+    [theme.breakpoints.down("sm")]: {
+      paddingTop: "50px",
+      paddingBottom: "50px",
+    },
+    [theme.breakpoints.up("md")]: {
+      paddingTop: "100px",
+      paddingBottom: "100px",
+    },
+  }
+}));
 
 function AboutPage({ data }) {
-
+const classes = useStyles();
   return (
     <Layout>
              <SEO
         postDescription="About the KABIS Project"
         postTitle="About Us"
         slug="about"
-        postImage={data.cover.childImageSharp.fixed.src}
+        postImage={data.cover.childImageSharp.fluid}
       />
-      <DividedSection
-        black
-        height="50vh"
-        image={data.cover.childImageSharp.fixed.src}
-        backgroundBlendMode="overlay"
-        backgroundColor="#333333"
+        <BackgroundImage
+        alt={`cover picture`}
+        fluid={data.cover.childImageSharp.fluid}
+        className={classes.hero}
       >
+        <Box align="center" py={16}>
         <Title variant="h2" align="center">
           About KABIS
         </Title>
-      </DividedSection>
+        </Box>
+      </BackgroundImage>
       <Container maxWidth="md">
         <TabPill
           alignCenter
@@ -96,7 +112,11 @@ function AboutPage({ data }) {
                           innovation processes.
                         </li>
                       </ul>
+                      
                     </Text>
+                    <Box align="center">
+                    <Subscribe/>
+                    </Box>
                   </Box>
                 </>
               ),
@@ -227,8 +247,10 @@ export const ItemPageQuery = graphql`
       childImageSharp {
         # Specify the image processing specifications right in the query.
         # Makes it trivial to update as your page's design changes.
-        fixed(width: 1920, height: 1080) {
-          ...GatsbyImageSharpFixed
+        fluid(maxWidth: 2000,
+          duotone: { highlight: "#006381", shadow: "#004357" }
+          traceSVG: { color: "#004357" }) {
+          ...GatsbyImageSharpFluid
         }
       }
     }

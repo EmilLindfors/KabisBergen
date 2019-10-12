@@ -4,13 +4,29 @@ import Layout from "../components/layout"
 import Img from "gatsby-image"
 import SEO from "../components/seo"
 import { DividedSection, Title, Text, Badge } from "gatsby-theme-material-foundry"
-import { Grid, Divider, Container, Box } from "@material-ui/core"
+import { Grid, Divider, Container, Box, makeStyles } from "@material-ui/core"
 import EventList, { GenerateTags } from "../components/event-list"
 import moment from "moment"
+import BackgroundImage from "gatsby-background-image"
+
+const useStyles = makeStyles(theme => ({
+  hero: {
+    color: "white",
+    [theme.breakpoints.down("sm")]: {
+      paddingTop: "50px",
+      paddingBottom: "50px",
+    },
+    [theme.breakpoints.up("md")]: {
+      paddingTop: "100px",
+      paddingBottom: "100px",
+    },
+  }
+}));
 
 function EventsPage(props) {
   const projects = props.data.allProjects.nodes
-  const img = props.data.cover.childImageSharp.fixed.src
+  const img = props.data.cover.childImageSharp.fluid
+  const classes = useStyles()
 
   return (
     <Layout>
@@ -20,17 +36,17 @@ function EventsPage(props) {
         slug="projects"
         postImage={img}
       />
-      <DividedSection
-        black
-        image={img}
-        height="40vh"
-        backgroundBlendMode="overlay"
-        backgroundColor="#333333"
+      <BackgroundImage
+        alt={`cover picture`}
+        fluid={img}
+        className={classes.hero}
       >
+          <Box align="center" py={16}>
         <Title variant="h2" align="center">
           Kabis Projects
         </Title>
-      </DividedSection>
+        </Box>
+      </BackgroundImage>
       <Container maxWidth="md">
         {projects.map(e => {
           const status = moment(e.end).isBefore(Date.now()) ? "finished" : moment(e.start).isAfter(Date.now()) ? "planned" : "in progress"
@@ -111,8 +127,10 @@ export const ItemPageQuery = graphql`
       childImageSharp {
         # Specify the image processing specifications right in the query.
         # Makes it trivial to update as your page's design changes.
-        fixed(width: 1920, height: 1080) {
-          ...GatsbyImageSharpFixed
+        fluid(maxWidth: 2000,
+          duotone: { highlight: "#006381", shadow: "#004357" }
+          traceSVG: { color: "#004357" }) {
+          ...GatsbyImageSharpFluid
         }
       }
     }

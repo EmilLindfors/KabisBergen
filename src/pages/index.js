@@ -7,38 +7,60 @@ import {
   Text,
   Button,
 } from "gatsby-theme-material-foundry"
-import { Container, Box } from "@material-ui/core"
+import { Container, Box, makeStyles } from "@material-ui/core"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { AvatarCard } from "../components/custom-cards"
+import SubscribeDialog from "../components/subscribe-dialog"
+import BackgroundImage from "gatsby-background-image"
+
+const useStyles = makeStyles(theme => ({
+  hero: {
+    color: "white",
+    [theme.breakpoints.down("sm")]: {
+      paddingTop: "50px",
+      paddingBottom: "50px",
+    },
+    [theme.breakpoints.up("md")]: {
+      paddingTop: "100px",
+      paddingBottom: "100px",
+    },
+  }
+}));
 
 function IndexPage(props) {
-  const img = props.data.cover.childImageSharp.fixed.src
+  const classes = useStyles()
+  const img = props.data.cover.childImageSharp.fluid
 
   return (
     <Layout>
       <SEO postImage={img} />
-      <DividedSection
-        black
-        image={img}
-        height="80vh"
-        backgroundBlendMode="overlay"
-        backgroundColor="#333333"
+      <BackgroundImage
+        alt={`cover picture`}
+        fluid={img}
+        className={classes.hero}
       >
-        <Container maxWidth="sm" align="center">
+          <Box align="center" py={16}>
+        <Container maxWidth="md" align="center">
           <Title variant="h3" align="center">
-            Aquaculture reserach and education in Bergen, Norway
+            Aquaculture reserach and <br/>education in Bergen, Norway
           </Title>
           <Text variant="h5" align="center">
             Capacity-lift for Sustainable and Innovative Aquaculture Production
           </Text>
           <Box m={2}>
-            <Button color="primary" to="/">
-              See Projects
+            <Button color="secondary" simple to="/projects" size="lg">
+              Go to Projects
             </Button>
+         
+          <SubscribeDialog/>
+  
+          
           </Box>
+
         </Container>
-      </DividedSection>
+        </Box>
+      </BackgroundImage>
 
       <Box my={4}>
         <DividedSection>
@@ -124,8 +146,10 @@ export const pageQuery = graphql`
       childImageSharp {
         # Specify the image processing specifications right in the query.
         # Makes it trivial to update as your page's design changes.
-        fixed(width: 1920, height: 1080) {
-          ...GatsbyImageSharpFixed
+        fluid(maxWidth: 2000,
+          duotone: { highlight: "#006381", shadow: "#004357" }
+          traceSVG: { color: "#004357" }) {
+          ...GatsbyImageSharpFluid
         }
       }
     }

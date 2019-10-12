@@ -1,37 +1,58 @@
 import React from "react"
 import { graphql } from "gatsby"
 import {
-  DividedSection,
   Title,
   Text,
   Section,
 } from "gatsby-theme-material-foundry"
-import { Container, Box, List, ListItem, ListItemIcon } from "@material-ui/core"
+import { Container, Box, List, ListItem, ListItemIcon,makeStyles } from "@material-ui/core"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import Check from "@material-ui/icons/CheckBox"
 import Star from "@material-ui/icons/Star"
 import Form from "../components/students-corner-form"
+import BackgroundImage from "gatsby-background-image"
+
+const useStyles = makeStyles(theme => ({
+  hero: {
+    color: "white",
+    [theme.breakpoints.down("sm")]: {
+      paddingTop: "50px",
+      paddingBottom: "50px",
+    },
+    [theme.breakpoints.up("md")]: {
+      paddingTop: "100px",
+      paddingBottom: "100px",
+    },
+  }
+}));
 
 function IndexPage(props) {
-  const img = props.data.cover.childImageSharp.fixed.src
+  const img = props.data.cover.childImageSharp.fluid
+  const classes = useStyles();
   return (
-    <Layout>
+    <Layout dark>
       <SEO
         postDescription="Attend the student's corner at the Aqkva conference the 16th of January 2020"
         postTitle="Student's Corner"
         slug="students-corner"
         postImage={img}
       />
-      <DividedSection black height="50vh" image={img}>
-        <Box align="center">
+      <BackgroundImage
+        alt={`cover picture`}
+        fluid={img}
+        className={classes.hero}
+      >
+        <Box align="center" py={16}>
+          <Container maxWidth="md">
           <Title variant="h1">Student's Corner</Title>
-          <Title variant="subtitle">
+          <Title variant="h4">
             join the students corner during the Aqkva-conference 16th of January
             2020
           </Title>
+          </Container>
         </Box>
-      </DividedSection>
+      </BackgroundImage>
       <Container maxWidth="md">
         <Title variant="h2" black>
           Show off your hard work to the aquaculture industry
@@ -143,8 +164,10 @@ export const pageQuery = graphql`
       childImageSharp {
         # Specify the image processing specifications right in the query.
         # Makes it trivial to update as your page's design changes.
-        fixed(width: 2000, height: 800) {
-          ...GatsbyImageSharpFixed
+        fluid(maxWidth: 2000,
+          duotone: { highlight: "#006381", shadow: "#004357" }
+          traceSVG: { color: "#004357" }) {
+          ...GatsbyImageSharpFluid
         }
       }
     }

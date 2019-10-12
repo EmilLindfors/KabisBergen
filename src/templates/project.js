@@ -44,7 +44,7 @@ function EventTemplate(props) {
         postImage={`${coverUrl}&sz=w1000`}
         article
       />
-      <DividedSection black height="50vh">
+      <DividedSection black height="700px">
         <Container maxWidth="md">
           <Text variant="subheader">
           <Badge color={statusColor}>{status}</Badge>

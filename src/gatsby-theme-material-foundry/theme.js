@@ -10,7 +10,7 @@ const SuccessGreen = "#96de99"
 //const Black = "#326795"
 const yellowBackground = "#F5F2E7"
 const darkBlue = "#004357"
-const primaryBlue = "#e2c472"
+const primaryBlue = "#fa6900"
 
 const theme = createMuiTheme({
   palette: {

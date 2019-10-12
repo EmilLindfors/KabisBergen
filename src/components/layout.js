@@ -77,7 +77,7 @@ const TemplateWrapper = ({ children }) => {
         color="transparent"
         brand={
           <div
-            style={{ display: "flex", alignItems: "center", width: "300px" }}
+            style={{ display: "flex", alignItems: "center", width: "100px" }}
             ariaLabel="home button"
             role="button"
           >
