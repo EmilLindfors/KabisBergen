@@ -10,6 +10,7 @@ import {
   Radio,
   RadioGroup,
   Grid,
+  LinearProgress,
 } from "@material-ui/core"
 import { Button as FoundryButton } from "gatsby-theme-material-foundry"
 import { makeStyles } from "@material-ui/core/styles"
@@ -113,59 +114,36 @@ const MyForm = () => {
         subscribe: false,
       }}
       validationSchema={validationSchema}
-      onSubmit={async (values, { resetForm }) => {
- /*
-        const msg =
-          `name: ${values.myName}, ` +
-          `Email: ${values.myEmail}, ` +
-          `School and field of study: ${values.fieldOfStudy} at ${values.mySchool}, ` +
-          `Type of application: ${values.typeOfApplication},` +
-          `description: ${values.description}, ` +
-          `Attending dinner: ${values.attendDinner}, ` +
-          `Allergies: ${values.allergies ? values.allergies : "none"},`
-          try {
-        const response  = await fetch(
-          "https://us-central1-kabis-bergen.cloudfunctions.net/kabisNewsletter",
-          {
-            method: "POST",
-            mode: "no-cors",
-            body: JSON.stringify({email: "test@test.no", name: values.myName, data: `School and field of study: ${values.fieldOfStudy} at ${values.mySchool}`}),
-            headers: {
-              "Content-Type": "application/json",
-            },
-         
-          }
-        )
-        const json = await response.json();
-        console.log('Success:', JSON.stringify(json));
+      onSubmit={async (values, { resetForm, setSubmitting, setErrors }) => {
+        setSubmitting(true)
 
-          } catch (error) {
-            console.error('Error:', error);
-          }
-
-        /*
-
-        if(values.subscribe){
-           body: `{\"to\":\"${values.myEmail}\",\"from\":\"info@kabis.no\",\"subject\":\"New Application from ${values.myName}\",\"body\":\"${msg}\"}`,
+        const res = await fetch("/api/send", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(values),
+        })
+        console.log(res)
+        const text = await res.text()
+        if (status === 200) {
+          setSubmitting(false)
+          resetForm()
+        } else {
+          setErrors({ api: text })
+          setSubmitting(false)
         }
-   
-
-        const emailBody =
-          `name: ${values.myName}, ` +
-          `Email: ${values.myEmail}, ` +
-          `School and field of study: ${values.fieldOfStudy} at ${values.mySchool}, ` +
-          `Type of application: ${values.typeOfApplication},` +
-          `description: ${values.description}, ` +
-          `Attending dinner: ${values.attendDinner}, ` +
-          `Allergies: ${values.allergies ? values.allergies : "none"},`;
-
-
-        window.location.href = `mailto:info@kabis.no?subject=New Application from ${values.myName} &body=${emailBody}`*/
-        //resetForm()*/
-  
       }}
     >
-      {({ values, touched, errors, handleChange, handleBlur, isValid }) => (
+      {({
+        values,
+        touched,
+        errors,
+        handleChange,
+        handleBlur,
+        isValid,
+        isSubmitting,
+      }) => (
         <Form noValidate autoComplete="off" className={classes.root}>
           <Box mx={1}>
             <Divider style={{ marginBottom: 20 }} />
@@ -337,6 +315,7 @@ const MyForm = () => {
               </Grid>
             </Grid>
           </Box>
+          {isSubmitting && <LinearProgress />}
           <Box align="right" mt={4} mb={12}>
             <FoundryButton
               className={classes.button}
@@ -349,6 +328,7 @@ const MyForm = () => {
               Apply now
             </FoundryButton>
           </Box>
+          {errors.api && <span>{errors.api}</span>}
         </Form>
       )}
     </Formik>
