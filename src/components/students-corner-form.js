@@ -127,11 +127,11 @@ const MyForm = () => {
       
         const text = await res.text()
         if (res.status === 200) {
-          setStatus({ api: text })
+          setStatus({ type: text.type, msg: text.message })
           setSubmitting(false)
           resetForm()
         } else {
-          setStatus({ api: text })
+          setStatus({ type: text.type, msg: text.message })
           setSubmitting(false)
         }
       }}
@@ -330,7 +330,7 @@ const MyForm = () => {
               Apply now
             </FoundryButton>
           </Box>
-          {status.api && <span style={{color: status.api.type === "error" ? "red" : "green"}}>{status.api.message}</span>}
+          {status && <span style={{color: status.type === "error" ? "red" : "green"}}>{status.message}</span>}
         </Form>
       )}
     </Formik>
