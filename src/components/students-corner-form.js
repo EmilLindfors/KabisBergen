@@ -114,7 +114,7 @@ const MyForm = () => {
         subscribe: false,
       }}
       validationSchema={validationSchema}
-      onSubmit={async (values, { resetForm, setSubmitting, setErrors }) => {
+      onSubmit={async (values, { resetForm, setSubmitting, setStatus }) => {
         setSubmitting(true)
 
         const res = await fetch("/api/send", {
@@ -127,10 +127,11 @@ const MyForm = () => {
       
         const text = await res.text()
         if (res.status === 200) {
+          setStatus({ api: text })
           setSubmitting(false)
           resetForm()
         } else {
-          setErrors({ api: text })
+          setStatus({ api: text })
           setSubmitting(false)
         }
       }}
@@ -139,6 +140,7 @@ const MyForm = () => {
         values,
         touched,
         errors,
+        status,
         handleChange,
         handleBlur,
         isValid,
@@ -328,7 +330,7 @@ const MyForm = () => {
               Apply now
             </FoundryButton>
           </Box>
-          {errors.api && <span>{errors.api}</span>}
+          {status.api && <span style={{color: status.api.type === error ? "red" : "green"}}>{status.api.message}</span>}
         </Form>
       )}
     </Formik>
