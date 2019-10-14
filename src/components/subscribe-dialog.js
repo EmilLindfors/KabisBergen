@@ -68,7 +68,7 @@ function SubscribeDialog() {
           </Box>
           </DialogTitle>
           <DialogContent   className={classes.dialog}>
-          <iframe width="400px" height="500px" style={{border: "none", padding: "none"}} src="https://cdn.forms-content.sg-form.com/2029b17b-ecb3-11e9-9033-aaa63ca798dc"/>
+          <iframe title="newsletter subscribe" width="400px" height="500px" style={{border: "none", padding: "none"}} src="https://cdn.forms-content.sg-form.com/2029b17b-ecb3-11e9-9033-aaa63ca798dc"/>
        
           </DialogContent>
         </Dialog>

@@ -330,7 +330,7 @@ const MyForm = () => {
               Apply now
             </FoundryButton>
           </Box>
-          {status.api && <span style={{color: status.api.type === error ? "red" : "green"}}>{status.api.message}</span>}
+          {status.api && <span style={{color: status.api.type === "error" ? "red" : "green"}}>{status.api.message}</span>}
         </Form>
       )}
     </Formik>
