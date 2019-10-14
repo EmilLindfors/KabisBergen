@@ -124,7 +124,7 @@ const MyForm = () => {
           },
           body: JSON.stringify(values),
         })
-        console.log(res)
+      
         const text = await res.text()
         if (res.status === 200) {
           setSubmitting(false)
