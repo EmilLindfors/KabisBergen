@@ -48,7 +48,7 @@ function SEO({
     ? `${site.siteMetadata.siteUrl}/${slug}/`
     : site.siteMetadata.siteUrl
 
-  const date = datePublished ? datePublished : false
+  //const date = datePublished ? datePublished : false
 
   return (
     <React.Fragment>

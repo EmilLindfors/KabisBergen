@@ -128,11 +128,11 @@ const MyForm = () => {
       
         const text = await res.text()
         if (res.status === 200) {
-          setStatus({ type: text.type, msg: text.message })
+          setStatus(text)
           setSubmitting(false)
           resetForm()
         } else {
-          setStatus({ type: text.type, msg: text.message })
+          setStatus(text)
           setSubmitting(false)
         }
       }}
@@ -331,7 +331,7 @@ const MyForm = () => {
               Apply now
             </FoundryButton>
           </Box>
-          {status && <span style={{color: status.type === "error" ? "red" : "green"}}>{status.message}</span>}
+          {status && <span>{status}</span>}
         </Form>
       )}
     </Formik>
