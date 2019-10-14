@@ -7,7 +7,6 @@
   "dependencies": {
     "@material-ui/core": "4.3.1",
     "@material-ui/icons": "4.2.1",
-    "@sendgrid/mail": "^6.4.0",
     "chroma-js": "2.0.6",
     "classnames": "2.2.6",
     "clsx": "1.0.4",
@@ -33,7 +32,6 @@
     "yup": "^0.27.0"
   },
   "devDependencies": {
-    "@now/node": "^0.11.0",
     "prettier": "^1.18.2"
   },
   "keywords": [],

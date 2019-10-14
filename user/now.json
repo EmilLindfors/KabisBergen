@@ -1,0 +1,18 @@
+{
+  "version": 2,
+  "builds": [
+    { "src": "./package.json", "use": "@now/static-build" },
+    { "src": "api/send.js", "use": "@now/node-server@0.4.26" }
+  ],
+    "build": {
+      "env": {
+        "type": "@type",
+        "project_id": "@project_id",
+        "private_key_id": "@private_key_id",
+        "private_key": "@private_key",
+        "client_email": "@client_email",
+        "client_id": "@client_id",
+        "sendgrid_api_key": "@sendgrid_api_key"
+      }
+    }
+  }
