@@ -119,7 +119,6 @@ const MyForm = () => {
 
         const res = await fetch("/api/send", {
           method: "POST",
-          mode: "no-cors",
           headers: {
             "Content-Type": "application/json",
           },
