@@ -1,34 +1,24 @@
 const sgMail = require("@sendgrid/mail")
 
 export default async function(req, res) {
-  const {
-    myName,
-    mySchool,
-    fieldOfStudy,
-    myEmail,
-    typeOfApplication,
-    description,
-    attendDinner,
-    allergies,
-    subscribe,
-  } = JSON.parse(req.body)
+  const body = JSON.parse(req.body)
 
   sgMail.setApiKey(process.env.sendgrid_api_key)
 
   const content = {
-    to: myEmail,
+    to: body.myEmail,
     from: "info@kabis.no",
-    templateId: "d-f43daeeaef504760851f727007e0b5d0",
+    templateId: "d-4482ef8298a3475b8a464757f6deb53d",
     dynamic_template_data: {
-      name: myName,
-      email: myEmail,
-      studentType: `${fieldOfStudy} at ${mySchool}`,
-      typeOfApplication: typeOfApplication,
-      description: description,
-      dinner: attendDinner
+      name: body.myName,
+      email: body.myEmail,
+      studentType: `${body.fieldOfStudy} at ${body.mySchool}`,
+      typeOfApplication: body.typeOfApplication,
+      description: body.description,
+      dinner: body.attendDinner
         ? "I will attend the dinner"
         : "I will not attend the dinner",
-      allergies: allergies ? allergies : "none",
+      allergies: body.allergies ? body.allergies : "none",
     },
   }
 
