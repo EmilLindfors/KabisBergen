@@ -126,7 +126,7 @@ const MyForm = () => {
         })
         console.log(res)
         const text = await res.text()
-        if (status === 200) {
+        if (res.status === 200) {
           setSubmitting(false)
           resetForm()
         } else {

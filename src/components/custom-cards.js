@@ -7,9 +7,12 @@ import {
   Avatar,
   Card,
   CardContent,
+  Grid,
 } from "@material-ui/core"
-import { Button, Title, Text } from "gatsby-theme-material-foundry"
+import { navigate } from "gatsby"
+import { Button, Title, Text, Badge } from "gatsby-theme-material-foundry"
 import NextIcon from "@material-ui/icons/NavigateNextOutlined"
+import EventList from "./event-list"
 
 const useStyles = makeStyles({
   avatar: {
@@ -48,6 +51,15 @@ const useStyles = makeStyles({
   card: {
     minHeight: "300px",
   },
+  eventCard: {
+    marginTop: "10px",
+    borderRadius: "3px",
+    "&:hover": {
+      backgroundColor: "rgba(0,0,0,0.1)",
+      textDecoration: "underline",
+      cursor: "pointer",
+    },
+  },
 })
 
 export function AvatarCard({
@@ -77,7 +89,7 @@ export function AvatarCard({
           className={horizontal ? classes.avatar : classes.bigAvatar}
         />
 
-        {!horizontal && <img src={logo} className={classes.logo} alt={name}/>}
+        {!horizontal && <img src={logo} className={classes.logo} alt={name} />}
       </Box>
       <Box>
         <Title variant="h5" align="center" className={classes.title}>
@@ -127,5 +139,47 @@ export function CompanyCard({ name, logo, website, imageClasses }) {
         </Box>
       </CardContent>
     </Card>
+  )
+}
+
+export function ProjectCard({
+  title,
+  date,
+  link,
+  image,
+  backupImage,
+  tags,
+  author,
+  category,
+}) {
+  const classes = useStyles()
+  return (
+    <Grid item xs={12} sm={4}>
+      <Box p={2} onClick={() => navigate(link)} className={classes.eventCard}>
+        <Box mb={4}>
+          <img
+            src={image ? image : backupImage}
+            alt={title}
+            style={{
+              borderRadius: "6px !important",
+              boxShadow:
+                "0 5px 15px -8px rgba(0, 0, 0, 0.24), 0 8px 10px -5px rgba(0, 0, 0, 0.2)",
+              maxWidth: "100%",
+              height: "200px",
+            }}
+          />
+        </Box>
+        {category && <Badge color="black">{category}</Badge>}
+        {tags.map(tag => (
+          <Badge color="black" key={tag} simple>
+            {tag}
+          </Badge>
+        ))}
+        <Title black variant="h6" className={classes.title}>
+          {title}
+        </Title>
+        <EventList horizontal date={date} person={author} noLink />
+      </Box>
+    </Grid>
   )
 }
