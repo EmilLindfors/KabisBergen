@@ -1,21 +1,21 @@
 import React from "react"
 import { Helmet } from "react-helmet"
-import {
-  Header,
-  HeaderLinks,
-} from "gatsby-theme-material-foundry"
+import { Header, HeaderLinks } from "gatsby-theme-material-foundry"
 import { graphql, useStaticQuery, Link } from "gatsby"
 import { makeStyles, Box, Container, Grid } from "@material-ui/core/"
 import Subscribe from "./subscribe-dialog"
+import School from "@material-ui/icons/School"
+import Books from "@material-ui/icons/LibraryBooks"
+import Dashboard from "@material-ui/icons/Dashboard"
 
 const useStyles = makeStyles(theme => ({
   footer: {
     "& a": {
       color: "#e2e2e2",
       "&:hover": {
-        color: "white"
-      }
-    }
+        color: "white",
+      },
+    },
   },
 }))
 
@@ -49,41 +49,6 @@ const TemplateWrapper = ({ children }) => {
   const classes = useStyles()
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
-      <Helmet>
-        <html lang="en" />
-        <title>{site.siteMetadata.title}</title>
-        <meta name="description" content={site.siteMetadata.description} />
-
-        <link
-          rel="apple-touch-icon"
-          sizes="180x180"
-          href="/img/apple-touch-icon.png"
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          href="/img/favicon-32x32.png"
-          sizes="32x32"
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          href="/img/favicon-16x16.png"
-          sizes="16x16"
-        />
-
-        <link
-          rel="mask-icon"
-          href="/img/safari-pinned-tab.svg"
-          color="#ff4400"
-        />
-        <meta name="theme-color" content="#fff" />
-
-        <meta property="og:type" content="business.business" />
-        <meta property="og:title" content={site.siteMetadata.title} />
-        <meta property="og:url" content="/" />
-        <meta property="og:image" content="/img/og-image.jpg" />
-      </Helmet>
       <Header
         absolute
         color="transparent"
@@ -106,7 +71,43 @@ const TemplateWrapper = ({ children }) => {
           <HeaderLinks
             links={[
               { link: "/projects", text: "Projects" },
-              { link: "/students-corner", text: "Students Corner" },
+              {
+                dropdown: {
+                  title: "Student",
+                  icon: School,
+                  links: [
+                    {
+                      link: "/students-corner",
+                      text: "Students Corner",
+                    },
+                    { link: "/project-pool", text: "Project Pool" },
+                  ],
+                },
+              },
+              {
+                dropdown: {
+                  title: "Reserach",
+                  icon: Books,
+                  links: [
+                    {
+                      link: "/publications",
+                      text: "Publications",
+                    },
+                  ],
+                },
+              },
+              {
+                dropdown: {
+                  title: "Innovation",
+                  icon: Dashboard,
+                  links: [
+                    {
+                      link: "/innovations",
+                      text: "Innovations",
+                    },
+                  ],
+                },
+              },
               { link: "/annual-report", text: "Annual Report" },
               { link: "/about", text: "About" },
             ]}
@@ -114,38 +115,44 @@ const TemplateWrapper = ({ children }) => {
         }
       />
       <div style={{ minHeight: "100%" }}>{children}</div>
-      <div style={{backgroundColor: "#111"}}>
-      <Container maxWidth="lg">
-        <Grid container>
-     <Grid item xs={12} md={2} align="center">
-       <Box py={8}>
-       <Link to="/">
-           <img
-              src={file.childImageSharp.fixed.src}
-              alt={site.siteMetadata.title}
-            />
-            </Link>
-            </Box>
+      <div style={{ backgroundColor: "#111" }}>
+        <Container maxWidth="lg">
+          <Grid container>
+            <Grid item xs={12} md={2} align="center">
+              <Box py={8}>
+                <Link to="/">
+                  <img
+                    src={file.childImageSharp.fixed.src}
+                    alt={site.siteMetadata.title}
+                  />
+                </Link>
+              </Box>
             </Grid>
             <Grid item xs={12} md={6}>
-          <Box display="flex" justifyContent="space-between" alignContent="center" className={classes.footer} py={8} px={4} mt={2}>
-            <Link to="/projects">Projects</Link>
+              <Box
+                display="flex"
+                justifyContent="space-between"
+                alignContent="center"
+                className={classes.footer}
+                py={8}
+                px={4}
+                mt={2}
+              >
+                <Link to="/projects">Projects</Link>
 
-            <Link to="/students-corner">Student's Corner</Link>
-            <Link to="/annual-report">Annual Report</Link>
-            <Link to="/about">About KABIS</Link>
-           
-          </Box>
+                <Link to="/students-corner">Student's Corner</Link>
+                <Link to="/annual-report">Annual Report</Link>
+                <Link to="/about">About KABIS</Link>
+              </Box>
+            </Grid>
+            <Grid item xs={12} md={4} align="center">
+              <Box py={8}>
+                <Subscribe />
+              </Box>
+            </Grid>
           </Grid>
-          <Grid item xs={12} md={4} align="center">
-          <Box py={8}>
-          <Subscribe/>
-          </Box>
-         </Grid>
-        
-        </Grid>
         </Container>
-        </div>
+      </div>
     </div>
   )
 }
