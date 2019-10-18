@@ -7,6 +7,7 @@ import Subscribe from "./subscribe-dialog"
 import School from "@material-ui/icons/School"
 import Books from "@material-ui/icons/LibraryBooks"
 import Dashboard from "@material-ui/icons/Dashboard"
+import Account from "@material-ui/icons/SupervisorAccount"
 
 const useStyles = makeStyles(theme => ({
   footer: {
@@ -108,8 +109,17 @@ const TemplateWrapper = ({ children }) => {
                   ],
                 },
               },
-              { link: "/annual-report", text: "Annual Report" },
-              { link: "/about", text: "About" },
+              {
+                dropdown: {
+                  title: "About",
+                  icon: Account,
+                  links: [
+                    { link: "/about", text: "About" },
+                    { link: "/annual-report", text: "Annual Report" },
+                    { link: "/impact-forum", text: "Impact Forum" },
+                  ],
+                },
+              },
             ]}
           />
         }
