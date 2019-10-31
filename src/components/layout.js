@@ -1,5 +1,4 @@
 import React from "react"
-import { Helmet } from "react-helmet"
 import { Header, HeaderLinks } from "gatsby-theme-material-foundry"
 import { graphql, useStaticQuery, Link } from "gatsby"
 import { makeStyles, Box, Container, Grid } from "@material-ui/core/"

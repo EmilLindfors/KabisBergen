@@ -1,19 +1,13 @@
 import React from "react"
 import { graphql } from "gatsby"
-import { Title, Text, Section } from "gatsby-theme-material-foundry"
+import { Title, Text } from "gatsby-theme-material-foundry"
 import {
   Container,
   Box,
-  List,
-  ListItem,
-  ListItemIcon,
   makeStyles,
 } from "@material-ui/core"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import Check from "@material-ui/icons/CheckBox"
-import Star from "@material-ui/icons/Star"
-import Form from "../components/students-corner-form"
 import BackgroundImage from "gatsby-background-image"
 
 const useStyles = makeStyles(theme => ({
