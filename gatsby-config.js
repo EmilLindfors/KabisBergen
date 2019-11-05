@@ -35,8 +35,27 @@ module.exports = {
         icon: `src/images/kabis_icon.png`, // This path is relative to the root of the site.
       },
     },
-    // this (optional) plugin enables Progressive Web App + Offline functionality
-    // To learn more, visit: https://gatsby.dev/offline
-    // `gatsby-plugin-offline`,
+    {
+      resolve: `gatsby-plugin-google-analytics`,
+      options: {
+        trackingId: "UA-151531888-1",
+        // Defines where to place the tracking script - `true` in the head and `false` in the body
+        head: false,
+        // Setting this parameter is optional
+        anonymize: true,
+        // Setting this parameter is also optional
+        respectDNT: true,
+      },
+    },
+    `gatsby-plugin-sitemap`,
+    {
+      resolve: 'gatsby-plugin-robots-txt',
+      options: {
+        host: 'https://kabis.no',
+        sitemap: 'https://kabis.no/sitemap.xml',
+        policy: [{ userAgent: '*', allow: '/' }]
+      }
+    },
+     `gatsby-plugin-offline`,
   ],
 }
