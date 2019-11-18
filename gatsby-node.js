@@ -66,6 +66,14 @@ const createNodesfromSheet = async ({
           : "",
         website: r.website,
       }
+    } else if (sheetName === "studentpool") {
+      nodeData = {
+        title: r.projectsuggestion,
+        problem: r.problemstatement,
+        category: r.category,
+        tags: r.tags ? r.tags.split(",") : [],
+        person: r.contactperson
+      }
     } else if (sheetName === "people") {
       nodeData = {
         avatarUrl: `https://drive.google.com/thumbnail?${
@@ -123,6 +131,14 @@ exports.sourceNodes = async ({
   await createNodesfromSheet({
     sheetId: "1ZM4fzS5ggnv7eed21i40mDkOD-dwOPCDO6FfZY9JEn8",
     sheetName: "projects",
+    credentials,
+    createNodeId,
+    createNode,
+    createContentDigest,
+  })
+  await createNodesfromSheet({
+    sheetId: "1O2Yhk_i6XCGZT6lvqzBcdMvgsLFMGNiQJPwj-BxHJhU",
+    sheetName: "studentpool",
     credentials,
     createNodeId,
     createNode,
@@ -187,6 +203,9 @@ exports.createSchemaCustomization = ({ actions }) => {
   const typeDefs = `
     type projects implements Node {
       projectPerson: people @link(by: "fullname", from: "author")
+    }
+    type studentpool implements Node {
+      supervisor: people @link(by: "fullname", from: "person")
     }
     type people implements Node {
       company: companies @link(by: "name", from: "organization") # foreign-key relation by custom field
