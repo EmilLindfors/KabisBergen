@@ -43,7 +43,6 @@ const classes = useStyles();
         postDescription="About the KABIS Project"
         postTitle="About Us"
         slug="about"
-        postImage={data.cover.childImageSharp.fluid}
       />
         <BackgroundImage
         alt={`cover picture`}

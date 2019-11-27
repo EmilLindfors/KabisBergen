@@ -34,7 +34,6 @@ function EventsPage(props) {
         postDescription="Read about the projects that are connected to KABIS"
         postTitle="Projects"
         slug="projects"
-        postImage={img}
       />
       <BackgroundImage
         alt={`cover picture`}

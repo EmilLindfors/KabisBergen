@@ -36,7 +36,6 @@ function IndexPage(props) {
         and business."
         postTitle="Kabis Impact Forum"
         slug="imapct-forum"
-        postImage={img}
       />
       <BackgroundImage
         alt={`cover picture`}

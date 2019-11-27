@@ -49,7 +49,6 @@ function IndexPage(props) {
         and business."
         postTitle="Project Pool"
         slug="imapct-forum"
-        postImage={img.src}
       />
       <BackgroundImage
         alt={`cover picture`}

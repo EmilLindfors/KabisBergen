@@ -25,8 +25,8 @@ const useStyles = makeStyles(theme => ({
       paddingTop: "100px",
       paddingBottom: "100px",
     },
-  }
-}));
+  },
+}))
 
 function IndexPage(props) {
   const classes = useStyles()
@@ -34,31 +34,30 @@ function IndexPage(props) {
 
   return (
     <Layout>
-      <SEO postImage={img} />
+      <SEO />
       <BackgroundImage
         alt={`cover picture`}
         fluid={img}
         className={classes.hero}
       >
-          <Box align="center" py={16}>
-        <Container maxWidth="md" align="center">
-          <Title variant="h3" align="center">
-            Aquaculture reserach and <br/>education in Bergen, Norway
-          </Title>
-          <Text variant="h5" align="center">
-            Capacity-lift for Sustainable and Innovative Aquaculture Production
-          </Text>
-          <Box m={2}>
-            <Button color="secondary" simple to="/projects" size="lg">
-              Go to Projects
-            </Button>
-         
-          <SubscribeDialog/>
-  
-          
-          </Box>
+        <Box align="center" py={16}>
+          <Container maxWidth="md" align="center">
+            <Title variant="h3" align="center">
+              Aquaculture reserach and <br />
+              education in Bergen, Norway
+            </Title>
+            <Text variant="h5" align="center">
+              Capacity-lift for Sustainable and Innovative Aquaculture
+              Production
+            </Text>
+            <Box m={2}>
+              <Button color="secondary" simple to="/projects" size="lg">
+                Go to Projects
+              </Button>
 
-        </Container>
+              <SubscribeDialog />
+            </Box>
+          </Container>
         </Box>
       </BackgroundImage>
 
@@ -67,47 +66,72 @@ function IndexPage(props) {
           {props.data.partners &&
             props.data.partners.nodes.map(company => (
               <Link to={company.website}>
-              <img src={company.logoUrl} width="100px" alt={company.name} />
+                <img src={company.logoUrl} width="100px" alt={company.name} />
               </Link>
             ))}
         </DividedSection>
       </Box>
       <Box my={12}>
-      <Container maxWidth="lg">
-        <Title primary variant="h3" align="center">Students Corner 2020</Title>
-        <Divider/>
-        <Img fluid={props.data.studentsCorner.childImageSharp.fluid}/>
-        <Text black paragraph>
-          Are you a student and do you plan or are in the process of writing a
-          thesis related to the aquaculture industry? Through the KABIS project,
-          HVL Mohn Center, NCE Seafood and IHS we give 20 students the
-          opportunity to show their master or bachelor thesis at the Aqkva
-          conference 2020. <Link to="/students-corner">Read more</Link>
-        </Text>
-        </Container>
-        </Box>
-      <Box my={12}>
-      <Container maxWidth="lg">
-        <Title primary variant="h4"> KABIS Projects</Title>
-        <Divider/>
-      <Grid container>
-              {props.data.latestProjects.nodes.map(p => (
-                <ProjectCard
-                  key={`project-${p.id}`}
-                  title={p.title}
-                  date={`${p.start}-${p.end}`}
-                  link={`/projects/${p.slug}`}
-                  image={p.coverUrl}
-                  tags={p.tags}
-                  author={p.author}
-                  backupImage={props.data.backupProjectImg.childImageSharp.fixed.src}
-                />
-              ))}
+        <Container maxWidth="lg">
+          <Title primary variant="h3" align="center">
+            Students Corner 2020
+          </Title>
+          <Divider />
+          <Box mt={4}>
+            <Grid container spacing={4}>
+              <Grid item xs={12} sm={6}>
+              <Box p={4}>
+                <Text variant="h6" black paragraph>
+                  Are you a student and do you plan or are in the process of
+                  writing a thesis related to the aquaculture industry? Through
+                  the KABIS project, HVL Mohn Center, NCE Seafood and IHS we
+                  give 20 students the opportunity to show their master or
+                  bachelor thesis at the Aqkva conference 2020.
+                
+                </Text>
+                <Button color="secondary" to="/students-corner">Read More and apply</Button>
+                </Box>
+            
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <Img fluid={props.data.studentsCorner.childImageSharp.fluid} />
+              </Grid>
             </Grid>
-            </Container>
+          </Box>
+        </Container>
       </Box>
-   
-      <Container maxWidth="md">
+      <Box my={12}>
+        <Container maxWidth="lg">
+          <Title primary variant="h4">
+            {" "}
+            KABIS Projects
+          </Title>
+          <Divider />
+          <Grid container>
+            {props.data.latestProjects.nodes.map(p => (
+              <ProjectCard
+                key={`project-${p.id}`}
+                title={p.title}
+                date={`${p.start}-${p.end}`}
+                link={`/projects/${p.slug}`}
+                image={p.coverUrl}
+                tags={p.tags}
+                author={p.author}
+                backupImage={
+                  props.data.backupProjectImg.childImageSharp.fixed.src
+                }
+              />
+            ))}
+          </Grid>
+        </Container>
+      </Box>
+    </Layout>
+  )
+}
+
+export default IndexPage
+
+/*  <Container maxWidth="md">
         <Box pt={8}>
           <Text align="left" variant="h4">
             "Kabis is a good project that will benefit the region, we do a lot
@@ -124,12 +148,7 @@ function IndexPage(props) {
             orgRole={props.data.quote.orgrole}
           />
         </Box>
-      </Container>
-    </Layout>
-  )
-}
-
-export default IndexPage
+      </Container>*/
 
 export const pageQuery = graphql`
   query IndexPage {
@@ -137,9 +156,11 @@ export const pageQuery = graphql`
       childImageSharp {
         # Specify the image processing specifications right in the query.
         # Makes it trivial to update as your page's design changes.
-        fluid(maxWidth: 2000,
+        fluid(
+          maxWidth: 2000
           duotone: { highlight: "#006381", shadow: "#004357" }
-          traceSVG: { color: "#004357" }) {
+          traceSVG: { color: "#004357" }
+        ) {
           ...GatsbyImageSharpFluid
         }
       }
@@ -193,8 +214,6 @@ export const pageQuery = graphql`
         }
       }
     }
-
-
 
     quote: people(fullname: { eq: "Sigurd Handeland" }) {
       fullname

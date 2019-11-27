@@ -38,7 +38,6 @@ function IndexPage(props) {
         postDescription="Read and download the KABIS annual reports"
         postTitle="Annual Report"
         slug="annual-report"
-        postImage="https://source.unsplash.com/Q5QspluNZmM/2000x1000"
       />
       <DividedSection
         black

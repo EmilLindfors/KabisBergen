@@ -39,7 +39,7 @@ function IndexPage(props) {
         postDescription="Attend the student's corner at the Aqkva conference the 16th of January 2020"
         postTitle="Student's Corner"
         slug="students-corner"
-        postImage={props.data.seoCover.childImageSharp.fixed}
+        postImage={props.data.seoCover.childImageSharp.fixed.src}
       />
       <BackgroundImage
         alt={`cover picture`}
