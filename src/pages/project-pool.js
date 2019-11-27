@@ -60,37 +60,60 @@ function IndexPage(props) {
           <Container maxWidth="md">
             <Title variant="h1">Project Pool</Title>
             <Title variant="h4">
-              Potential bachelor, master or PhD projects.
+              Potential Bachelor, Master, Civ. Eng. or PhD projects.
             </Title>
           </Container>
         </Box>
       </BackgroundImage>
       <Container maxWidth="sm">
-       
         <Box my={4}>
           {projects &&
             projects.map(p => (
-              <Box py={4}>
-                <Badge color="primary">{p.category}</Badge>
-                {p.tags.map((tag, i) => (
-                  <Badge color="primary" simple key={`${p.id}-tag-${i}`}>
-                    {tag}
-                  </Badge>
-                ))}
-                <Text variant="h5" black gutterBottom>
-                  {p.title}
-                </Text>
-                <Text paragraph>{p.problem}</Text>
-
-                <Box display="flex">
-                  <Avatar src={p.supervisor.avatarUrl} />
-                  <Box p={1}>
-                  <Text secondary><a style={{textDecoration: "none", color: "inherit"}} href={`mailto:${p.supervisor.email}`}>{p.supervisor.fullname}</a></Text>
-                 </Box>
+              <>
+                <Box py={4}>
+                  <Badge color="primary">{p.category}</Badge>
+                  {p.tags.map((tag, i) => (
+                    <Badge color="primary" simple key={`${p.id}-tag-${i}`}>
+                      {tag}
+                    </Badge>
+                  ))}
+                  <Text variant="h5" black gutterBottom>
+                    {p.title}
+                  </Text>
+                  <Text paragraph>{p.problem}</Text>
+                  <Grid container>
+                    <Grid item xs={6}>
+                      <Box display="flex">
+                        <Avatar src={p.supervisor.avatarUrl} />
+                        <Box p={1}>
+                          <Text primary>
+                            <a
+                              style={{
+                                textDecoration: "none",
+                                color: "inherit",
+                              }}
+                              href={`mailto:${p.supervisor.email}`}
+                            >
+                              {p.supervisor.fullname}
+                            </a>
+                          </Text>
+                        </Box>
+                      </Box>
+                    </Grid>
+                    <Grid item xs={6} align="right">
+                      <Button
+                        size="sm"
+                        color="secondary"
+                        to={`mailto:${p.supervisor.email}?subject=KABIS Student Interested in project pool subject "${p.title}"&body=Problem statement: ${p.title} from problem: ${p.problem} `}
+                      >
+                        Contact supervisor
+                      </Button>
+                    </Grid>
+                  </Grid>
                 </Box>
-              </Box>
+                <Divider />
+              </>
             ))}
-          <Divider />
         </Box>
       </Container>
     </Layout>

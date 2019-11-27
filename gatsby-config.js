@@ -4,7 +4,7 @@ module.exports = {
     description: `Sustainable and Innovative Aquaculture Production`,
     author: `Kabis <info@kabis.no>`,
     siteUrl: "https://kabis.no",
-    defaultImage: "/images/cover.jpg",
+    defaultImage: "images/cover.jpg",
     social: {
       twitter: "@kabisbergen",
       fbAppID: "@kabisbergen"

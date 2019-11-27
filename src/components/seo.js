@@ -19,9 +19,18 @@ function SEO({
   isBlogPost,
   postImage,
 }) {
-  const { site } = useStaticQuery(
+  const { site, file } = useStaticQuery(
     graphql`
       query {
+        file(relativePath: { eq: "cover.jpg" }) {
+          childImageSharp {
+            fixed(
+              width: 500
+            ) {
+              ...GatsbyImageSharpFixed
+            }
+          }
+        }
         site {
           siteMetadata {
             title
@@ -42,10 +51,10 @@ function SEO({
   const title = postTitle || site.siteMetadata.title
   const description = postDescription || site.siteMetadata.description
   const image = postImage
-    ? postImage
-    : site.siteMetadata.defaultImage
+    ?  `${site.siteMetadata.siteUrl}/${postImage}`
+    : `${site.siteMetadata.siteUrl}${file.childImageSharp.fixed.src}`
   const url = slug
-    ? `${site.siteMetadata.siteUrl}/${slug}/`
+    ? `${site.siteMetadata.siteUrl}/${slug}`
     : site.siteMetadata.siteUrl
 
   //const date = datePublished ? datePublished : false
