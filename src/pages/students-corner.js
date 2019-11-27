@@ -1,11 +1,14 @@
 import React from "react"
 import { graphql } from "gatsby"
+import { Title, Text, Section } from "gatsby-theme-material-foundry"
 import {
-  Title,
-  Text,
-  Section,
-} from "gatsby-theme-material-foundry"
-import { Container, Box, List, ListItem, ListItemIcon,makeStyles } from "@material-ui/core"
+  Container,
+  Box,
+  List,
+  ListItem,
+  ListItemIcon,
+  makeStyles,
+} from "@material-ui/core"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import Check from "@material-ui/icons/CheckBox"
@@ -24,19 +27,19 @@ const useStyles = makeStyles(theme => ({
       paddingTop: "100px",
       paddingBottom: "100px",
     },
-  }
-}));
+  },
+}))
 
 function IndexPage(props) {
   const img = props.data.cover.childImageSharp.fluid
-  const classes = useStyles();
+  const classes = useStyles()
   return (
     <Layout dark>
       <SEO
         postDescription="Attend the student's corner at the Aqkva conference the 16th of January 2020"
         postTitle="Student's Corner"
         slug="students-corner"
-        postImage={img}
+        postImage={props.data.seoCover.childImageSharp.fixed}
       />
       <BackgroundImage
         alt={`cover picture`}
@@ -45,11 +48,11 @@ function IndexPage(props) {
       >
         <Box align="center" py={16}>
           <Container maxWidth="md">
-          <Title variant="h1">Student's Corner</Title>
-          <Title variant="h4">
-            join the students corner during the Aqkva-conference 16th of January
-            2020
-          </Title>
+            <Title variant="h1">Student's Corner</Title>
+            <Title variant="h4">
+              join the students corner during the Aqkva-conference 16th of
+              January 2020
+            </Title>
           </Container>
         </Box>
       </BackgroundImage>
@@ -80,21 +83,21 @@ function IndexPage(props) {
             <ListItemIcon>
               <Check color="primary" />
             </ListItemIcon>
-            Student på masternivå eller bachelornivå på høgskule eller
-            universitet i Norge
+            Student at a master or bachelor level at a norwegian university
           </ListItem>
           <ListItem>
             <ListItemIcon>
               <Check color="primary" />
             </ListItemIcon>
-            Du har skrive - eller er i gong med å skriva ei oppgåve relatert til
-            havbruksnæringa
+            You are writing, or have started to write, a thesis related to the
+            aquaculture industry.
           </ListItem>
           <ListItem>
             <ListItemIcon>
               <Check color="primary" />
             </ListItemIcon>
-            ....eller du har en forretningsidè knyttet til næringa
+            ...or you've got a business idea related to the aquaculture
+            industry.
           </ListItem>
         </List>
         <Title variant="h3" black>
@@ -106,49 +109,58 @@ function IndexPage(props) {
             <ListItemIcon>
               <Star color="primary" />
             </ListItemIcon>
-            Du er med i konkurransen om å vinna pris for beste poster: kr
-            10.000,-
+            You join the "Best Poster" competition where the willer will receive
+            kr 10.000,-
           </ListItem>
           <ListItem>
             <ListItemIcon>
               <Star color="primary" />
             </ListItemIcon>
-            Du får dekka konferanseavgift og festmidaggen om kvelden
+            The conference fee and dinner will be paid for and completely free
+            (value: kr 4433,75,-)
           </ListItem>
           <ListItem>
             <ListItemIcon>
               <Star color="primary" />
             </ListItemIcon>
-            Du får vist deg fram på Norges største havbrukskonferanse
+            You get the chance to present your work at Norway's largest
+            aquaculture conference.
           </ListItem>
           <ListItem>
             <ListItemIcon>
               <Star color="primary" />
             </ListItemIcon>
-            Du får møta aktørar frå heile næringskjeda og knyta verdifulle
-            kontaktar
+            You will meet industry players from the whole industry and have the
+            opportunity to create a valuable network.
           </ListItem>
         </List>
         <Title variant="h3" black>
           Apply to participate
         </Title>
+        <Text black>
         <ol>
           <li>
-            På påmeldingssida (link under) registrerer du deg med navn,
-            kontaktinformasjon, kva du studerer og kor du studerer.
+            In the application form below you will register who you are and
+            where you study.
           </li>
           <li>
-            {" "}
-            Du vil bli bedt om å gje eit lite abstrakt av prosjektet eller
-            oppgåva du ønskjer å presentera under konferansen. I skildringa
-            ønskjer me at du inkluderer problemstilling, metode, funn (om
-            relevant), og konklusjon (om relevant)
+            You will fill out a summary of the project you wish to present at
+            the conference. Problem statement, method, results and conlusion are
+            all relevant summary details, depending on your project's status.
           </li>
-          <li>I løpet av desember vil du få beskjed om du vert valgt ut</li>
+          <li>
+            You will receive a confirmation email with more details and a link
+            to previous year's posters.
+          </li>
+          <li>We will notify the selected participants in December.</li>
         </ol>
+        </Text>
       </Container>
       <Section id="students-corner-form">
         <Container maxWidth="md">
+        <Title variant="h4" black>
+          Students Corner Application Form
+        </Title>
           <Form />
         </Container>
       </Section>
@@ -164,10 +176,21 @@ export const pageQuery = graphql`
       childImageSharp {
         # Specify the image processing specifications right in the query.
         # Makes it trivial to update as your page's design changes.
-        fluid(maxWidth: 2000,
+        fluid(
+          maxWidth: 2000
           duotone: { highlight: "#006381", shadow: "#004357" }
-          traceSVG: { color: "#004357" }) {
+          traceSVG: { color: "#004357" }
+        ) {
           ...GatsbyImageSharpFluid
+        }
+      }
+    }
+    seoCover: file(relativePath: { eq: "sc_cover.jpg" }) {
+      childImageSharp {
+        # Specify the image processing specifications right in the query.
+        # Makes it trivial to update as your page's design changes.
+        fixed(width: 1300) {
+          ...GatsbyImageSharpFixed
         }
       }
     }

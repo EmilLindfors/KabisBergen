@@ -80,6 +80,10 @@ const TemplateWrapper = ({ children }) => {
                       link: "/students-corner",
                       text: "Students Corner",
                     },
+                    {
+                      link: "/courses",
+                      text: "Courses",
+                    },
                     { link: "/project-pool", text: "Project Pool" },
                   ],
                 },
