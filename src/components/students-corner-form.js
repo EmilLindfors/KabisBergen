@@ -12,10 +12,12 @@ import {
   Grid,
   LinearProgress,
 } from "@material-ui/core"
-import { Button as FoundryButton } from "gatsby-theme-material-foundry"
+import { Button as FoundryButton, Title } from "gatsby-theme-material-foundry"
 import { makeStyles } from "@material-ui/core/styles"
 import { Form, Formik } from "formik"
 import * as Yup from "yup"
+import { navigate } from "gatsby"
+import { submit } from "./submit"
 
 const validationSchema = Yup.object().shape({
   mySchool: Yup.string().required("You have to choose a school"),
@@ -114,28 +116,33 @@ const MyForm = () => {
         subscribe: false,
       }}
       validationSchema={validationSchema}
-      onSubmit={async (values, { resetForm, setSubmitting, setStatus }) => {
-        setSubmitting(true)
-
-        const res = await fetch("/api/send", {
-          method: "POST",
-          mode: "no-cors",
-          headers: {
-            "Content-Type": "application/json",
+      onSubmit={async (values, { resetForm, setSubmitting, setStatus }) =>
+        submit({
+          resetForm: resetForm,
+          setStatus: setStatus,
+          setSubmitting: setSubmitting,
+          navigate,
+          email: {
+            content: [
+              { text: "Type", value: values.typeOfApplication },
+              { text: "Name", value: values.myName },
+              { text: "Email", value: values.myEmail },
+              { text: "School", value: values.mySchool },
+              { text: "Field", value: values.fieldOfStudy },
+              { text: "Description", value: values.description },
+              { text: "Dinner", value: values.attendDinner },
+              { text: "Allergies", value: values.allergies },
+            ],
+            toEmail: values.myEmail,
+            name: values.myName,
+            fromEmail: "emil@kabis.no",
+            ccEmail: "emil@kabis.no",
+            title: "Students corner 2020 application",
+            description: `Thank you for applying for Students Corner 2020 with a ${values.typeOfApplication}. We will contact you after the deadline with more info.`,
+            subject: `New application for students corner 2020 - KABIS.no`,
           },
-          body: JSON.stringify(values),
         })
-      
-        const text = await res.text()
-        if (res.status === 200) {
-          setStatus(text)
-          setSubmitting(false)
-          resetForm()
-        } else {
-          setStatus(text)
-          setSubmitting(false)
-        }
-      }}
+      }
     >
       {({
         values,
@@ -319,19 +326,31 @@ const MyForm = () => {
             </Grid>
           </Box>
           {isSubmitting && <LinearProgress />}
-          <Box align="right" mt={4} mb={12}>
-            <FoundryButton
-              className={classes.button}
-              type="submit"
-              disabled={Boolean(!isValid)}
-              color="secondary"
-              variant="contained"
-              size="lg"
-            >
-              Apply now
-            </FoundryButton>
+          <Box mt={4} mb={12}>
+            <Grid container>
+              <Grid item xs={6}>
+                {status && (
+                  <Title variant="h4" info>
+                    {status}
+                  </Title>
+                )}
+              </Grid>
+              <Grid item xs={6}>
+                <Box align="right">
+                  <FoundryButton
+                    className={classes.button}
+                    type="submit"
+                    disabled={Boolean(!isValid)}
+                    color="secondary"
+                    variant="contained"
+                    size="lg"
+                  >
+                    Apply now
+                  </FoundryButton>
+                </Box>
+              </Grid>
+            </Grid>
           </Box>
-          {status && <span>{status}</span>}
         </Form>
       )}
     </Formik>

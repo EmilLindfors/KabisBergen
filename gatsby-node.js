@@ -86,6 +86,7 @@ const createNodesfromSheet = async ({
         orgrole: r.orgrole,
         etternavn: r.etternavn,
         linkedin: r.linkedin,
+        email: r.emailaddress
       }
     } else {
       nodeData = r

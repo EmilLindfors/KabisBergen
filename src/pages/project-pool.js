@@ -85,7 +85,7 @@ function IndexPage(props) {
                 <Box display="flex">
                   <Avatar src={p.supervisor.avatarUrl} />
                   <Box p={1}>
-                  <Text>{p.supervisor.fullname}</Text>
+                  <Text secondary><a style={{textDecoration: "none", color: "inherit"}} href={`mailto:${p.supervisor.email}`}>{p.supervisor.fullname}</a></Text>
                  </Box>
                 </Box>
               </Box>
@@ -116,6 +116,7 @@ export const pageQuery = graphql`
         supervisor {
           avatarUrl
           fullname
+          email
         }
         problem
         category
