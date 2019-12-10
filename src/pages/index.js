@@ -9,7 +9,7 @@ import {
 import { Container, Box, makeStyles, Grid, Divider } from "@material-ui/core"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import { AvatarCard, ProjectCard } from "../components/custom-cards"
+import { ProjectCard } from "../components/custom-cards"
 import SubscribeDialog from "../components/subscribe-dialog"
 import BackgroundImage from "gatsby-background-image"
 import Img from "gatsby-image"

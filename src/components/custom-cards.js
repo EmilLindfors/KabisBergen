@@ -7,6 +7,7 @@ import {
   Avatar,
   Card,
   CardContent,
+
   Grid,
 } from "@material-ui/core"
 import { navigate } from "gatsby"
@@ -123,7 +124,7 @@ export function CompanyCard({ name, logo, website, imageClasses }) {
       p={2}
       className={classes.card}
     >
-      <Box align="center" pt={2} className={classes.logoContainer}>
+      <Box align="center" pt={2} className={classes.logoContainer} display="flex" justifyContent="center" alignItems="center">
         <img className={classes.logoCard} src={logo} alt={`${name} logo`} />
       </Box>
       <CardContent>
@@ -137,6 +138,7 @@ export function CompanyCard({ name, logo, website, imageClasses }) {
             <NextIcon />
           </Button>
         </Box>
+
       </CardContent>
     </Card>
   )

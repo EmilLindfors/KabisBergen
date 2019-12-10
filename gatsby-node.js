@@ -72,7 +72,15 @@ const createNodesfromSheet = async ({
         problem: r.problemstatement,
         category: r.category,
         tags: r.tags ? r.tags.split(",") : [],
-        person: r.contactperson
+        person: r.contactperson,
+      }
+    } else if (sheetName === "publications") {
+      nodeData = {
+        authors: r.authors,
+        year: r.year,
+        title: r.title,
+        journal: r.journal ? r.journal : "",
+        doi: r.doi ? r.doi : "",
       }
     } else if (sheetName === "people") {
       nodeData = {
@@ -86,7 +94,7 @@ const createNodesfromSheet = async ({
         orgrole: r.orgrole,
         etternavn: r.etternavn,
         linkedin: r.linkedin,
-        email: r.emailaddress
+        email: r.emailaddress,
       }
     } else {
       nodeData = r
@@ -132,6 +140,14 @@ exports.sourceNodes = async ({
   await createNodesfromSheet({
     sheetId: "1ZM4fzS5ggnv7eed21i40mDkOD-dwOPCDO6FfZY9JEn8",
     sheetName: "projects",
+    credentials,
+    createNodeId,
+    createNode,
+    createContentDigest,
+  })
+  await createNodesfromSheet({
+    sheetId: "1vwrRCdmYo9JICZiRewyM2EmxrLOgRG4srKLyRGbWCeQ",
+    sheetName: "publications",
     credentials,
     createNodeId,
     createNode,

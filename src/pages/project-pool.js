@@ -5,16 +5,12 @@ import {
   Text,
   Button,
   Badge,
-  Section,
 } from "gatsby-theme-material-foundry"
 import {
   Container,
   Box,
   makeStyles,
   Avatar,
-  Card,
-  CardContent,
-  CardActions,
   Grid,
   Divider,
 } from "@material-ui/core"

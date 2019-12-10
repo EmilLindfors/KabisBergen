@@ -189,7 +189,7 @@ const classes = useStyles();
                   <Container maxWidth="md">
                     <Box p={6}>
                       <Title variant="h3" align="center" gutterBottom>
-                        industry Members
+                        Industry Members
                       </Title>
                     </Box>
                   </Container>
