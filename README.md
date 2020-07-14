@@ -8,3 +8,6 @@ sendgrid to user
 store in google-spreadsheet
 email to info@kabis.no
 }
+
+enable google sheets api in cloud console
+create a service account

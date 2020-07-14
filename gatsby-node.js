@@ -22,71 +22,72 @@ const createNodesfromSheet = async ({
     return `${slug}`.replace(/\/\/+/g, "/")
   }
 
+  //getter need to be exact header row string
   rows.forEach(r => {
     let nodeData
 
     if (sheetName === "projects") {
       nodeData = {
-        title: r.projecttitle,
-        slug: slugify(r.projecttitle),
-        description: r.description,
-        blurb: r.description ? r.description.substr(0, 200) : "",
-        coverUrl: r.coverimage
-          ? `https://drive.google.com/thumbnail?${r.coverimage.split("?")[1]}`
+        title: r["Project Title"],
+        slug: slugify(r["Project Title"]),
+        description: r.Description,
+        blurb: r.Description ? r.Description.substr(0, 200) : "",
+        coverUrl: r["Cover image"]
+          ? `https://drive.google.com/thumbnail?${r['Cover image'].split("?")[1]}`
           : "",
-        fileUrl: r.resultsmasterthesisetc
+        fileUrl: r['Results (master thesis etc)']
           ? `https://drive.google.com/uc?export=download&${
-              r.resultsmasterthesisetc.split("?")[1]
-            }`
+          r['Results (master thesis etc)'].split("?")[1]
+          }`
           : "",
-        start: r.startdate
-          ? `${r.startdate.split("/")[2]}-${r.startdate.split("/")[1]}-${
-              r.startdate.split("/")[0]
-            }`
+        start: r.Startdate
+          ? `${r.Startdate.split("/")[2]}-${r.Startdate.split("/")[1]}-${
+          r.Startdate.split("/")[0]
+          }`
           : "",
-        end: r.enddate
-          ? `${r.enddate.split("/")[2]}-${r.enddate.split("/")[1]}-${
-              r.enddate.split("/")[0]
-            }`
+        end: r.Enddate
+          ? `${r.Enddate.split("/")[2]}-${r.Enddate.split("/")[1]}-${
+          r.Enddate.split("/")[0]
+          }`
           : "",
-        author: r.nameofprojectlead,
-        category: r.category,
+        author: r['Name of Project Lead'],
+        category: r.Category,
         tags: r.tags ? r.tags.split(",") : [],
-        organizations: r.involvedorganizations
-          ? r.involvedorganizations.split(",")
+        organizations: r['Involved Organizations']
+          ? r['Involved Organizations'].split(",")
           : [],
       }
     } else if (sheetName === "companies") {
       nodeData = {
-        name: r.name,
-        slug: slugify(r.name),
-        type: r.partnertype,
-        logoUrl: r.logo
-          ? `https://drive.google.com/thumbnail?${r.logo.split("?")[1]}`
+        name: r.Name,
+        slug: slugify(r.Name),
+        type: r['partner type'],
+        logoUrl: r.Logo
+          ? `https://drive.google.com/thumbnail?${r.Logo.split("?")[1]}`
           : "",
         website: r.website,
       }
     } else if (sheetName === "studentpool") {
       nodeData = {
-        title: r.projectsuggestion,
-        problem: r.problemstatement,
-        category: r.category,
-        tags: r.tags ? r.tags.split(",") : [],
-        person: r.contactperson,
+        title: r["Project Suggestion"],
+        problem: r["Problem Statement"],
+        category: r.Category,
+        tags: r.Tags ? r.Tags.split(",") : [],
+        person: r["Contact person"],
       }
     } else if (sheetName === "publications") {
       nodeData = {
-        authors: r.authors,
-        year: r.year,
-        title: r.title,
-        journal: r.journal ? r.journal : "",
-        doi: r.doi ? r.doi : "",
+        authors: r.Authors,
+        year: r.Year,
+        title: r.Title,
+        journal: r.Journal ? r.Journal : "",
+        doi: r.DOI ? r.DOI : "",
       }
     } else if (sheetName === "people") {
       nodeData = {
         avatarUrl: `https://drive.google.com/thumbnail?${
           r.avatar.split("?")[1]
-        }`,
+          }`,
         fullname: r.fullname,
         organization: r.organization,
         type: r.partnertype,
@@ -94,24 +95,22 @@ const createNodesfromSheet = async ({
         orgrole: r.orgrole,
         etternavn: r.etternavn,
         linkedin: r.linkedin,
-        email: r.emailaddress,
+        email: r["Email Address"],
       }
     } else {
       nodeData = r
     }
-
-    //TODO: fix hardcoded timezone difference
-    createNode(
-      Object.assign(nodeData, {
-        id: createNodeId(`${sheetName}-${r.id}`),
-        parent: "__SOURCE__",
-        children: [],
-        internal: {
-          type: sheetName,
-          content: JSON.stringify(r),
-          contentDigest: createContentDigest(r),
-        },
-      })
+    createNode({
+      ...nodeData,
+      id: createNodeId(`${sheetName}-${r._rawData[0]}`),
+      parent: "__SOURCE__",
+      children: [],
+      internal: {
+        type: sheetName,
+        content: JSON.stringify(nodeData),
+        contentDigest: createContentDigest(nodeData),
+      },
+    }
     )
   })
 }
@@ -124,11 +123,12 @@ exports.sourceNodes = async ({
   const { createNode } = actions
 
   // remember to use replace on private key!
+  // old replace function .replace(/\\n/g, "\n")
   const credentials = {
     type: process.env.type,
     project_id: process.env.project_id,
     private_key_id: process.env.private_key_id,
-    private_key: process.env.private_key.replace(/\\n/g, "\n"),
+    private_key: process.env.private_key.replace(new RegExp("\\\\n", "\g"), "\n"),
     client_email: process.env.client_email,
     client_id: process.env.client_id,
     auth_uri: process.env.auth_uri,

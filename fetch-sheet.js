@@ -1,41 +1,35 @@
 exports.__esModule = true
-const GoogleSpreadsheet = require("google-spreadsheet")
+const GoogleSpreadsheet = require("google-spreadsheet").GoogleSpreadsheet
 const _ = require("lodash")
 
-const getSpreadsheet = (spreadsheetId, credentials) =>
-  new Promise((resolve, reject) => {
-    const doc = new GoogleSpreadsheet(spreadsheetId)
+const getSpreadsheet = async (spreadsheetId, credentials) => {
+  //removed surrounding promise
+  const doc = new GoogleSpreadsheet(spreadsheetId)
+  await doc.useServiceAccountAuth(credentials)
+  return doc;
+}
 
-    doc.useServiceAccountAuth(credentials, function(err) {
-      if (err) reject(err)
-      else resolve(doc)
-    })
-  })
+const getWorksheetByTitle = async (spreadsheet, worksheetTitle) => {
+  //removed surrounding promise
 
-const getWorksheetByTitle = (spreadsheet, worksheetTitle) =>
-  new Promise((resolve, reject) =>
-    spreadsheet.getInfo((e, s) => {
-      if (e) reject(e)
-      const targetSheet = s.worksheets.find(
-        sheet => sheet.title === worksheetTitle
-      )
-      if (!targetSheet) {
-        reject(`Found no worksheet with the title ${worksheetTitle}`)
-      }
-      resolve(targetSheet)
-    })
-  )
+  /*const worksheet = await spreadsheet.getInfo((s) => s.worksheets.find(
+    sheet => sheet.title === worksheetTitle
+  ))*/
+  await spreadsheet.loadInfo();
+  console.log("spreadsheet:", spreadsheet.title)
+  
+  // possible worksheet props: sheetsByIndex, sheetsById and sheetCount
+  const worksheet = await spreadsheet.sheetsByIndex.find(sheet => sheet.title === worksheetTitle)
+  console.log("found the worksheet: ", worksheet.title)
 
-const getRows = (worksheet, options = {}) =>
-  new Promise((resolve, reject) =>
-    worksheet.getRows(options, (err, rows) => {
-      if (err) reject(err)
-      else {
-        resolve(rows)
-      }
-    })
-  )
+  return worksheet;
 
+}
+//removed promise
+const getRows = async (worksheet, options = {}) => await worksheet.getRows(options)
+
+
+//does not work
 const cleanRows = rows =>
   rows.map(r =>
     _.chain(r)
@@ -55,10 +49,17 @@ const cleanRows = rows =>
   )
 
 const fetchData = async (spreadsheetId, worksheetTitle, credentials) => {
+  console.log("fetch called")
   const spreadsheet = await getSpreadsheet(spreadsheetId, credentials)
   const worksheet = await getWorksheetByTitle(spreadsheet, worksheetTitle)
-  const rows = await getRows(worksheet)
-  return cleanRows(rows)
+  const rows = await worksheet.getRows()
+  //let CellData = [];
+  //await rows.map(row => CellData.push(row._rawData));
+
+
+      //console.log("Cell Data: ",CellData)
+  //return cleanRows(CellData)
+  return rows
 }
 
 exports.cleanRows = cleanRows
