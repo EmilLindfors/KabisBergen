@@ -125,7 +125,7 @@ export function CompanyCard({ name, logo, website, imageClasses }) {
       className={classes.card}
     >
       <Box align="center" pt={2} className={classes.logoContainer} display="flex" justifyContent="center" alignItems="center">
-        <img className={classes.logoCard} src={logo} alt={`${name} logo`} />
+        <img className={classes.logoCard} src={logo + "&sz=w200"} alt={`${name} logo`} />
       </Box>
       <CardContent>
         <Title variant="h5" align="center" className={classes.title}>
