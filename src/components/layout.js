@@ -7,6 +7,7 @@ import School from "@material-ui/icons/School"
 import Books from "@material-ui/icons/LibraryBooks"
 import Dashboard from "@material-ui/icons/Dashboard"
 import Account from "@material-ui/icons/SupervisorAccount"
+import Img from "gatsby-image"
 
 const useStyles = makeStyles(theme => ({
   footer: {
@@ -59,6 +60,7 @@ const TemplateWrapper = ({ children }) => {
             role="button"
           >
             <img
+              style={{ display: "inline-block" }}
               src={file.childImageSharp.fixed.src}
               alt={site.siteMetadata.title}
             />
@@ -106,8 +108,8 @@ const TemplateWrapper = ({ children }) => {
                   icon: Dashboard,
                   links: [
                     {
-                      link: "/innovations",
-                      text: "Innovations",
+                      link: "/innovation",
+                      text: "Innovation",
                     },
                   ],
                 },

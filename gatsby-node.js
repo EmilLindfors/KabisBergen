@@ -97,6 +97,19 @@ const createNodesfromSheet = async ({
         linkedin: r.linkedin,
         email: r["Email Address"],
       }
+     } else if (sheetName === "events") {
+        nodeData = {
+          picture: `https://drive.google.com/thumbnail?${
+            r.picture.split("?")[1]
+            }`,
+          title: r.title,
+          startDate: r.startDate,
+          startTime: r.startTime,
+          endDate: r.endDate,
+          endTime: r.endTime,
+          description: r.description,
+          registration: r.registration,
+        }
     } else {
       nodeData = r
     }
@@ -172,6 +185,14 @@ exports.sourceNodes = async ({
   await createNodesfromSheet({
     sheetId: "1PKxuE9HGlnWXZfEsnL-DUdfUpmhHSn9u2XV1lhlDn3E",
     sheetName: "people",
+    credentials,
+    createNodeId,
+    createNode,
+    createContentDigest,
+  })
+  await createNodesfromSheet({
+    sheetId: "1B7qhF4Xxm6OiA-ug8fN72zSo7C_dCbR7rBhbJfxgKLw",
+    sheetName: "events",
     credentials,
     createNodeId,
     createNode,

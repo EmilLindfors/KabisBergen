@@ -50,8 +50,7 @@ function IndexPage(props) {
           <Container maxWidth="md">
             <Title variant="h1">Student's Corner</Title>
             <Title variant="h4">
-              join the students corner during the Aqkva-conference 16th of
-              January 2020
+              join the students corner during the Aqkva-conference in 2021
             </Title>
           </Container>
         </Box>
@@ -161,7 +160,8 @@ function IndexPage(props) {
         <Title variant="h4" black>
           Students Corner Application Form
         </Title>
-          <Form />
+        <Text error>Due to the current corona crisis we will let you know if students corner will return in 2021</Text>
+       
         </Container>
       </Section>
     </Layout>
