@@ -42,9 +42,9 @@ function InnovationPage(props) {
         <Box align="center" py={16}>
           <Container maxWidth="md">
             <Title variant="h1">KABIS Innovation</Title>
-            <Title variant="h4">
+            <Text variant="h4">
             This page is under construction
-            </Title>
+            </Text>
           </Container>
         </Box>
       </BackgroundImage>

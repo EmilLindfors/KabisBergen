@@ -73,39 +73,55 @@ function IndexPage(props) {
       </Box>
       <Box my={12}>
         <Container maxWidth="lg">
-          <Title primary variant="h3" align="center">
-            Students Corner 2020
-          </Title>
-          <Divider />
-          <Box mt={4}>
-            <Grid container spacing={4}>
-              <Grid item xs={12} sm={6}>
-              <Box p={4}>
-                <Text variant="h6" black paragraph>
-                  Are you a student and do you plan or are in the process of
-                  writing a thesis related to the aquaculture industry? Through
-                  the KABIS project, HVL Mohn Center, NCE Seafood and IHS we
-                  give 20 students the opportunity to show their master or
-                  bachelor thesis at the Aqkva conference 2020.
-                
-                </Text>
-                <Button color="secondary" to="/students-corner">Read More and apply</Button>
-                </Box>
-            
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <Img fluid={props.data.studentsCorner.childImageSharp.fluid} />
-              </Grid>
-            </Grid>
-          </Box>
-        </Container>
+        <Grid container spacing={4}>
+              <Grid item xs={12} sm={8}>
+              <Box p={6} mt={4}>
+        <Text variant="h4" align="left">  
+     Connecting research and industry
+      </Text>
+      <Text variant="h6">
+        The KABIS projects brings together a network of world leading actors and institutions in the salmon farming industry.
+        </Text>
+        <Button color="primary" to="/about" size="md">
+                Participants
+              </Button>
+        </Box>
+      </Grid>
+      <Grid item xs={12} sm={4}>
+      <Box p={2}>
+<Img fluid={props.data.kabisnetwork.childImageSharp.fluid} alt="kabis network"/>
+</Box>
+</Grid>
+</Grid>
+<Grid container spacing={4}>
+<Grid item xs={12} sm={4}>
+      <Box p={2}>
+<Img fluid={props.data.impactforum.childImageSharp.fluid} alt="Impact Forum"/>
+</Box>
+</Grid>
+
+              <Grid item xs={12} sm={8}>
+              <Box p={6} mt={4}>
+      <Text variant="h4" align="left">  
+       Collaborative research and innovation
+      </Text>
+      <Text variant="h6">
+        Through the Impact Forum, we have created an arena to materialize industry needs into projects and innovations.
+        </Text>
+        <Button color="primary" to="/impact-forum" size="md">
+                Impact Forum
+              </Button>
+        </Box>
+      </Grid>
+      </Grid>
+      </Container>
       </Box>
+     
       <Box my={12}>
         <Container maxWidth="lg">
-          <Title primary variant="h4">
-            {" "}
-            KABIS Projects
-          </Title>
+          <Text variant="h4">
+            Industry wide results
+          </Text>
           <Divider />
           <Grid container>
             {props.data.latestProjects.nodes.map(p => (
@@ -123,6 +139,35 @@ function IndexPage(props) {
               />
             ))}
           </Grid>
+        </Container>
+      </Box>
+      <Box my={12}>
+        <Container maxWidth="lg">
+          <Title primary variant="h3" align="center">
+            Students Corner 2021
+          </Title>
+          <Divider />
+          <Box mt={4}>
+            <Grid container spacing={4}>
+              <Grid item xs={12} sm={6}>
+              <Box p={4}>
+                <Text variant="h6" black paragraph>
+                  Are you a student and do you plan or are in the process of
+                  writing a thesis related to the aquaculture industry? Through
+                  the KABIS project, HVL Mohn Center, NCE Seafood and IHS we
+                  give 20 students the opportunity to show their master or
+                  bachelor thesis at the Aqkva conference 2021.
+                
+                </Text>
+                <Button color="secondary" to="/students-corner">Read More and apply</Button>
+                </Box>
+            
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <Img fluid={props.data.studentsCorner.childImageSharp.fluid} />
+              </Grid>
+            </Grid>
+          </Box>
         </Container>
       </Box>
     </Layout>
@@ -206,6 +251,24 @@ export const pageQuery = graphql`
       }
     }
     studentsCorner: file(relativePath: { eq: "sc_cover.jpg" }) {
+      childImageSharp {
+        # Specify the image processing specifications right in the query.
+        # Makes it trivial to update as your page's design changes.
+        fluid(maxWidth: 1000) {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    }
+    kabisnetwork: file(relativePath: { eq: "kabisnetwork.png" }) {
+      childImageSharp {
+        # Specify the image processing specifications right in the query.
+        # Makes it trivial to update as your page's design changes.
+        fluid(maxWidth: 1000) {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    }
+    impactforum: file(relativePath: { eq: "impactforum.png" }) {
       childImageSharp {
         # Specify the image processing specifications right in the query.
         # Makes it trivial to update as your page's design changes.

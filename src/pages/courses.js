@@ -1,12 +1,12 @@
 import React from "react"
-import { graphql, Link } from "gatsby"
+import { graphql } from "gatsby"
 import { Title, Section, Button, Text } from "gatsby-theme-material-foundry"
-import { Container, Box, makeStyles, Divider, Grid } from "@material-ui/core"
+import { Container, Box, Divider, Grid } from "@material-ui/core"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import BackgroundImage from "gatsby-background-image"
 
-const useStyles = makeStyles(theme => ({
+/*const useStyles = makeStyles(theme => ({
   hero: {
     color: "white",
     [theme.breakpoints.down("sm")]: {
@@ -18,11 +18,10 @@ const useStyles = makeStyles(theme => ({
       paddingBottom: "100px",
     },
   },
-}))
+}))*/
 
 function CoursesPage(props) {
   const projectImage = props.data.project.childImageSharp.fluid
-  const classes = useStyles()
   return (
     <Layout dark>
       <SEO

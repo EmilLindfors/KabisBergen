@@ -13,7 +13,7 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import Check from "@material-ui/icons/CheckBox"
 import Star from "@material-ui/icons/Star"
-import Form from "../components/students-corner-form"
+//import Form from "../components/students-corner-form"
 import BackgroundImage from "gatsby-background-image"
 
 const useStyles = makeStyles(theme => ({
