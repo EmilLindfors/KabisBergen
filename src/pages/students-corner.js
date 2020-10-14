@@ -1,6 +1,6 @@
 import React from "react"
 import { graphql } from "gatsby"
-import { Title, Text, Section } from "gatsby-theme-material-foundry"
+import { Title, Text, Section, Button } from "gatsby-theme-material-foundry"
 import {
   Container,
   Box,
@@ -57,21 +57,14 @@ function IndexPage(props) {
       </BackgroundImage>
       <Container maxWidth="md">
         <Title variant="h2" black>
-          Show off your hard work to the aquaculture industry
+        Student’s Corner: your chance to showcase your aquaculture-related project to the industry!  
         </Title>
 
         <Text paragraph>
-          Are you a student and do you plan or are in the process of writing a
-          thesis related to the aquaculture industry? Through the KABIS project,
-          HVL Mohn Center, NCE Seafood and IHS we give 20 students the
-          opportunity to show their master or bachelor thesis at the Aqkva
-          conference 2020.
+        Are you a student in the process of writing a bachelor or master thesis related to the aquaculture industry? Or maybe you are working on an exciting business opportunity related to the industry? Each year the KABIS-project gives several students the opportunity to show their aquaculture-related project at the Aqkva conference.  
         </Text>
         <Text paragraph>
-          Every student will receive an A3 template to be filled out with
-          information about ongoing or planned master or bachelor project. If
-          you feel like this is something for you, please dont hesitate about
-          filling out the form below and we will contact you with more details.
+        Every student elected to the Student’s Corner will receive an A3 template to be filled out with information about ongoing or planned projects or business ideas. 
         </Text>
         <Title variant="h3" black>
           Who are you?
@@ -82,21 +75,19 @@ function IndexPage(props) {
             <ListItemIcon>
               <Check color="primary" />
             </ListItemIcon>
-            Student at a master or bachelor level at a norwegian university
+            Student at a master or bachelor level at a Norwegian university.
           </ListItem>
           <ListItem>
             <ListItemIcon>
               <Check color="primary" />
             </ListItemIcon>
-            You are writing, or have started to write, a thesis related to the
-            aquaculture industry.
+            You are writing, or have started to write, a thesis related to the aquaculture industry. 
           </ListItem>
           <ListItem>
             <ListItemIcon>
               <Check color="primary" />
             </ListItemIcon>
-            ...or you've got a business idea related to the aquaculture
-            industry.
+            ...or you have a business idea related to the aquaculture industry. 
           </ListItem>
         </List>
         <Title variant="h3" black>
@@ -108,29 +99,25 @@ function IndexPage(props) {
             <ListItemIcon>
               <Star color="primary" />
             </ListItemIcon>
-            You join the "Best Poster" competition where the willer will receive
-            kr 10.000,-
+            You join the "Best Poster" competition where the winner receives kr 10.000,- 
           </ListItem>
           <ListItem>
             <ListItemIcon>
               <Star color="primary" />
             </ListItemIcon>
-            The conference fee and dinner will be paid for and completely free
-            (value: kr 4433,75,-)
+            The conference fee and dinner will be paid for and completely free (value: kr 4433,75,-) 
           </ListItem>
           <ListItem>
             <ListItemIcon>
               <Star color="primary" />
             </ListItemIcon>
-            You get the chance to present your work at Norway's largest
-            aquaculture conference.
+            You get the chance to present your work at Norway's largest aquaculture conference. 
           </ListItem>
           <ListItem>
             <ListItemIcon>
               <Star color="primary" />
             </ListItemIcon>
-            You will meet industry players from the whole industry and have the
-            opportunity to create a valuable network.
+            You get the opportunity to meet industry players form the entire value chain and create a valuable network.  
           </ListItem>
         </List>
         <Title variant="h3" black>
@@ -143,25 +130,20 @@ function IndexPage(props) {
             where you study.
           </li>
           <li>
-            You will fill out a summary of the project you wish to present at
-            the conference. Problem statement, method, results and conlusion are
-            all relevant summary details, depending on your project's status.
+          You will fill out a summary of the project you wish to present at the conference. 
           </li>
           <li>
-            You will receive a confirmation email with more details and a link
-            to previous year's posters.
+          You will receive a confirmation email with more details and a link to previous year's posters. 
           </li>
-          <li>We will notify the selected participants in December.</li>
+          <li>We will notify the selected participants in December. </li>
         </ol>
         </Text>
       </Container>
       <Section id="students-corner-form">
         <Container maxWidth="md">
-        <Title variant="h4" black>
-          Students Corner Application Form
-        </Title>
-        <Text error>Due to the current corona crisis we will let you know if students corner will return in 2021</Text>
-       
+     <Box pb={8}>
+       <Button color="primary" size="lg" to="https://www.survey-xact.dk/LinkCollector?key=K567WZ25L291">Apply here</Button>
+       </Box>
         </Container>
       </Section>
     </Layout>
