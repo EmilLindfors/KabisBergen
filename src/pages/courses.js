@@ -93,6 +93,54 @@ function CoursesPage(props) {
                           style={{ color: "inherit", textDecoration: "none" }}
                           href="https://www.uib.no/emne/BIF100"
                         >
+                          KJE 118{" "}
+                        </a>
+                      </Title>
+                    </Box>
+                  </BackgroundImage>
+                </Box>
+              </Grid>
+              <Grid item xs={12} sm={8}>
+                <Title variant="h4" black>
+                  <a
+                    style={{ color: "inherit" }}
+                    href="https://www.hvl.no/studier/studieprogram/emne/kje118"
+                  >
+                    Water Quality and Recirculating Aquaculture Systems (RAS)
+                  </a>
+                </Title>
+                <Text black variant="h6">
+                  <a href={props.data.hvl.website}>
+                    <img
+                      width="70px"
+                      alt={props.data.hvl.name}
+                      src={props.data.hvl.logoUrl}
+                    />
+                  </a>{" "}
+                  | 10 credits
+                </Text>
+              </Grid>
+            </Grid>
+          </Box>
+          <Divider/>
+          <Box mt={2}>
+            <Grid container spacing={3}>
+              <Grid item xs={12} sm={4}>
+                <Box height="200px" mt={2}>
+                  <BackgroundImage fluid={projectImage}>
+                    {" "}
+                    <Box
+                      height="150px"
+                      display="flex"
+                      alignItems="center"
+                      justifyContent="center"
+                      color="white"
+                    >
+                      <Title variant="h3" color="inherit">
+                        <a
+                          style={{ color: "inherit", textDecoration: "none" }}
+                          href="https://www.uib.no/emne/BIF100"
+                        >
                           BIF 100{" "}
                         </a>
                       </Title>

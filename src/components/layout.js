@@ -1,8 +1,8 @@
 import React from "react"
-import { Header, HeaderLinks } from "gatsby-theme-material-foundry"
+import { Header, HeaderLinks, Button } from "gatsby-theme-material-foundry"
 import { graphql, useStaticQuery, Link } from "gatsby"
 import { makeStyles, Box, Container, Grid } from "@material-ui/core/"
-import Subscribe from "./subscribe-dialog"
+//import Subscribe from "./subscribe-dialog"
 import School from "@material-ui/icons/School"
 import Books from "@material-ui/icons/LibraryBooks"
 import Dashboard from "@material-ui/icons/Dashboard"
@@ -157,7 +157,7 @@ const TemplateWrapper = ({ children }) => {
             </Grid>
             <Grid item xs={12} md={4} align="center">
               <Box py={8}>
-                <Subscribe />
+                <Button color="secondary" to="https://seafoodinnovation.no/news/">Latest News</Button>
               </Box>
             </Grid>
           </Grid>

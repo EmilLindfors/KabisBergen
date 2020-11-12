@@ -10,7 +10,7 @@ import { Container, Box, makeStyles, Grid, Divider } from "@material-ui/core"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { ProjectCard } from "../components/custom-cards"
-import SubscribeDialog from "../components/subscribe-dialog"
+//import SubscribeDialog from "../components/subscribe-dialog"
 import BackgroundImage from "gatsby-background-image"
 import Img from "gatsby-image"
 
@@ -51,11 +51,12 @@ function IndexPage(props) {
               Production
             </Text>
             <Box m={2}>
-              <Button color="secondary" simple to="/projects" size="lg">
-                Go to Projects
+            <Button color="secondary" simple to="https://seafoodinnovation.no/news/" size="lg">
+                Read Latest News
               </Button>
-
-              <SubscribeDialog />
+              <Button color="secondary" to="/projects" size="lg">
+                View Projects
+              </Button>
             </Box>
           </Container>
         </Box>

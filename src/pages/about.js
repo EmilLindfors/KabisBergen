@@ -10,6 +10,7 @@ import {
   Title,
   Text,
   TabPill,
+  Button
 } from "gatsby-theme-material-foundry"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
@@ -18,7 +19,7 @@ import Schedule from "@material-ui/icons/Business"
 import List from "@material-ui/icons/List"
 import Description from "@material-ui/icons/Description"
 import { AvatarCard, CompanyCard } from "../components/custom-cards"
-import Subscribe from "../components/subscribe-dialog"
+//import Subscribe from "../components/subscribe-dialog"
 import BackgroundImage from "gatsby-background-image"
 
 const useStyles = makeStyles(theme => ({
@@ -114,7 +115,7 @@ const classes = useStyles();
                       
                     </Text>
                     <Box align="center">
-                    <Subscribe/>
+                    <Button color="secondary" to="https://seafoodinnovation.no/news/">Latest News</Button>
                     </Box>
                   </Box>
                 </>
