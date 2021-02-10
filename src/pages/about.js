@@ -11,6 +11,7 @@ import {
   Text,
   Button,
   TabPill,
+  Button
 } from "gatsby-theme-material-foundry"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
@@ -19,7 +20,7 @@ import Schedule from "@material-ui/icons/Business"
 import List from "@material-ui/icons/List"
 import Description from "@material-ui/icons/Description"
 import { AvatarCard, CompanyCard } from "../components/custom-cards"
-import Subscribe from "../components/subscribe-dialog"
+//import Subscribe from "../components/subscribe-dialog"
 import BackgroundImage from "gatsby-background-image"
 import Img from "gatsby-image"
 
