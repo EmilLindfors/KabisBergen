@@ -10,8 +10,7 @@ import {
   Title,
   Text,
   Button,
-  TabPill,
-  Button
+  TabPill
 } from "gatsby-theme-material-foundry"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
