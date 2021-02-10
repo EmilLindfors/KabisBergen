@@ -128,7 +128,7 @@ const TemplateWrapper = ({ children }) => {
       <div style={{ backgroundColor: "#111" }}>
         <Container maxWidth="lg">
           <Grid container>
-            <Grid item xs={12} md={2} align="center">
+            <Grid item xs={12} md={4} align="center">
               <Box py={8}>
                 <Link to="/">
                   <img
@@ -138,7 +138,7 @@ const TemplateWrapper = ({ children }) => {
                 </Link>
               </Box>
             </Grid>
-            <Grid item xs={12} md={6}>
+            <Grid item xs={12} md={8}>
               <Box
                 display="flex"
                 justifyContent="space-between"
@@ -153,13 +153,10 @@ const TemplateWrapper = ({ children }) => {
                 <Link to="/students-corner">Student's Corner</Link>
                 <Link to="/annual-report">Annual Report</Link>
                 <Link to="/about">About KABIS</Link>
+                <a href="mailto:info@kabis.no">info@kabis.no</a>
               </Box>
             </Grid>
-            <Grid item xs={12} md={4} align="center">
-              <Box py={8}>
-                <Subscribe />
-              </Box>
-            </Grid>
+
           </Grid>
         </Container>
       </div>

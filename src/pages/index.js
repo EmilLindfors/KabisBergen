@@ -10,7 +10,7 @@ import { Container, Box, makeStyles, Grid, Divider } from "@material-ui/core"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { ProjectCard } from "../components/custom-cards"
-import SubscribeDialog from "../components/subscribe-dialog"
+//import SubscribeDialog from "../components/subscribe-dialog"
 import BackgroundImage from "gatsby-background-image"
 import Img from "gatsby-image"
 
@@ -50,12 +50,15 @@ function IndexPage(props) {
               Capacity-lift for Sustainable and Innovative Aquaculture
               Production
             </Text>
-            <Box m={2}>
+            <Box m={2} py={12}>
               <Button color="secondary" simple to="/projects" size="lg">
                 Go to Projects
               </Button>
+              <Button color="secondary" to="/about" size="lg">
+                About Kabis
+              </Button>
 
-              <SubscribeDialog />
+
             </Box>
           </Container>
         </Box>
@@ -139,35 +142,6 @@ function IndexPage(props) {
               />
             ))}
           </Grid>
-        </Container>
-      </Box>
-      <Box my={12}>
-        <Container maxWidth="lg">
-          <Title primary variant="h3" align="center">
-            Students Corner 2021
-          </Title>
-          <Divider />
-          <Box mt={4}>
-            <Grid container spacing={4}>
-              <Grid item xs={12} sm={6}>
-              <Box p={4}>
-                <Text variant="h6" black paragraph>
-                  Are you a student and do you plan or are in the process of
-                  writing a thesis related to the aquaculture industry? Through
-                  the KABIS project, HVL Mohn Center, NCE Seafood and IHS we
-                  give 20 students the opportunity to show their master or
-                  bachelor thesis at the Aqkva conference 2021.
-                
-                </Text>
-                <Button color="secondary" to="/students-corner">Read More and apply</Button>
-                </Box>
-            
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <Img fluid={props.data.studentsCorner.childImageSharp.fluid} />
-              </Grid>
-            </Grid>
-          </Box>
         </Container>
       </Box>
     </Layout>

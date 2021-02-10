@@ -30,6 +30,13 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
+const applyto = [
+"In the application form below you will register who you are and where you study.",
+"You will fill out a summary of the project you wish to present at the conference.",
+"You will receive a confirmation email with more details and a link to previous year's posters.",
+"We will notify the selected participants in December."
+]
+
 function IndexPage(props) {
   const img = props.data.cover.childImageSharp.fluid
   const classes = useStyles()
@@ -50,7 +57,7 @@ function IndexPage(props) {
           <Container maxWidth="md">
             <Title variant="h1">Student's Corner</Title>
             <Title variant="h4">
-              join the students corner during the Aqkva-conference in 2021
+              Stay tuned for student corner in 2022
             </Title>
           </Container>
         </Box>
@@ -120,32 +127,12 @@ function IndexPage(props) {
             You get the opportunity to meet industry players form the entire value chain and create a valuable network.  
           </ListItem>
         </List>
+        <Box align="center" py={16}>
         <Title variant="h3" black>
-          Apply to participate
+          Check back in 2022
         </Title>
-        <Text black>
-        <ol>
-          <li>
-            In the application form below you will register who you are and
-            where you study.
-          </li>
-          <li>
-          You will fill out a summary of the project you wish to present at the conference. 
-          </li>
-          <li>
-          You will receive a confirmation email with more details and a link to previous year's posters. 
-          </li>
-          <li>We will notify the selected participants in December. </li>
-        </ol>
-        </Text>
-      </Container>
-      <Section id="students-corner-form">
-        <Container maxWidth="md">
-     <Box pb={8}>
-       <Button color="primary" size="lg" to="https://www.survey-xact.dk/LinkCollector?key=K567WZ25L291">Apply here</Button>
-       </Box>
+        </Box>
         </Container>
-      </Section>
     </Layout>
   )
 }

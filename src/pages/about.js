@@ -9,6 +9,7 @@ import {
 import {
   Title,
   Text,
+  Button,
   TabPill,
 } from "gatsby-theme-material-foundry"
 import Layout from "../components/layout"
@@ -20,6 +21,7 @@ import Description from "@material-ui/icons/Description"
 import { AvatarCard, CompanyCard } from "../components/custom-cards"
 import Subscribe from "../components/subscribe-dialog"
 import BackgroundImage from "gatsby-background-image"
+import Img from "gatsby-image"
 
 const useStyles = makeStyles(theme => ({
   hero: {
@@ -69,6 +71,10 @@ const classes = useStyles();
                     <Title variant="h3" align="center" gutterBottom>
                       The KABIS Project
                     </Title>
+                    <Img
+        alt={`org picture`}
+        fluid={data.orgPic.childImageSharp.fluid}
+      />
                     <Text variant="body1" gutterBottom>
                       The aim of the KABIS project's current period has been to
                       focus and strengthen the aquaculture-oriented research and
@@ -113,8 +119,9 @@ const classes = useStyles();
                       </ul>
                       
                     </Text>
-                    <Box align="center">
-                    <Subscribe/>
+                    <Box align="center" py={8}>
+                     <Text color="secondary">For mer info send en mail til</Text>
+                    <Button size="lg" color="primary" to="mailto:info@kabis.no">info@kabis.no</Button>
                     </Box>
                   </Box>
                 </>
@@ -247,6 +254,17 @@ export const ItemPageQuery = graphql`
         # Specify the image processing specifications right in the query.
         # Makes it trivial to update as your page's design changes.
         fluid(maxWidth: 2000,
+          duotone: { highlight: "#006381", shadow: "#004357" }
+          traceSVG: { color: "#004357" }) {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    }
+    orgPic: file(relativePath: { eq: "Orgkart.png" }) {
+      childImageSharp {
+        # Specify the image processing specifications right in the query.
+        # Makes it trivial to update as your page's design changes.
+        fluid(maxWidth: 800,
           duotone: { highlight: "#006381", shadow: "#004357" }
           traceSVG: { color: "#004357" }) {
           ...GatsbyImageSharpFluid
