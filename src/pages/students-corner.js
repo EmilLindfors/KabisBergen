@@ -57,7 +57,7 @@ function IndexPage(props) {
           <Container maxWidth="md">
             <Title variant="h1">Student's Corner</Title>
             <Title variant="h4">
-              Stay tuned for students corner in 2022
+            Student's corner is postponed until 2022, but we offer free tickets for the digital Aqkva conference 29th of April 2021
             </Title>
           </Container>
         </Box>
@@ -65,10 +65,10 @@ function IndexPage(props) {
       <Container maxWidth="md" minHeight="100vh">
       <Box align="center" pt={16} pb={48}>
       <Text paragraph>
-        Due to the Covid pandemic, we've unfortunately had to postpone students corner until 2022. WE can however offer students free tickets to the AqKva conference that is being held on the 29th of April, as compensation.  
+        Due to the Covid pandemic, we've unfortunately had to postpone students corner until 2022. We can however offer students free tickets to the AqKva conference that is being held on the 29th of April, as compensation.  
         </Text>
         <Text paragraph>
-        Do you want to attend the digital version of the <a href="https://www.aqkva.no/">AqKva conference</a> for free on the 29th of April? If that's the case please send your name to Vidar Onarheim (vidar@aqkva.no).
+        Do you want to attend the digital version of the <a href="https://aqkva.no/aqkva-konferansen/student">AqKva conference</a> for free on the 29th of April? If that's the case please send your name to Vidar Onarheim (vidar@aqkva.no).
         </Text>
         <Button size="lg" color="primary" to="mailto:vidar@aqkva.no">vidar@aqkva.no</Button>
         </Box>

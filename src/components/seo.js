@@ -51,7 +51,7 @@ function SEO({
   const title = postTitle || site.siteMetadata.title
   const description = postDescription || site.siteMetadata.description
   const image = postImage
-    ?  `${site.siteMetadata.siteUrl}/${postImage}`
+    ?  `${site.siteMetadata.siteUrl}${postImage}`
     : `${site.siteMetadata.siteUrl}${file.childImageSharp.fixed.src}`
   const url = slug
     ? `${site.siteMetadata.siteUrl}/${slug}`
