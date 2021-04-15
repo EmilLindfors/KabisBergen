@@ -1,5 +1,5 @@
 import React from "react"
-import { Header, HeaderLinks, Button } from "gatsby-theme-material-foundry"
+import { Header, HeaderLinks } from "gatsby-theme-material-foundry"
 import { graphql, useStaticQuery, Link } from "gatsby"
 import { makeStyles, Box, Container, Grid } from "@material-ui/core/"
 //import Subscribe from "./subscribe-dialog"
@@ -87,7 +87,7 @@ const TemplateWrapper = ({ children }) => {
               },
               {
                 dropdown: {
-                  title: "Reserach",
+                  title: "Research",
                   icon: Books,
                   links: [
                     {

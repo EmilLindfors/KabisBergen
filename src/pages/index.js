@@ -1,5 +1,5 @@
 import React from "react"
-import { graphql, Link } from "gatsby"
+import { graphql } from "gatsby"
 import {
   DividedSection,
   Title,
@@ -67,10 +67,10 @@ function IndexPage(props) {
       <Box my={4}>
         <DividedSection>
           {props.data.partners &&
-            props.data.partners.nodes.map(company => (
-              <Link to={company.website}>
+            props.data.partners.nodes.map((company, i) => (
+              <a key={i} href={company.website}>
                 <img src={company.logoUrl} width="100px" alt={company.name} />
-              </Link>
+              </a>
             ))}
         </DividedSection>
       </Box>

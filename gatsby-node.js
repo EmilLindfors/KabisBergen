@@ -72,7 +72,8 @@ const createNodesfromSheet = async ({
         title: r["Project Suggestion"],
         problem: r["Problem Statement"],
         category: r.Category,
-        tags: r.Tags ? r.Tags.split(",") : [],
+        tags: r.Tags ? r.Tags.split(",").map(function(item) {
+          return item.trim().toUpperCase()}) : [],
         person: r["Contact person"],
       }
     } else if (sheetName === "publications") {

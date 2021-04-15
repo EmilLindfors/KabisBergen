@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import { graphql } from "gatsby"
 import {
   Title,
@@ -13,10 +13,12 @@ import {
   Avatar,
   Grid,
   Divider,
+  Chip
 } from "@material-ui/core"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import BackgroundImage from "gatsby-background-image"
+
 
 const useStyles = makeStyles(theme => ({
   hero: {
@@ -30,12 +32,39 @@ const useStyles = makeStyles(theme => ({
       paddingBottom: "100px",
     },
   },
+  chip: {
+    color: "white",
+    background: theme.palette.primary.light,
+    "&:focus, &:hover": {
+      background: theme.palette.primary.dark,
+      color: theme.palette.secondary.light
+    },
+    margin: theme.spacing(0.5),
+  },
 }))
+
 
 function IndexPage(props) {
   const img = props.data.cover.childImageSharp.fluid
   const projects = props.data.projects.nodes
+  var [tagFilter, setTags] = useState([])
   const classes = useStyles()
+  const [filter, setFilter] = useState("ALL");
+
+  useEffect(() => {
+    var tags = []
+    projects.map(p => p.tags.map(tag => !tags.includes(tag) && tags.push(tag)))
+    setTags([...tags])
+      
+  }, [projects])
+
+  /*const projectList = projects
+    .filter(filter)
+    .map(project => (
+      <div>{JSON.stringify(project)}</div>
+    ));*/
+
+
   return (
     <Layout dark>
       <SEO
@@ -57,15 +86,28 @@ function IndexPage(props) {
             <Title variant="h4">
               Potential Bachelor, Master, Civ. Eng. or PhD projects.
             </Title>
+            <Chip
+              className={classes.chip}
+              label="ALL"
+              color="currentColor"
+              onClick={() => setFilter("ALL")}/>
+            {tagFilter.length !== 0 && tagFilter.map(tag => 
+            <Chip key={tag}
+              className={classes.chip}
+              label={tag}
+              color="currentColor"
+              onClick={() => setFilter(tag)}/>)}
           </Container>
         </Box>
       </BackgroundImage>
       <Container maxWidth="sm">
+       
         <Box my={4}>
+     <Text color="primary">{filter === "ALL" ? "All Projects": `Projects tagged with ${filter}`} </Text>
           {projects &&
-            projects.map(p => (
+            projects.filter(p => p.tags.find(tag => filter ==="ALL" ? true : tag === filter)).map((p, j) => (
               <>
-                <Box py={4}>
+                <Box py={4} key={j}>
                   <Badge color="primary">{p.category}</Badge>
                   {p.tags.map((tag, i) => (
                     <Badge color="primary" simple key={`${p.id}-tag-${i}`}>

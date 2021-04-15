@@ -1,6 +1,6 @@
 import React from "react"
 import { graphql } from "gatsby"
-import { Title, Text, Section, Button } from "gatsby-theme-material-foundry"
+import { Title, Text, Button } from "gatsby-theme-material-foundry"
 import {
   Container,
   Box,
@@ -30,12 +30,12 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-const applyto = [
+/*const applyto = [
 "In the application form below you will register who you are and where you study.",
 "You will fill out a summary of the project you wish to present at the conference.",
 "You will receive a confirmation email with more details and a link to previous year's posters.",
 "We will notify the selected participants in December."
-]
+]*/
 
 function IndexPage(props) {
   const img = props.data.cover.childImageSharp.fluid
@@ -57,13 +57,59 @@ function IndexPage(props) {
           <Container maxWidth="md">
             <Title variant="h1">Student's Corner</Title>
             <Title variant="h4">
-              Stay tuned for student corner in 2022
+              Stay tuned for students corner in 2022
             </Title>
           </Container>
         </Box>
       </BackgroundImage>
-      <Container maxWidth="md">
-        <Title variant="h2" black>
+      <Container maxWidth="md" minHeight="100vh">
+      <Box align="center" pt={16} pb={48}>
+      <Text paragraph>
+        Due to the Covid pandemic, we've unfortunately had to postpone students corner until 2022. WE can however offer students free tickets to the AqKva conference that is being held on the 29th of April, as compensation.  
+        </Text>
+        <Text paragraph>
+        Do you want to attend the digital version of the <a href="https://www.aqkva.no/">AqKva conference</a> for free on the 29th of April? If that's the case please send your name to Vidar Onarheim (vidar@aqkva.no).
+        </Text>
+        <Button size="lg" color="primary" to="mailto:vidar@aqkva.no">vidar@aqkva.no</Button>
+        </Box>
+        </Container>
+ 
+    </Layout>
+  )
+}
+
+export default IndexPage
+
+export const pageQuery = graphql`
+  query StudentsCornerPage {
+    cover: file(relativePath: { eq: "sc_cover.jpg" }) {
+      childImageSharp {
+        # Specify the image processing specifications right in the query.
+        # Makes it trivial to update as your page's design changes.
+        fluid(
+          maxWidth: 2000
+          duotone: { highlight: "#006381", shadow: "#004357" }
+          traceSVG: { color: "#004357" }
+        ) {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    }
+    seoCover: file(relativePath: { eq: "sc_cover.jpg" }) {
+      childImageSharp {
+        # Specify the image processing specifications right in the query.
+        # Makes it trivial to update as your page's design changes.
+        fixed(width: 1300) {
+          ...GatsbyImageSharpFixed
+        }
+      }
+    }
+  }
+`
+function OldPage() {
+  return(
+    <>
+       <Title variant="h2" black>
         Student’s Corner: your chance to showcase your aquaculture-related project to the industry!  
         </Title>
 
@@ -132,36 +178,6 @@ function IndexPage(props) {
           Check back in 2022
         </Title>
         </Box>
-        </Container>
-    </Layout>
+    </>
   )
 }
-
-export default IndexPage
-
-export const pageQuery = graphql`
-  query StudentsCornerPage {
-    cover: file(relativePath: { eq: "sc_cover.jpg" }) {
-      childImageSharp {
-        # Specify the image processing specifications right in the query.
-        # Makes it trivial to update as your page's design changes.
-        fluid(
-          maxWidth: 2000
-          duotone: { highlight: "#006381", shadow: "#004357" }
-          traceSVG: { color: "#004357" }
-        ) {
-          ...GatsbyImageSharpFluid
-        }
-      }
-    }
-    seoCover: file(relativePath: { eq: "sc_cover.jpg" }) {
-      childImageSharp {
-        # Specify the image processing specifications right in the query.
-        # Makes it trivial to update as your page's design changes.
-        fixed(width: 1300) {
-          ...GatsbyImageSharpFixed
-        }
-      }
-    }
-  }
-`
