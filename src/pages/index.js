@@ -40,8 +40,31 @@ function IndexPage(props) {
         fluid={img}
         className={classes.hero}
       >
-        <Box align="center" py={16}>
+
+        <Box align="center" pt={16} pb={8}>
           <Container maxWidth="md" align="center">
+            <Box pt={8} style={{ maxWidth: "800px" }}>
+              <div style={{ position: "relative", overflow: "hidden", paddingTop: "56.25%" }}>
+                <iframe
+                  style={{
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    width: "100%",
+                    height: "100%",
+                    border: "0",
+                    boxShadow:
+                      "0 5px 15px -8px rgba(0, 0, 0, 0.24), 0 8px 10px -5px rgba(0, 0, 0, 0.2)",
+                  }}
+                  width="800"
+                  title="KABIS Video"
+                  src="https://www.youtube.com/embed/Vw1r2z-3aRY"
+                  frameborder="0"
+                  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen
+                />
+              </div>
+            </Box>
             <Title variant="h3" align="center">
               Aquaculture reserach and <br />
               education in Bergen, Norway
@@ -50,20 +73,17 @@ function IndexPage(props) {
               Capacity-lift for Sustainable and Innovative Aquaculture
               Production
             </Text>
-            <Box m={2} py={12}>
+            <Box m={2} py={4}>
               <Button color="secondary" simple to="/projects" size="lg">
                 Go to Projects
               </Button>
               <Button color="secondary" to="/about" size="lg">
                 About Kabis
               </Button>
-
-
             </Box>
           </Container>
         </Box>
       </BackgroundImage>
-
       <Box my={4}>
         <DividedSection>
           {props.data.partners &&
@@ -76,50 +96,50 @@ function IndexPage(props) {
       </Box>
       <Box my={12}>
         <Container maxWidth="lg">
-        <Grid container spacing={4}>
-              <Grid item xs={12} sm={8}>
+          <Grid container spacing={4}>
+            <Grid item xs={12} sm={8}>
               <Box p={6} mt={4}>
-        <Text variant="h4" align="left">  
-     Connecting research and industry
+                <Text variant="h4" align="left">
+                  Connecting research and industry
       </Text>
-      <Text variant="h6">
-        The KABIS projects brings together a network of world leading actors and institutions in the salmon farming industry.
+                <Text variant="h6">
+                  The KABIS projects brings together a network of world leading actors and institutions in the salmon farming industry.
         </Text>
-        <Button color="primary" to="/about" size="md">
-                Participants
+                <Button color="primary" to="/about" size="md">
+                  Participants
               </Button>
-        </Box>
-      </Grid>
-      <Grid item xs={12} sm={4}>
-      <Box p={2}>
-<Img fluid={props.data.kabisnetwork.childImageSharp.fluid} alt="kabis network"/>
-</Box>
-</Grid>
-</Grid>
-<Grid container spacing={4}>
-<Grid item xs={12} sm={4}>
-      <Box p={2}>
-<Img fluid={props.data.impactforum.childImageSharp.fluid} alt="Impact Forum"/>
-</Box>
-</Grid>
+              </Box>
+            </Grid>
+            <Grid item xs={12} sm={4}>
+              <Box p={2}>
+                <Img fluid={props.data.kabisnetwork.childImageSharp.fluid} alt="kabis network" />
+              </Box>
+            </Grid>
+          </Grid>
+          <Grid container spacing={4}>
+            <Grid item xs={12} sm={4}>
+              <Box p={2}>
+                <Img fluid={props.data.impactforum.childImageSharp.fluid} alt="Impact Forum" />
+              </Box>
+            </Grid>
 
-              <Grid item xs={12} sm={8}>
+            <Grid item xs={12} sm={8}>
               <Box p={6} mt={4}>
-      <Text variant="h4" align="left">  
-       Collaborative research and innovation
+                <Text variant="h4" align="left">
+                  Collaborative research and innovation
       </Text>
-      <Text variant="h6">
-        Through the Impact Forum, we have created an arena to materialize industry needs into projects and innovations.
+                <Text variant="h6">
+                  Through the Impact Forum, we have created an arena to materialize industry needs into projects and innovations.
         </Text>
-        <Button color="primary" to="/impact-forum" size="md">
-                Impact Forum
+                <Button color="primary" to="/impact-forum" size="md">
+                  Impact Forum
               </Button>
-        </Box>
-      </Grid>
-      </Grid>
-      </Container>
+              </Box>
+            </Grid>
+          </Grid>
+        </Container>
       </Box>
-     
+
       <Box my={12}>
         <Container maxWidth="lg">
           <Text variant="h4">
