@@ -58,7 +58,7 @@ function IndexPage(props) {
                   }}
                   width="800"
                   title="KABIS Video"
-                  src="https://www.youtube.com/embed/YFSp0rlcW2k"
+                  src="https://www.youtube.com/embed/AwyrI8hl5Ig"
                   frameborder="0"
                   allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                   allowfullscreen
