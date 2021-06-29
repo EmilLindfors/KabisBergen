@@ -57,8 +57,8 @@ function IndexPage(props) {
                       "0 5px 15px -8px rgba(0, 0, 0, 0.24), 0 8px 10px -5px rgba(0, 0, 0, 0.2)",
                   }}
                   width="800"
-                  title="KABIS Video"
-                  src="https://www.youtube.com/embed/AwyrI8hl5Ig"
+                  title="KABIS Video" 
+                  src="https://www.youtube.com/embed/_DQ7BtCBj28"
                   frameborder="0"
                   allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                   allowfullscreen

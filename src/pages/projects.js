@@ -107,7 +107,7 @@ function EventsPage(props) {
 
 export const ItemPageQuery = graphql`
   query Projects {
-    allProjects(sort: { order: ASC, fields: end }) {
+    allProjects(sort: { order: DESC, fields: end }) {
       nodes {
         id
         coverUrl
