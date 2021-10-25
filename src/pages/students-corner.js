@@ -57,23 +57,84 @@ function IndexPage(props) {
           <Container maxWidth="md">
             <Title variant="h1">Student's Corner</Title>
             <Title variant="h4">
-            Student's corner is postponed until 2022, but we offer free tickets for the digital Aqkva conference 29th of April 2021
+              your chance to showcase your aquaculture-related project to the
+              industry!
             </Title>
           </Container>
         </Box>
       </BackgroundImage>
-      <Container maxWidth="md" minHeight="100vh">
-      <Box align="center" pt={16} pb={48}>
-      <Text paragraph>
-        Due to the Covid pandemic, we've unfortunately had to postpone students corner until 2022. We can however offer students free tickets to the AqKva conference that is being held on the 29th of April, as compensation.  
-        </Text>
-        <Text paragraph>
-        Do you want to attend the digital version of the <a href="https://aqkva.no/aqkva-konferansen/student">AqKva conference</a> for free on the 29th of April? If that's the case please send your name to Vidar Onarheim (vidar@aqkva.no).
-        </Text>
-        <Button size="lg" color="primary" to="mailto:vidar@aqkva.no">vidar@aqkva.no</Button>
+      <Container maxWidth="sm" minHeight="100vh">
+        <Box pt={16} pb={48}>
+          <Text paragraph>
+            <strong>
+            Are you a student in the process of writing a bachelor or master
+            thesis related to the aquaculture industry? Or maybe you are working
+            on an exciting business opportunity related to the industry? Each
+            year the KABIS-project gives several students the opportunity to
+            show their aquaculture-related project at the Aqkva conference.
+           </strong>
+            <br />
+            Every student elected to the Student’s Corner will receive an A3
+            template to be filled out with information about ongoing or planned
+            projects or business ideas.
+          </Text>
+          <Title variant="h4" primary>Who are you?</Title>
+          <Text paragraph>
+            <li>
+              A student at a master or bachelor level at a Norwegian university{" "}
+            </li>
+            <li>
+              You are writing, or have started to write, a thesis related to the
+              aquaculture industry.{" "}
+            </li>
+            <li>
+              ...or you have a business idea related to the aquaculture
+              industry.{" "}
+            </li>
+          </Text>
+          <Title variant="h4" primary>What do you get?</Title>
+          <Text paragraph>
+            <li>
+              You join the "Best Poster" competition where the winner receives
+              kr 10.000,-{" "}
+            </li>
+            <li>
+              The conference fee and dinner will be paid for and completely free
+              (value: kr 4433,75,-){" "}
+            </li>
+            <li>
+              You get the chance to present your work at Norway's largest
+              aquaculture conference.{" "}
+            </li>
+            <li>
+              You get the opportunity to meet industry players form the entire
+              value chain and create a valuable network.{" "}
+            </li>
+          </Text>
+          <Title variant="h4" primary>Apply to participate</Title>
+          <Text paragraph>
+            <ol>
+              <li>
+                In the application form below you will register who you are and
+                where you study.
+              </li>
+              <li>
+                You will fill out a summary of the project you wish to present
+                at the conference.{" "}
+              </li>
+              <li>
+                You will receive a confirmation email with more details and a
+                link to previous year's posters.{" "}
+              </li>
+              <li>We will notify the selected participants in January. </li>
+            </ol>
+          </Text>
+          <Title variant="h5" secondary>Application deadline: 6th of January </Title>
+          <Button size="lg" color="primary" to="https://aqkva.no/aqkva-konferansen/student">
+            Register now
+          </Button>
         </Box>
-        </Container>
- 
+      </Container>
     </Layout>
   )
 }
@@ -107,77 +168,89 @@ export const pageQuery = graphql`
   }
 `
 function OldPage() {
-  return(
+  return (
     <>
-       <Title variant="h2" black>
-        Student’s Corner: your chance to showcase your aquaculture-related project to the industry!  
-        </Title>
+      <Title variant="h2" black>
+        Student’s Corner: your chance to showcase your aquaculture-related
+        project to the industry!
+      </Title>
 
-        <Text paragraph>
-        Are you a student in the process of writing a bachelor or master thesis related to the aquaculture industry? Or maybe you are working on an exciting business opportunity related to the industry? Each year the KABIS-project gives several students the opportunity to show their aquaculture-related project at the Aqkva conference.  
-        </Text>
-        <Text paragraph>
-        Every student elected to the Student’s Corner will receive an A3 template to be filled out with information about ongoing or planned projects or business ideas. 
-        </Text>
-        <Title variant="h3" black>
-          Who are you?
-        </Title>
-        <List>
-          <ListItem>
-            {" "}
-            <ListItemIcon>
-              <Check color="primary" />
-            </ListItemIcon>
-            Student at a master or bachelor level at a Norwegian university.
-          </ListItem>
-          <ListItem>
-            <ListItemIcon>
-              <Check color="primary" />
-            </ListItemIcon>
-            You are writing, or have started to write, a thesis related to the aquaculture industry. 
-          </ListItem>
-          <ListItem>
-            <ListItemIcon>
-              <Check color="primary" />
-            </ListItemIcon>
-            ...or you have a business idea related to the aquaculture industry. 
-          </ListItem>
-        </List>
-        <Title variant="h3" black>
-          What do you get?
-        </Title>
-        <List>
-          <ListItem>
-            {" "}
-            <ListItemIcon>
-              <Star color="primary" />
-            </ListItemIcon>
-            You join the "Best Poster" competition where the winner receives kr 10.000,- 
-          </ListItem>
-          <ListItem>
-            <ListItemIcon>
-              <Star color="primary" />
-            </ListItemIcon>
-            The conference fee and dinner will be paid for and completely free (value: kr 4433,75,-) 
-          </ListItem>
-          <ListItem>
-            <ListItemIcon>
-              <Star color="primary" />
-            </ListItemIcon>
-            You get the chance to present your work at Norway's largest aquaculture conference. 
-          </ListItem>
-          <ListItem>
-            <ListItemIcon>
-              <Star color="primary" />
-            </ListItemIcon>
-            You get the opportunity to meet industry players form the entire value chain and create a valuable network.  
-          </ListItem>
-        </List>
-        <Box align="center" py={16}>
+      <Text paragraph>
+        Are you a student in the process of writing a bachelor or master thesis
+        related to the aquaculture industry? Or maybe you are working on an
+        exciting business opportunity related to the industry? Each year the
+        KABIS-project gives several students the opportunity to show their
+        aquaculture-related project at the Aqkva conference.
+      </Text>
+      <Text paragraph>
+        Every student elected to the Student’s Corner will receive an A3
+        template to be filled out with information about ongoing or planned
+        projects or business ideas.
+      </Text>
+      <Title variant="h3" black>
+        Who are you?
+      </Title>
+      <List>
+        <ListItem>
+          {" "}
+          <ListItemIcon>
+            <Check color="primary" />
+          </ListItemIcon>
+          Student at a master or bachelor level at a Norwegian university.
+        </ListItem>
+        <ListItem>
+          <ListItemIcon>
+            <Check color="primary" />
+          </ListItemIcon>
+          You are writing, or have started to write, a thesis related to the
+          aquaculture industry.
+        </ListItem>
+        <ListItem>
+          <ListItemIcon>
+            <Check color="primary" />
+          </ListItemIcon>
+          ...or you have a business idea related to the aquaculture industry.
+        </ListItem>
+      </List>
+      <Title variant="h3" black>
+        What do you get?
+      </Title>
+      <List>
+        <ListItem>
+          {" "}
+          <ListItemIcon>
+            <Star color="primary" />
+          </ListItemIcon>
+          You join the "Best Poster" competition where the winner receives kr
+          10.000,-
+        </ListItem>
+        <ListItem>
+          <ListItemIcon>
+            <Star color="primary" />
+          </ListItemIcon>
+          The conference fee and dinner will be paid for and completely free
+          (value: kr 4433,75,-)
+        </ListItem>
+        <ListItem>
+          <ListItemIcon>
+            <Star color="primary" />
+          </ListItemIcon>
+          You get the chance to present your work at Norway's largest
+          aquaculture conference.
+        </ListItem>
+        <ListItem>
+          <ListItemIcon>
+            <Star color="primary" />
+          </ListItemIcon>
+          You get the opportunity to meet industry players form the entire value
+          chain and create a valuable network.
+        </ListItem>
+      </List>
+      <Box align="center" py={16}>
         <Title variant="h3" black>
           Check back in 2022
         </Title>
-        </Box>
+      </Box>
     </>
   )
 }
